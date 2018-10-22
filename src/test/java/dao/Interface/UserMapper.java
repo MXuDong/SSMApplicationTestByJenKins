@@ -4,7 +4,7 @@ import dao.pojo.User;
 
 import java.util.List;
 
-public interface UserInterface {
+public interface UserMapper {
 
     public List<User> getAllUsers();
 }

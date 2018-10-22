@@ -1,17 +1,23 @@
-import dao.Interface.UserInterface;
+import dao.Service.UserService;
+import dao.Service.UserServiceImpl;
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class TestBaseEnvironment {
 
-    @Test
-    public void testEnvironment(){
-        ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
+    private ApplicationContext ac;
+    private UserService us;
+
+    @Before
+    public void Before(){
+        ac = new ClassPathXmlApplicationContext("applicationContext.xml");
+        us = (UserService) ac.getBean("UserService");
     }
 
     @Test
-    public void testMybatis(){
-        UserInterface userInterface =
+    public void testMyBatis(){
+        System.out.println(us.findAllUsers());
     }
 }
