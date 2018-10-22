@@ -200,7 +200,7 @@ CREATE TABLE `user_info` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_password` char(35) NOT NULL,
   `user_power` int(11) DEFAULT '0',
-  `contact_way` int(12) NOT NULL,
+  `contact_way` char(12) NOT NULL,
   `user_name` char(15) NOT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `user_info_user_id_uindex` (`user_id`),
@@ -226,4 +226,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-20 20:52:06
+-- Dump completed on 2018-10-22 17:16:15
