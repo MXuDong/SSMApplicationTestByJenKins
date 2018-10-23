@@ -18,10 +18,5 @@
         </property>
     </bean>
 
-    <!--<bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">-->
-        <!--<property name="typeAliasesPackage" value="com.how2java.pojo" />-->
-        <!--<property name="dataSource" ref="dataSource"/>-->
-        <!--<property name="mapperLocations" value="classpath:com/how2java/mapper/*.xml"/>-->
-    <!--</bean>-->
 
 </beans>
