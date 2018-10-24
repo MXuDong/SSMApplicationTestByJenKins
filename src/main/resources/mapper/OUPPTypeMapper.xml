@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="main.java.dao.OUPPTypeMapper" >
-  <resultMap id="BaseResultMap" type="main.java.model.OUPPType" >
+<mapper namespace="dao.OUPPTypeMapper" >
+  <resultMap id="BaseResultMap" type="model.OUPPType" >
     <id column="operation_id" property="operationId" jdbcType="INTEGER" />
     <result column="user_id" property="userId" jdbcType="INTEGER" />
     <result column="product_id" property="productId" jdbcType="INTEGER" />
@@ -21,13 +21,13 @@
     delete from operation_user_product_price
     where operation_id = #{operationId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="main.java.model.OUPPType" >
+  <insert id="insert" parameterType="model.OUPPType" >
     insert into operation_user_product_price (operation_id, user_id, product_id, 
       operation_type, change_price)
     values (#{operationId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{productId,jdbcType=INTEGER}, 
       #{operationType,jdbcType=INTEGER}, #{changePrice,jdbcType=DOUBLE})
   </insert>
-  <insert id="insertSelective" parameterType="main.java.model.OUPPType" >
+  <insert id="insertSelective" parameterType="model.OUPPType" >
     insert into operation_user_product_price
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="operationId != null" >
@@ -64,7 +64,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="main.java.model.OUPPType" >
+  <update id="updateByPrimaryKeySelective" parameterType="model.OUPPType" >
     update operation_user_product_price
     <set >
       <if test="userId != null" >
@@ -82,7 +82,7 @@
     </set>
     where operation_id = #{operationId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="main.java.model.OUPPType" >
+  <update id="updateByPrimaryKey" parameterType="model.OUPPType" >
     update operation_user_product_price
     set user_id = #{userId,jdbcType=INTEGER},
       product_id = #{productId,jdbcType=INTEGER},

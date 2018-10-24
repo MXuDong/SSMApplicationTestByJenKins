@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="main.java.dao.ObillOUPCTypeMapper" >
-  <resultMap id="BaseResultMap" type="main.java.model.ObillOUPCType" >
+<mapper namespace="dao.ObillOUPCTypeMapper" >
+  <resultMap id="BaseResultMap" type="model.ObillOUPCType" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="bill_id" property="billId" jdbcType="INTEGER" />
     <result column="operation_user_product_count" property="operationUserProductCount" jdbcType="INTEGER" />
@@ -19,13 +19,13 @@
     delete from obill_oupc
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="main.java.model.ObillOUPCType" >
+  <insert id="insert" parameterType="model.ObillOUPCType" >
     insert into obill_oupc (id, bill_id, operation_user_product_count
       )
     values (#{id,jdbcType=INTEGER}, #{billId,jdbcType=INTEGER}, #{operationUserProductCount,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="main.java.model.ObillOUPCType" >
+  <insert id="insertSelective" parameterType="model.ObillOUPCType" >
     insert into obill_oupc
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -50,7 +50,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="main.java.model.ObillOUPCType" >
+  <update id="updateByPrimaryKeySelective" parameterType="model.ObillOUPCType" >
     update obill_oupc
     <set >
       <if test="billId != null" >
@@ -62,7 +62,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="main.java.model.ObillOUPCType" >
+  <update id="updateByPrimaryKey" parameterType="model.ObillOUPCType" >
     update obill_oupc
     set bill_id = #{billId,jdbcType=INTEGER},
       operation_user_product_count = #{operationUserProductCount,jdbcType=INTEGER}

@@ -7,12 +7,12 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class TestBaseEnvironment {
 
     private ApplicationContext ac;
-    private UserService us;
+    private service.Interface.UserService us;
 
     @Before
     public void Before(){
         ac = new ClassPathXmlApplicationContext("applicationContext.xml");
-        us = (UserService) ac.getBean("UserService");
+        us = (service.Interface.UserService) ac.getBean("UserService");
     }
 
     @Test
