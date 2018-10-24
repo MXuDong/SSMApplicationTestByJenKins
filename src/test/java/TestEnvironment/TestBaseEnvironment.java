@@ -17,8 +17,5 @@ public class TestBaseEnvironment {
         us = (UserService) ac.getBean("UserService");
     }
 
-    @Test
-    public void testMyBatis(){
-        System.out.println(us.findAllUsers());
-    }
+
 }
