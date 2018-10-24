@@ -1,5 +1,4 @@
 import dao.Service.UserService;
-import dao.Service.UserServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
