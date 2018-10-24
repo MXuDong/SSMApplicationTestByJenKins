@@ -24,6 +24,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserInfoType findAllUsers() {
-        return userInfoTypeMapper.selectByPrimaryKey(0);
+        return userInfoTypeMapper.selectByPrimaryKey(1);
     }
 }

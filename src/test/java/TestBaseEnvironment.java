@@ -1,18 +1,18 @@
-import dao.Service.UserService;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import service.Interface.UserService;
 
 public class TestBaseEnvironment {
 
     private ApplicationContext ac;
-    private service.Interface.UserService us;
+    private UserService us;
 
     @Before
     public void Before(){
         ac = new ClassPathXmlApplicationContext("applicationContext.xml");
-        us = (service.Interface.UserService) ac.getBean("UserService");
+        us = (UserService) ac.getBean("UserService");
     }
 
     @Test
