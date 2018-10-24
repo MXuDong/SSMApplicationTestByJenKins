@@ -17,5 +17,4 @@ public class TestBaseEnvironment {
         us = (UserService) ac.getBean("UserService");
     }
 
-
 }
