@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface UserService {
 //    注册
-    public void doRegister(UserInfoType beRegisterdUser);
+    public boolean doRegister(UserInfoType beRegisterdUser);
 //    根据用户名查找
     public UserInfoType findByUserName(String userName);
 //    根据ID查找用户

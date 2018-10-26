@@ -50,4 +50,15 @@ public class UserInfoType {
     public void setUserName(String userName) {
         this.userName = userName == null ? null : userName.trim();
     }
+
+    @Override
+    public String toString() {
+        return "UserInfoType{" +
+                "userId=" + userId +
+                ", userPassword='" + userPassword + '\'' +
+                ", userPower=" + userPower +
+                ", contactWay='" + contactWay + '\'' +
+                ", userName='" + userName + '\'' +
+                '}';
+    }
 }

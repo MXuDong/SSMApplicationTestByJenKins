@@ -9,5 +9,7 @@ public interface UserInfoTypeMapper {
 
     UserInfoType selectByPrimaryKey(Integer userId);
 
+    UserInfoType selectByUserName(String userName);
+
     int updateByPrimaryKeySelective(UserInfoType record);
 }
