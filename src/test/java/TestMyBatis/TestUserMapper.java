@@ -12,7 +12,7 @@ public class TestUserMapper {
 
     UserService us;
 
-    @Before
+//    @Before
     public void doSomeBefore() {
         ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
         us = (UserService) ac.getBean("UserService");
@@ -63,7 +63,7 @@ public class TestUserMapper {
         TestUtil.PrintTestTag("doTestDeleteUserInfo  END");
     }
 
-    @Test
+//    @Test
     public void MainTest() {
         doTestRegister();
         doTestFindByUserId();
