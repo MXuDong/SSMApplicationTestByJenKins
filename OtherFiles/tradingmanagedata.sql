@@ -1,13 +1,13 @@
--- MySQL dump 10.13  Distrib 8.0.11, for Win64 (x86_64)
+-- MySQL dump 10.14  Distrib 5.5.60-MariaDB, for Linux (x86_64)
 --
--- Host: 127.0.0.1    Database: tradingmanagerdata
+-- Host: localhost    Database: tradingmanagerdata
 -- ------------------------------------------------------
--- Server version	8.0.11
+-- Server version	5.5.60-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
- SET NAMES utf8mb4 ;
+/*!40101 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -21,15 +21,15 @@
 
 DROP TABLE IF EXISTS `log_info`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `log_info` (
   `log_id` int(11) NOT NULL AUTO_INCREMENT,
-  `log_date` timestamp NOT NULL,
+  `log_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `log_type` int(11) NOT NULL,
   `log_what` text NOT NULL,
   PRIMARY KEY (`log_id`),
   UNIQUE KEY `log_info_log_id_uindex` (`log_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -47,7 +47,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `obill_oupc`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `obill_oupc` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `bill_id` int(11) NOT NULL,
@@ -58,7 +58,7 @@ CREATE TABLE `obill_oupc` (
   KEY `obill_oupc_operation_user_product_count_operation_id_fk` (`operation_user_product_count`),
   CONSTRAINT `obill_oupc_operation_bill_bill_id_fk` FOREIGN KEY (`bill_id`) REFERENCES `operation_bill` (`bill_id`),
   CONSTRAINT `obill_oupc_operation_user_product_count_operation_id_fk` FOREIGN KEY (`operation_user_product_count`) REFERENCES `operation_user_product_count` (`operation_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -76,7 +76,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `operation_bill`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `operation_bill` (
   `bill_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
@@ -86,7 +86,7 @@ CREATE TABLE `operation_bill` (
   UNIQUE KEY `operation_bill_bill_id_uindex` (`bill_id`),
   KEY `operation_bill_user_info_user_id_fk` (`user_id`),
   CONSTRAINT `operation_bill_user_info_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `user_info` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -104,7 +104,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `operation_user_product_count`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `operation_user_product_count` (
   `operation_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
@@ -117,7 +117,7 @@ CREATE TABLE `operation_user_product_count` (
   KEY `operation_user_product_count_product_info_product_id_fk` (`product_id`),
   CONSTRAINT `operation_user_product_count_product_info_product_id_fk` FOREIGN KEY (`product_id`) REFERENCES `product_info` (`product_id`),
   CONSTRAINT `operation_user_product_count_user_info_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `user_info` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -135,7 +135,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `operation_user_product_price`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `operation_user_product_price` (
   `operation_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
@@ -148,7 +148,7 @@ CREATE TABLE `operation_user_product_price` (
   KEY `operation_user_product_price_product_info_product_id_fk` (`product_id`),
   CONSTRAINT `operation_user_product_price_product_info_product_id_fk` FOREIGN KEY (`product_id`) REFERENCES `product_info` (`product_id`),
   CONSTRAINT `user_operation_product_user_info_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `user_info` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -166,18 +166,18 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `product_info`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `product_info` (
   `product_id` int(11) NOT NULL AUTO_INCREMENT,
   `product_name` char(30) NOT NULL,
-  `product_desc` varchar(50) DEFAULT '产品描述',
+  `product_desc` varchar(50) DEFAULT NULL,
   `product_pic` char(30) DEFAULT NULL,
   `product_count` int(11) DEFAULT '0',
   `product_price` double DEFAULT '0',
-  `product_last_change_date` timestamp NOT NULL,
+  `product_last_change_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`product_id`),
   UNIQUE KEY `productInfo_productId_uindex` (`product_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -195,7 +195,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `user_info`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user_info` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_password` char(35) NOT NULL,
@@ -205,7 +205,7 @@ CREATE TABLE `user_info` (
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `user_info_user_id_uindex` (`user_id`),
   UNIQUE KEY `user_info_user_name_uindex` (`user_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -225,5 +225,3 @@ UNLOCK TABLES;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2018-10-22 17:16:15

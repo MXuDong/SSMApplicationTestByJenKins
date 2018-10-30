@@ -8,10 +8,10 @@
     <context:component-scan base-package="service" />
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName">
-            <value>com.mysql.cj.jdbc.Driver</value>
+            <value>com.mysql.jdbc.Driver</value>
         </property>
         <property name="url">
-            <value>jdbc:mysql://localhost:3306/tradingmanagerdata?useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=UTC&amp;allowPublicKeyRetrieval=true</value>
+            <value>jdbc:mysql://localhost:3306/tradingmanagerdata?characterEncoding=latin1</value>
         </property>
         <property name="username">
             <value>root</value>
