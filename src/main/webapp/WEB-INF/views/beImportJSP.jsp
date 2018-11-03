@@ -12,3 +12,4 @@
 <script src="../CSS/bootstrap/js/bootstrap.min.js"></script>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page isELIgnored="false" %>

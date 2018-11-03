@@ -7,8 +7,12 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class baseController {
 
-    @RequestMapping(value = {"/", "/index", "Home"})
+    @RequestMapping(value = {"/", "/index", "Home"}, params = )
     public ModelAndView baseIndex(){
-        return new ModelAndView("index");
+        ModelAndView modelAndView = new ModelAndView("index");
+
+        modelAndView.addObject("UserInfor", null);
+
+        return modelAndView;
     }
 }
