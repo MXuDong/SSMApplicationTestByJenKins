@@ -31,7 +31,7 @@
     </div>
 
     <div class="col-md-4">
-        <%--收入支出折线图--%>
+        <%--产品总量占比饼图--%>
         <div id="countPic" style="width: 600px;height:400px;">
             测试
         </div>
@@ -46,7 +46,7 @@
     // 指定图表的配置项和数据
     optionObillPic = {
         title: {
-            text: '测试折线图'
+            text: '收入支出折线图'
         },
         xAxis: {
             type: 'category',
@@ -63,7 +63,7 @@
 
     optionProductCountPic = {
         title: {
-            text: '测试折线图'
+            text: '产品总量变化折线图'
         },
         xAxis: {
             type: 'category',
@@ -79,8 +79,7 @@
     };
     optionCountPic = {
         title : {
-            text: '某站点用户访问来源',
-            subtext: '纯属虚构',
+            text: '产品总量占比饼图',
             x:'center'
         },
         tooltip : {
@@ -133,7 +132,7 @@
             <a href="#" class="list-group-item list-group-item-action active">
                 查看更多
             </a>
-            <c:forEach items="${sessionScope.Opers}" var="oper">
+            <c:forEach items="${requestScope.Opers}" var="oper">
                 <a href="#" class="list-group-item list-group-item-action"><c:out value="${oper}" /></a>
             </c:forEach>
         </div>
@@ -144,7 +143,7 @@
             <a href="#" class="list-group-item list-group-item-action active">
                 查看更多
             </a>
-            <c:forEach items="${sessionScope.LessProduct}" var="lp">
+            <c:forEach items="${requestScope.LessProduct}" var="lp">
                 <a href="#" class="list-group-item list-group-item-action"><c:out value="${lp}" /></a>
             </c:forEach>
         </div>
@@ -155,7 +154,7 @@
             <a href="#" class="list-group-item list-group-item-action active">
                 查看更多
             </a>
-            <c:forEach items="${sessionScope.MoreProduct}" var="mp">
+            <c:forEach items="${requestScope.MoreProduct}" var="mp">
                 <a href="#" class="list-group-item list-group-item-action"><c:out value="${mp}" /></a>
             </c:forEach>
         </div>
