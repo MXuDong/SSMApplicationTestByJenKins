@@ -1,5 +1,6 @@
 package model;
 
+//出账收账日志
 public class OperBillType {
     private Integer billId;
 

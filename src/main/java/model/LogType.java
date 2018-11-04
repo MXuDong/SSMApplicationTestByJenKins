@@ -2,6 +2,7 @@ package model;
 
 import java.util.Date;
 
+//全部日志索引表
 public class LogType {
     private Integer logId;
 

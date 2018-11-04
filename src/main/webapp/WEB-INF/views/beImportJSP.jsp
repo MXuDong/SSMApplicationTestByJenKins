@@ -10,6 +10,7 @@
 <script src="../JS/jquery.cookie.js"></script>
 <script src="../JS/popper.min.js"></script>
 <script src="../CSS/bootstrap/js/bootstrap.min.js"></script>
+<script src="../JS/echarts.min.js"></script>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page isELIgnored="false" %>

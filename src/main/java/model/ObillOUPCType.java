@@ -1,5 +1,6 @@
 package model;
 
+//出账收账导致的产品数量变动
 public class ObillOUPCType {
     private Integer id;
 

@@ -1,5 +1,6 @@
 package model;
 
+//用户详细信息
 public class UserInfoType {
     private Integer userId;
 

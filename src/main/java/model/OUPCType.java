@@ -1,5 +1,6 @@
 package model;
 
+//操作数量变化日志
 public class OUPCType {
     private Integer operationId;
 

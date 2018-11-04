@@ -2,6 +2,7 @@ package model;
 
 import java.util.Date;
 
+//产品详细信息
 public class ProductInfoType {
     private Integer productId;
 

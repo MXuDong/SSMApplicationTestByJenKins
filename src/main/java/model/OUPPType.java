@@ -1,5 +1,6 @@
 package model;
 
+//操作价格变化日志
 public class OUPPType {
     private Integer operationId;
 
