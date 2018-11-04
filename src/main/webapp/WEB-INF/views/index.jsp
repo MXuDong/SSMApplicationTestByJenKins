@@ -43,6 +43,23 @@
     var productCount = echarts.init(document.getElementById('ProductCount'));
     var countPic = echarts.init(document.getElementById('countPic'));
 
+    optionProductCountPic = {
+        title: {
+            text: '产品总量变化折线图'
+        },
+        xAxis: {
+            type: 'category',
+            data: [${requestScope.ProductOptionValue.xAxis}]
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [{
+            data: [${requestScope.ProductOptionValue.data}],
+            type: 'line'
+        }]
+    };
+
     // 指定图表的配置项和数据
     optionObillPic = {
         title: {
@@ -50,36 +67,20 @@
         },
         xAxis: {
             type: 'category',
-            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+            data: [${requestScope.ObillPicOptionValue.xAxis}]
         },
         yAxis: {
             type: 'value'
         },
         series: [{
-            data: [820, 932, 901, 934, 1290, 1330, 1320],
+            data: [${requestScope.ObillPicOptionValue.data}],
             type: 'line'
         }]
     };
 
-    optionProductCountPic = {
-        title: {
-            text: '产品总量变化折线图'
-        },
-        xAxis: {
-            type: 'category',
-            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-        },
-        yAxis: {
-            type: 'value'
-        },
-        series: [{
-            data: [820, 932, 901, 934, 1290, 1330, 1320],
-            type: 'line'
-        }]
-    };
     optionCountPic = {
         title : {
-            text: '产品总量占比饼图',
+            text: '产品类别数量占比饼图',
             x:'center'
         },
         tooltip : {
@@ -89,20 +90,15 @@
         legend: {
             orient: 'vertical',
             left: 'left',
-            data: ['直接访问','邮件营销','联盟广告','视频广告','搜索引擎']
+            data: [${requestScope.ProductBingPic.legendData}]
         },
         series : [
             {
-                name: '访问来源',
+                name: '类别名称',
                 type: 'pie',
                 radius : '55%',
                 center: ['50%', '60%'],
-                data:[
-                    {value:335, name:'直接访问'},
-                    {value:310, name:'邮件营销'},
-                    {value:234, name:'联盟广告'},
-                    {value:135, name:'视频广告'},
-                    {value:1548, name:'搜索引擎'}
+                data:[${requestScope.ProductBingPic.seriesData}
                 ],
                 itemStyle: {
                     emphasis: {
