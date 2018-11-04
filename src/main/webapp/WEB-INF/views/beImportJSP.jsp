@@ -1,4 +1,4 @@
-
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <title>水产品信息管理系统</title>
 <!-- Required meta tags -->
 <meta charset="utf-8">
