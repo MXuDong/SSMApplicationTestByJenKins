@@ -28,6 +28,7 @@ public class ProductController {
 
         List<List<String>> productInfo = new ArrayList<List<String>>();
         List<String> productBody = new ArrayList<String>();
+        productBody.add("1"); //id
         productBody.add("1");
         productBody.add("鲸鱼");
         productBody.add("9元（人民币）");
@@ -62,6 +63,7 @@ public class ProductController {
 
         List<List<String>> productInfo = new ArrayList<List<String>>();
         List<String> productBody = new ArrayList<String>();
+        productBody.add("1"); //id
         productBody.add("1");
         productBody.add("鲸鱼");
         productBody.add("9元（人民币）");
@@ -96,6 +98,7 @@ public class ProductController {
 
         List<List<String>> productInfo = new ArrayList<List<String>>();
         List<String> productBody = new ArrayList<String>();
+        productBody.add("1"); //id
         productBody.add("1");
         productBody.add("鲸鱼");
         productBody.add("9元（人民币）");

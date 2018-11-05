@@ -36,8 +36,8 @@
             </thead>
             <tbody>
             <c:forEach items="${requestScope.ProductInfo}" var="lti">
-                <tr>
-                    <c:forEach items="${lti}" var="ltb">
+                <tr onclick="window.location='/product/info?id=${lti[0]}'"  >
+                    <c:forEach items="${lti}" var="ltb" begin="1">
                         <td><c:out value="${ltb}"/></td>
                     </c:forEach>
                 </tr>

@@ -124,22 +124,22 @@
     <div class="col-md-4">
         <h3>最新变化信息</h3>
         <div class="list-group">
-            <a href="#" class="list-group-item list-group-item-action active">
+            <a href="/log/logManager" class="list-group-item list-group-item-action active">
                 查看更多
             </a>
             <c:forEach items="${requestScope.Opers}" var="oper">
-                <a href="/log/logManager" class="list-group-item list-group-item-action"><c:out value="${oper}" /></a>
+                <a href="#" class="list-group-item list-group-item-action"><c:out value="${oper}" /></a>
             </c:forEach>
         </div>
     </div>
     <div class="col-md-3">
         <h3>库存告急列表</h3>
         <div class="list-group">
-            <a href="#" class="list-group-item list-group-item-action active">
+            <a href="/product/lessProductList" class="list-group-item list-group-item-action active">
                 查看更多
             </a>
             <c:forEach items="${requestScope.LessProduct}" var="lp">
-                <a href="/product/lessProductList" class="list-group-item list-group-item-action"><c:out value="${lp}" /></a>
+                <a href="#" class="list-group-item list-group-item-action"><c:out value="${lp}" /></a>
             </c:forEach>
         </div>
     </div>
