@@ -27,8 +27,8 @@
                     产品管理
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">浏览产品信息</a>
-                    <a class="dropdown-item" href="#">显示产品变动信息</a>
+                    <a class="dropdown-item" href="/product/ProductList">浏览产品信息</a>
+                    <a class="dropdown-item" href="/log/productPriceLog">显示产品变动信息</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">导入与导出</a>
                 </div>

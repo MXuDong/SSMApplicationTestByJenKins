@@ -25,6 +25,7 @@
             <a href="/log/productCountLog" class="btn btn-outline-primary">产品总量变化日志</a>
             <a href="/log/obillLog" class="btn btn-outline-primary">结账详细信息日志</a>
             <hr />
+            <h2>${requestScope.PageHeader}</h2>
             <table class="table table-bordered table-hover">
                 <thead class="thead-light">
                 <tr>
@@ -42,7 +43,6 @@
                     </tr>
                 </c:forEach>
                 </tbody>
-            </table>
             </table>
         </div>
         <div class="col-md-1"></div>

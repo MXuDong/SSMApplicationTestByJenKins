@@ -38,8 +38,8 @@ public class LogController {
         logTableInfo.add(logTableBody);
         modelAndView.addObject("LogTableInfo", logTableInfo);
 
-        //提示按钮是否可用
-        modelAndView.addObject("ButtonIndex", 0);
+        //设置页面信息标题
+        modelAndView.addObject("PageHeader", "全部日志信息");
 
         return modelAndView;
     }
@@ -68,7 +68,9 @@ public class LogController {
         logTableBody.add("6.0元（人民币）");
         logTableInfo.add(logTableBody);
         modelAndView.addObject("LogTableInfo", logTableInfo);
-        modelAndView.addObject("ButtonIndex", 1);
+
+        //设置页面信息标题
+        modelAndView.addObject("PageHeader", "价格变动日志信息");
 
         return modelAndView;
     }
@@ -97,7 +99,9 @@ public class LogController {
         logTableBody.add("70");
         logTableInfo.add(logTableBody);
         modelAndView.addObject("LogTableInfo", logTableInfo);
-        modelAndView.addObject("ButtonIndex", 1);
+
+        //设置页面信息标题
+        modelAndView.addObject("PageHeader", "产品数量变动信息日志");
 
         return modelAndView;
     }
@@ -124,8 +128,9 @@ public class LogController {
         logTableBody.add("收入");
         logTableInfo.add(logTableBody);
         modelAndView.addObject("LogTableInfo", logTableInfo);
-        modelAndView.addObject("ButtonIndex", 1);
 
+        //设置页面信息标题
+        modelAndView.addObject("PageHeader", "账单操作信息日志");
         return modelAndView;
     }
 }
