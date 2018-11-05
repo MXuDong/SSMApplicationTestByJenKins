@@ -19,7 +19,12 @@
         <div class="col-md-10">
 
             <h1 style="text-align: center">日志详细信息</h1>
-
+            <hr />
+            <a href="/log" class="btn btn-outline-primary">全部日简略细信息</a>
+            <a href="/log/productPriceLog" class="btn btn-outline-primary">产品价格变化日志</a>
+            <a href="/log/productCountLog" class="btn btn-outline-primary">产品总量变化日志</a>
+            <a href="/log/obillLog" class="btn btn-outline-primary">结账详细信息日志</a>
+            <hr />
             <table class="table table-bordered table-hover">
                 <thead class="thead-light">
                 <tr>
@@ -36,15 +41,6 @@
                         </c:forEach>
                     </tr>
                 </c:forEach>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>Mark</td>
-                    <td>Mark</td>
-                    <td>Mark</td>
-                </tr>
                 </tbody>
             </table>
             </table>

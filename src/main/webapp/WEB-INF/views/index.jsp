@@ -128,7 +128,7 @@
                 查看更多
             </a>
             <c:forEach items="${requestScope.Opers}" var="oper">
-                <a href="#" class="list-group-item list-group-item-action"><c:out value="${oper}" /></a>
+                <a href="/log/logManager" class="list-group-item list-group-item-action"><c:out value="${oper}" /></a>
             </c:forEach>
         </div>
     </div>
@@ -146,7 +146,7 @@
     <div class="col-md-3">
         <h3>库存冗余列表</h3>
         <div class="list-group">
-            <a href="#" class="list-group-item list-group-item-action active">
+            <a href="" class="list-group-item list-group-item-action active">
                 查看更多
             </a>
             <c:forEach items="${requestScope.MoreProduct}" var="mp">
