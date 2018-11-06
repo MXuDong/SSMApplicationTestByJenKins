@@ -53,6 +53,12 @@
         yAxis: {
             type: 'value'
         },
+        toolbox: {
+            left: 'center',
+            feature: {
+                saveAsImage: {}
+            }
+        },
         series: [{
             data: [${requestScope.ProductOptionValue.data}],
             type: 'line'
@@ -71,6 +77,12 @@
         yAxis: {
             type: 'value'
         },
+        toolbox: {
+            left: 'center',
+            feature: {
+                saveAsImage: {}
+            }
+        },
         series: [{
             data: [${requestScope.ObillPicOptionValue.data}],
             type: 'line'
@@ -85,6 +97,12 @@
         tooltip : {
             trigger: 'item',
             formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        toolbox: {
+            right: '0',
+            feature: {
+                saveAsImage: {}
+            }
         },
         legend: {
             orient: 'vertical',

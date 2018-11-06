@@ -2,10 +2,13 @@ package controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/product")
@@ -114,5 +117,52 @@ public class ProductController {
         modelAndView.addObject("PageHeader", "冗余产品信息");
 
         return modelAndView;
+    }
+
+    @RequestMapping(value = "info", params = {"id"})
+    public ModelAndView getProductInfo(@RequestParam int id){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("productInfo");
+        Map<String, String> productInfo = new HashMap<String, String>();
+        productInfo.put("productName", "鲸鱼");
+        productInfo.put("productPrice", "9.6元（人民币）");
+        productInfo.put("productCount", "1000");
+        productInfo.put("productPic", "../pic/1.jpg");
+        productInfo.put("productType", "测试版");
+        productInfo.put("productDisc", "这里是产品的描述");
+        productInfo.put("productMaxCount", "2000");
+        productInfo.put("productMinCount", "1");
+        productInfo.put("productStatus", "正常");
+        modelAndView.addObject("ProductInfo", productInfo);
+
+        //横坐标
+        String xAxisData = "'2018-9-1', '2018-9-2', '2018-9-3', '2018-9-4'";
+        modelAndView.addObject("xAxisData", xAxisData);
+
+        //数据
+        String seriesData = "1250,4356,724,8985";
+        modelAndView.addObject("seriesData", seriesData);
+
+        //横坐标开始数据
+        String startValue = "'2018-9-2'";
+        modelAndView.addObject("startValue", startValue);
+
+        //最小值
+        String minValue = "1000";
+        modelAndView.addObject("minValue", minValue);
+
+        //最大值
+        String maxValue = "5000";
+        modelAndView.addObject("maxValue", maxValue);
+
+        String productXAxisData = "'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'A', 'B'";
+        modelAndView.addObject("productXAxisData", productXAxisData);
+
+        String productSeriesData = "820, 932, 901, 934, 1290, 1330, 1320, 540, 7852";
+        modelAndView.addObject("productSeriesData", productSeriesData);
+
+
+        return modelAndView;
+
     }
 }
