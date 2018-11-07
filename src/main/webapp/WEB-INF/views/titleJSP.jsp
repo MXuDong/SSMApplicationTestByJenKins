@@ -30,7 +30,8 @@
                     <a class="dropdown-item" href="/product/ProductList">浏览产品信息</a>
                     <a class="dropdown-item" href="/log/productPriceLog">显示产品变动信息</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">导入与导出</a>
+                    <a class="dropdown-item" href="/product/addProducts">增加数据</a>
+                    <a class="dropdown-item" href="#">导出数据</a>
                 </div>
             </li>
             <li class="nav-item">

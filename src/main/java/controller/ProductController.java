@@ -165,4 +165,22 @@ public class ProductController {
         return modelAndView;
 
     }
+
+    @RequestMapping("/addProducts")
+    public ModelAndView addProductPage(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("addProductInfo");
+
+        List<String> typeList = new ArrayList<String>();
+        typeList.add("默认类型");
+        typeList.add("标准类型");
+        typeList.add("抽象类型");
+        modelAndView.addObject("typeList", typeList);
+
+        return modelAndView;
+    }
+
+    public ModelAndView addProductPageByOne(){
+
+    }
 }

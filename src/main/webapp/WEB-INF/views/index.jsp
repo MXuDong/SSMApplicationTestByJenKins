@@ -178,8 +178,8 @@
             <a href="/product/ProductList" class="list-group-item list-group-item-action">产品列表</a>
             <a href="/log/productCountLog" class="list-group-item list-group-item-action">产品库存变化列表</a>
             <a href="/log/productPriceLog" class="list-group-item list-group-item-action">产品价格变化日志</a>
-            <a href="/log/logManager" class="list-group-item list-group-item-action">操作日志历史纪录</a>
-            <a href="#" class="list-group-item list-group-item-action">导入数据</a>
+            <a href="/og/logManager" class="list-group-item list-group-item-action">操作日志历史纪录</a>
+            <a href="/product/addProducts" class="list-group-item list-group-item-action">导入数据</a>
             <a href="#" class="list-group-item list-group-item-action">下载库存产品数据</a>
             <a href="#" class="list-group-item list-group-item-action">关于我们</a>
         </div>
