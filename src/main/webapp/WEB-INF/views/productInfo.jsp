@@ -21,6 +21,46 @@
             <h1 class="display-4">${requestScope.ProductInfo.productName}</h1>
             <p class="lead">${requestScope.ProductInfo.productDisc}</p>
             <hr class="my-4">
+            <button type="button" class="btn btn-outline-primary btn-block" data-toggle="modal" data-target="#picForm"
+                    id="SubmitForm">更换图片
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="picForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <form action="/product/updateProductPic?productId=${requestScope.ProductInfo.productId}" method="post" enctype="multipart/form-data">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">选择文件</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+
+                                <p>文件格式必须为:jpg, jepg, png中的一种！</p>
+
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">上传</span>
+                                    </div>
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="uploadInput" name="file">
+                                        <label class="custom-file-label" for="uploadInput">选择文件</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                                <input type="submit" class="btn btn-primary" value="开始上传" >
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <br/>
             <img src="${requestScope.ProductInfo.productPic}" class="img-thumbnail">
             <hr class="my-4">
             <p>归属类别：${requestScope.ProductInfo.productType}</p>
@@ -75,7 +115,7 @@
             trigger: 'axis'
         },
         xAxis: {
-            data:[${requestScope.xAxisData}]
+            data: [${requestScope.xAxisData}]
         },
         yAxis: {
             splitLine: {
@@ -124,7 +164,7 @@
                 silent: true,
                 data: [{
                     yAxis:${requestScope.minValue}
-                },{
+                }, {
                     yAxis:${requestScope.maxValue}
                 }]
             }

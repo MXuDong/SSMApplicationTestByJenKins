@@ -1,15 +1,19 @@
 package controller;
 
+import org.apache.commons.io.FileUtils;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
+import java.util.*;
 
 @Controller
 @RequestMapping("/product")
@@ -125,6 +129,7 @@ public class ProductController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("productInfo");
         Map<String, String> productInfo = new HashMap<String, String>();
+        productInfo.put("productId", "1");
         productInfo.put("productName", "鲸鱼");
         productInfo.put("productPrice", "9.6元（人民币）");
         productInfo.put("productCount", "1000");
@@ -200,5 +205,31 @@ public class ProductController {
         if(productDisc != null) System.out.println(productDisc);
 
         return "redirect:/product/info?id=1";
+    }
+
+    @RequestMapping(value = "/updateProductPic", method = RequestMethod.POST)
+    public String updateProductPic(@RequestParam("file") MultipartFile file, HttpServletRequest request, @RequestParam("productId") String productId){
+        if(!file.isEmpty()){
+
+            String  path = "D:\\Work Space\\Intellij WorkSpace\\SSMApplicationTestByJenKins\\src\\main\\webapp\\WEB-INF\\pic";
+
+            String suffix = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1);
+
+            //不符合要求
+            if(!(suffix.equalsIgnoreCase("jpg")||suffix.equalsIgnoreCase("png")||suffix.equalsIgnoreCase("jepg"))){
+                return "redirect:/product/info?id=" + productId;
+            }
+
+            try {
+
+                //这里将上传得到的文件保存至 d:\\temp\\file 目录
+                FileUtils.copyInputStreamToFile(file.getInputStream(), new File(path,
+                        productId + "." + suffix));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return "redirect:/product/info?id=" + productId;
     }
 }

@@ -184,7 +184,7 @@
         }
     </script>
     <div class="col-md-5">
-        <%--上传批量导入文件--%>
+        <%--批量添加的上传文件--%>
     </div>
     <div class="col-md-1"></div>
 </div>

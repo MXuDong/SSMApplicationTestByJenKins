@@ -19,10 +19,16 @@
     <mvc:default-servlet-handler/>
 
     <!-- 视图定位 -->
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <bean  class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
         <property name="prefix" value="/WEB-INF/views/"/>
         <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="209715200" />
+        <property name="defaultEncoding" value="UTF-8" />
+        <property name="resolveLazily" value="true" />
     </bean>
 
     <mvc:resources mapping="/CSS/**" location="/WEB-INF/CSS/"/>
