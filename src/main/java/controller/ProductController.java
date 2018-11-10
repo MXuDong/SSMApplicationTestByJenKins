@@ -2,6 +2,7 @@ package controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -180,7 +181,24 @@ public class ProductController {
         return modelAndView;
     }
 
-    public ModelAndView addProductPageByOne(){
+    @RequestMapping(value = "/addOneProduct.up", method = RequestMethod.POST)
+    public String addProductPageByOne(
+            @RequestParam("productName") String productName,
+            @RequestParam("productPrice") Double productPrice,
+            @RequestParam("productCount")Integer productCount,
+            @RequestParam("productMaxCount")Integer productMaxCount,
+            @RequestParam("productMinCount")Integer productMinCount,
+            @RequestParam("productType")String productType,
+            @RequestParam("productDisc")String productDisc
+    ){
+        if(productName != null) System.out.println(productName);
+        if(productPrice != null) System.out.println(productPrice);
+        if(productCount != null) System.out.println(productCount);
+        if(productMaxCount != null) System.out.println(productMaxCount);
+        if(productMinCount != null) System.out.println(productMinCount);
+        if(productType != null) System.out.println(productType);
+        if(productDisc != null) System.out.println(productDisc);
 
+        return "redirect:/product/info?id=1";
     }
 }
