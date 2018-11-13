@@ -31,7 +31,7 @@
             <div>
                 <h1 style="text-align: center;">单产品添加</h1>
                 <h6>如果您希望为产品添加图片，请在商品详情页为其添加，谢谢</h6>
-                <hr />
+                <hr/>
                 <%--产品名称--%>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -64,10 +64,12 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="productMinMaxCount">产品推荐最大值|最小值</span>
                     </div>
-                    <input id="input_productMaxCount" type="text" class="form-control" placeholder="推荐最大值" name="productMaxCount">
-                    <input id="input_productMinCount" type="text" class="form-control" placeholder="推荐最小值" name="productMinCount">
+                    <input id="input_productMaxCount" type="text" class="form-control" placeholder="推荐最大值"
+                           name="productMaxCount">
+                    <input id="input_productMinCount" type="text" class="form-control" placeholder="推荐最小值"
+                           name="productMinCount">
                 </div>
-                <br />
+                <br/>
                 <%--添加新类别--%>
                 <div class="input-group">
                     <select class="custom-select" name="productType">
@@ -80,7 +82,7 @@
                         <button class="btn btn-outline-secondary" type="button">新建类别</button>
                     </div>
                 </div>
-                <br />
+                <br/>
                 <%--产品描述--%>
                 <div class="input-group">
                     <div class="input-group-prepend">
@@ -88,14 +90,16 @@
                     </div>
                     <textarea class="form-control" aria-label="With textarea" name="productDisc"></textarea>
                 </div>
-                <br />
+                <br/>
             </div>
             <input type="reset" class="btn btn-outline-warning btn-block" value="重置">
-            <button type="button" onclick="forSubmitForm()" class="btn btn-outline-primary btn-block" id="SubmitForm">提交</button>
+            <button type="button" onclick="forSubmitForm()" class="btn btn-outline-primary btn-block" id="SubmitForm">
+                提交
+            </button>
         </form>
     </div>
     <script language="JavaScript">
-        function forSubmitForm(){
+        function forSubmitForm() {
             //控件绑定
             var productName = $("#input_productName");
             var productPrice = $("#input_productPrice");
@@ -107,84 +111,104 @@
             var message = "";
 
             // 判断产品名称是否为空
-            if(productName.val() == ""){
+            if (productName.val() == "") {
                 message = message + "产品名称不能为空\n";
             }
             // 判断产品价格是否为空
-            if(productPrice.val() == ""){
+            if (productPrice.val() == "") {
                 message = message + "产品价格不能为空\n";
-            }else{
+            } else {
                 var docCount = 0;
-                for(var i = 0; i < productPrice.val().length; i++){
-                    if(productPrice.val()[i] == '.'){
+                for (var i = 0; i < productPrice.val().length; i++) {
+                    if (productPrice.val()[i] == '.') {
                         docCount++;
                         continue;
                     }
-                    if(!(productPrice.val()[i] >= '0' && productPrice.val()[i] <= '9')){
+                    if (!(productPrice.val()[i] >= '0' && productPrice.val()[i] <= '9')) {
                         break;
                     }
                 }
 
-                if(i == productPrice.val().length){
-                    if(docCount > 1){
+                if (i == productPrice.val().length) {
+                    if (docCount > 1) {
                         message = message + "产品价格为非正常数字！\n";
                     }
-                }else{
+                } else {
                     message = message + "产品价格中存在非法字符\n";
                 }
 
             }
             // 判断产品数量是否为空
-            if(productCount.val() == ""){
+            if (productCount.val() == "") {
                 message = message + "产品数量不能为空\n";
-            }else{
+            } else {
                 var i;
-                for(i = 0; i < productCount.val().length; i++){
-                    if(!(productCount.val()[i] >= '0' && productCount.val()[i] <= '9')){
+                for (i = 0; i < productCount.val().length; i++) {
+                    if (!(productCount.val()[i] >= '0' && productCount.val()[i] <= '9')) {
                         break;
                     }
                 }
 
-                if(i != productCount.val().length){
+                if (i != productCount.val().length) {
                     message = message + "产品数量存在非法字符！";
                 }
             }
             //判断推荐最大值是否合法
-            if(productMaxCount != ""){
+            if (productMaxCount != "") {
                 var i;
-                for(i = 0; i < productMaxCount.val().length; i++){
-                    if(!(productMaxCount.val()[i] >= '0' && productMaxCount.val()[i] <= '9')){
+                for (i = 0; i < productMaxCount.val().length; i++) {
+                    if (!(productMaxCount.val()[i] >= '0' && productMaxCount.val()[i] <= '9')) {
                         break;
                     }
                 }
 
-                if(i != productMaxCount.val().length){
+                if (i != productMaxCount.val().length) {
                     message = message + "产品推荐最大值存含有非法字符\n";
                 }
             }
             //判断推荐最小值是否合法
-            if(productMinCount != ""){
+            if (productMinCount != "") {
                 var i;
-                for(i = 0; i < productMinCount.val().length; i++){
-                    if(!(productMinCount.val()[i] >= '0' && productMinCount.val()[i] <= '9')){
+                for (i = 0; i < productMinCount.val().length; i++) {
+                    if (!(productMinCount.val()[i] >= '0' && productMinCount.val()[i] <= '9')) {
                         break;
                     }
                 }
 
-                if(i != productMinCount.val().length){
+                if (i != productMinCount.val().length) {
                     message = message + "产品推荐最小值含有非法字符\n";
                 }
             }
 
-            if(message != ""){
+            if (message != "") {
                 alert(message);
-            }else {
+            } else {
                 productForm.submit();
             }
         }
     </script>
     <div class="col-md-5">
-        <%--批量添加的上传文件--%>
+        <%--上传批量导入的文件--%>
+        <div>
+            <h1 style="text-align: center;">多产品批量添加</h1>
+            <h6>如果您希望为产品添加图片，请在商品详情页为其添加，谢谢</h6>
+            <hr/>
+            <form action="/product/uploadMoreProducts" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <p>如果您没有模板文件，请点击下载，并保持模板文件的表头，避免发生异常。</p>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">上传</span>
+                        </div>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="uploadInput" name="file">
+                            <label class="custom-file-label" for="uploadInput">选择文件</label>
+                        </div>
+                    </div>
+                </div>
+                <input type="submit" class="btn btn-outline-primary btn-block" value="开始上传">
+            </form>
+        </div>
     </div>
     <div class="col-md-1"></div>
 </div>

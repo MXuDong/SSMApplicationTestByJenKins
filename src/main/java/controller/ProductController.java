@@ -20,7 +20,7 @@ import java.util.*;
 public class ProductController {
 
     @RequestMapping(value = {"/ProductList"})
-    public ModelAndView getProductList(){
+    public ModelAndView getProductList() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("productAmount");
 
@@ -55,7 +55,7 @@ public class ProductController {
     }
 
     @RequestMapping(value = {"/lessProductList"})
-    public ModelAndView getLessProductList(){
+    public ModelAndView getLessProductList() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("productAmount");
 
@@ -90,7 +90,7 @@ public class ProductController {
     }
 
     @RequestMapping(value = {"/moreProductList"})
-    public ModelAndView getMoreProductList(){
+    public ModelAndView getMoreProductList() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("productAmount");
 
@@ -125,7 +125,7 @@ public class ProductController {
     }
 
     @RequestMapping(value = "info", params = {"id"})
-    public ModelAndView getProductInfo(@RequestParam int id){
+    public ModelAndView getProductInfo(@RequestParam int id) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("productInfo");
         Map<String, String> productInfo = new HashMap<String, String>();
@@ -173,7 +173,7 @@ public class ProductController {
     }
 
     @RequestMapping("/addProducts")
-    public ModelAndView addProductPage(){
+    public ModelAndView addProductPage() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("addProductInfo");
 
@@ -190,33 +190,47 @@ public class ProductController {
     public String addProductPageByOne(
             @RequestParam("productName") String productName,
             @RequestParam("productPrice") Double productPrice,
-            @RequestParam("productCount")Integer productCount,
-            @RequestParam("productMaxCount")Integer productMaxCount,
-            @RequestParam("productMinCount")Integer productMinCount,
-            @RequestParam("productType")String productType,
-            @RequestParam("productDisc")String productDisc
-    ){
-        if(productName != null) System.out.println(productName);
-        if(productPrice != null) System.out.println(productPrice);
-        if(productCount != null) System.out.println(productCount);
-        if(productMaxCount != null) System.out.println(productMaxCount);
-        if(productMinCount != null) System.out.println(productMinCount);
-        if(productType != null) System.out.println(productType);
-        if(productDisc != null) System.out.println(productDisc);
+            @RequestParam("productCount") Integer productCount,
+            @RequestParam("productMaxCount") Integer productMaxCount,
+            @RequestParam("productMinCount") Integer productMinCount,
+            @RequestParam("productType") String productType,
+            @RequestParam("productDisc") String productDisc
+    ) {
+        if (productName != null) {
+            System.out.println(productName);
+        }
+        if (productPrice != null) {
+            System.out.println(productPrice);
+        }
+        if (productCount != null) {
+            System.out.println(productCount);
+        }
+        if (productMaxCount != null) {
+            System.out.println(productMaxCount);
+        }
+        if (productMinCount != null) {
+            System.out.println(productMinCount);
+        }
+        if (productType != null) {
+            System.out.println(productType);
+        }
+        if (productDisc != null) {
+            System.out.println(productDisc);
+        }
 
         return "redirect:/product/info?id=1";
     }
 
     @RequestMapping(value = "/updateProductPic", method = RequestMethod.POST)
-    public String updateProductPic(@RequestParam("file") MultipartFile file, HttpServletRequest request, @RequestParam("productId") String productId){
-        if(!file.isEmpty()){
+    public String updateProductPic(@RequestParam("file") MultipartFile file, @RequestParam("productId") String productId) {
+        if (!file.isEmpty()) {
 
-            String  path = "D:\\Work Space\\Intellij WorkSpace\\SSMApplicationTestByJenKins\\src\\main\\webapp\\WEB-INF\\pic";
+            String path = "D:\\Work Space\\Intellij WorkSpace\\SSMApplicationTestByJenKins\\src\\main\\webapp\\WEB-INF\\pic";
 
             String suffix = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1);
 
             //不符合要求
-            if(!(suffix.equalsIgnoreCase("jpg")||suffix.equalsIgnoreCase("png")||suffix.equalsIgnoreCase("jepg"))){
+            if (!(suffix.equalsIgnoreCase("jpg") || suffix.equalsIgnoreCase("png") || suffix.equalsIgnoreCase("jepg"))) {
                 return "redirect:/product/info?id=" + productId;
             }
 
@@ -231,5 +245,23 @@ public class ProductController {
         }
 
         return "redirect:/product/info?id=" + productId;
+    }
+
+    @RequestMapping(value = "/uploadMoreProducts", method = RequestMethod.POST)
+    public String uploadProducts(@RequestParam("file") MultipartFile file) {
+        if (!file.isEmpty()) {
+            String path = "D:\\Work Space\\Intellij WorkSpace\\SSMApplicationTestByJenKins\\src\\main\\webapp\\WEB-INF\\pic";
+
+            //获取后缀
+            String suffix = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1);
+            try{
+                FileUtils.copyInputStreamToFile(file.getInputStream(), new File(path,
+                        suffix+"." + suffix));
+            }catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return "redirect:/product/info?id=1";
     }
 }
