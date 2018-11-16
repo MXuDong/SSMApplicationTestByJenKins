@@ -71,7 +71,8 @@ public class ProductController {
 
         List<List<String>> productInfo = new ArrayList<List<String>>();
         List<String> productBody = new ArrayList<String>();
-        productBody.add("1"); //id
+        //id
+        productBody.add("1");
         productBody.add("1");
         productBody.add("鲸鱼");
         productBody.add("9元（人民币）");
@@ -261,6 +262,20 @@ public class ProductController {
                 e.printStackTrace();
             }
         }
+
+        return "redirect:/product/info?id=1";
+    }
+
+    @RequestMapping(value = "/changeProductCount", method = RequestMethod.POST)
+    public String changeProductCount(@RequestParam(value = "productID") String productID, @RequestParam(value = "productCount", required = false)int productCount){
+        System.out.println(productID + "ChangeCount" + productCount);
+
+        return "redirect:/product/info?id=1";
+    }
+
+    @RequestMapping(value = "/changeProductPrice", method = RequestMethod.POST)
+    public String changeProductPrice(String productID, double productPrice){
+        System.out.println(productID + "ChangePrice" + productPrice);
 
         return "redirect:/product/info?id=1";
     }

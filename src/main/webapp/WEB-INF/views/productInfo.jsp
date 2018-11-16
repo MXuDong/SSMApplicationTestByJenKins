@@ -21,18 +21,21 @@
             <h1 class="display-4">${requestScope.ProductInfo.productName}</h1>
             <p class="lead">${requestScope.ProductInfo.productDisc}</p>
             <hr class="my-4">
-            <button type="button" class="btn btn-outline-primary btn-block" data-toggle="modal" data-target="#picForm"
-                    id="SubmitForm">更换图片
+            <button type="button" class="btn btn-outline-primary btn-block" data-toggle="modal"
+                    data-target="#changeProductPic"
+                    id="changePicButton">更换图片
             </button>
 
             <!-- Modal -->
-            <div class="modal fade" id="picForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            <div class="modal fade" id="changeProductPic" tabindex="-1" role="dialog"
+                 aria-labelledby="changeProductPicHeader"
                  aria-hidden="true">
                 <div class="modal-dialog" role="document">
-                    <form action="/product/updateProductPic?productId=${requestScope.ProductInfo.productId}" method="post" enctype="multipart/form-data">
+                    <form action="/product/updateProductPic?productId=${requestScope.ProductInfo.productId}"
+                          method="post" enctype="multipart/form-data">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">选择文件</h5>
+                                <h5 class="modal-title" id="changeProductPicHeader">选择文件</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -53,7 +56,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
-                                <input type="submit" class="btn btn-primary" value="开始上传" >
+                                <input type="submit" class="btn btn-primary" value="开始上传">
                             </div>
                         </div>
                     </form>
@@ -69,6 +72,87 @@
             <p class="lead">当前库存状态:${requestScope.ProductInfo.productStatus}</p>
             <p class="lead">库存推荐最大值:${requestScope.ProductInfo.productMaxCount}</p>
             <p class="lead">库存推荐最小值:${requestScope.ProductInfo.productMinCount}</p>
+
+            <%--修改产品数量--%>
+            <button type="button" class="btn btn-outline-primary btn-block" data-toggle="modal"
+                    data-target="#changeProductCount"
+                    id="changeProductCountButton">修改产品数量
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="changeProductCount" tabindex="-1" role="dialog"
+                 aria-labelledby="changeProductCountHeader"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <form action="/product/changeProductCount?productID=${requestScope.ProductInfo.productId}"
+                          method="post" id="changeCountForm">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="changeProductCountHeader">修改产品数量</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+
+                                <p>请输入产品数量</p>
+
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroup-sizing-default">产品数量</span>
+                                    </div>
+                                    <input id="input_changeProductCount" type="text" name="productCount" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                                <button type="button" class="btn btn-primary" onclick="checkChangeCount()">确认修改</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br />
+
+            <%--修改产品价格--%>
+            <button type="button" class="btn btn-outline-primary btn-block" data-toggle="modal"
+                    data-target="#changeProductCount"
+                    id="changeProductCountButton">修改产品价格
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="changeProductPrice" tabindex="-1" role="dialog"
+                 aria-labelledby="changeProductPriceHeader"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <form action="/product/changeProductPrice?productID=${requestScope.ProductInfo.productId}"
+                          method="post" id="changePriceForm">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="changeProductPriceHeader">修改产品数量</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+
+                                <p>请输入产品价格</p>
+
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="changeProductPriceInput">产品数量</span>
+                                    </div>
+                                    <input id="input_changeProductPrice" type="text" name="productPrice" class="form-control" aria-label="Default" aria-describedby="changeProductPriceInput">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal" >关闭</button>
+                                <button type="button" class="btn btn-primary" onclick="checkChangePrice()">确认修改</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
     <div class="col-md-7">
@@ -83,6 +167,44 @@
 <script language="JavaScript">
     var ProductCountPic = echarts.init(document.getElementById('productCountChange'));
     var ProductPricePic = echarts.init(document.getElementById('productPriceChange'));
+
+    function checkIsNumber(param){
+        var docCount = 0;
+        var i;
+        for (i = 0; i < param.length; i++) {
+            if (param[i] == '.') {
+                docCount++;
+                continue;
+            }
+            if (!(param[i] >= '0' && param[i] <= '9')) {
+                break;
+            }
+        }
+
+        return i == param.length;
+    }
+
+    function checkChangeCount(){
+        var form = $("#changeCountForm");
+        var input_count = $("#input_changeProductCount");
+
+        if(checkIsNumber(input_count.val())){
+            if(input_count.val().length != 0){
+                form.submit();
+            }
+        }
+    }
+
+    function checkChangePrice(){
+        var form = $("#changePriceForm");
+        var input_price = $("#input_changeProductPrice");
+
+        if(checkIsNumber(input_price.val())){
+            if(input_price.val().length != 0) {
+                form.submit();
+            }
+        }
+    }
 
     ProductPricePic.setOption(option = {
         title: {

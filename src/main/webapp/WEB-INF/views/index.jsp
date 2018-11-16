@@ -31,7 +31,7 @@
 
     <div class="col-md-4">
         <%--产品总量占比饼图--%>
-        <div id="countPic" style="width: 600px;height:400px;">
+        <div id="countPic" style="width: 480px;height:400px;">
             测试
         </div>
     </div>
