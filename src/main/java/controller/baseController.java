@@ -63,11 +63,13 @@ public class baseController {
         return modelAndView;
     }
 
-//    关于页面
-
     @RequestMapping("/about")
-    public ModelAndView trunAboutPage(){
+    public ModelAndView turnAboutPage(){
         return new ModelAndView("about");
     }
 
+    @RequestMapping("/login")
+    public ModelAndView turnLoginPage(){
+        return new ModelAndView("login");
+    }
 }
