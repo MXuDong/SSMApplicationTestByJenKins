@@ -181,7 +181,7 @@
             <a href="/og/logManager" class="list-group-item list-group-item-action">操作日志历史纪录</a>
             <a href="/product/addProducts" class="list-group-item list-group-item-action">导入数据</a>
             <a href="#" class="list-group-item list-group-item-action">下载库存产品数据</a>
-            <a href="#" class="list-group-item list-group-item-action">关于我们</a>
+            <a href="/about" class="list-group-item list-group-item-action">关于我们</a>
         </div>
     </div>
 </div>

@@ -1,7 +1,6 @@
 package controller;
 
 import org.apache.commons.io.FileUtils;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -9,8 +8,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
@@ -36,7 +33,8 @@ public class ProductController {
 
         List<List<String>> productInfo = new ArrayList<List<String>>();
         List<String> productBody = new ArrayList<String>();
-        productBody.add("1"); //id
+         //id
+        productBody.add("1");
         productBody.add("1");
         productBody.add("鲸鱼");
         productBody.add("9元（人民币）");
@@ -107,7 +105,8 @@ public class ProductController {
 
         List<List<String>> productInfo = new ArrayList<List<String>>();
         List<String> productBody = new ArrayList<String>();
-        productBody.add("1"); //id
+         //id
+        productBody.add("1");
         productBody.add("1");
         productBody.add("鲸鱼");
         productBody.add("9元（人民币）");

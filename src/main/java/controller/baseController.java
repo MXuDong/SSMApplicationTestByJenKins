@@ -2,6 +2,7 @@ package controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
@@ -61,4 +62,12 @@ public class baseController {
         modelAndView.addObject("ProductBingPic", productBingPic);
         return modelAndView;
     }
+
+//    关于页面
+
+    @RequestMapping("/about")
+    public ModelAndView trunAboutPage(){
+        return new ModelAndView("about");
+    }
+
 }
