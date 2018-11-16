@@ -3,8 +3,10 @@ package controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.request.SessionScope;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -71,5 +73,18 @@ public class baseController {
     @RequestMapping("/login")
     public ModelAndView turnLoginPage(){
         return new ModelAndView("login");
+    }
+
+    @RequestMapping("/doLogin")
+    public String login(String userName, String password, HttpSession session){
+        session.setAttribute("userInfoId", 1);
+        return "redirect:/login";
+    }
+
+    @RequestMapping("/doLogOut")
+    public String logOut(HttpSession session){
+        session.setAttribute("userInfoId", null);
+
+        return "redirect:/login";
     }
 }

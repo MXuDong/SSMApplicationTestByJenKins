@@ -35,7 +35,7 @@
                 </div>
             </li>
             <li class="nav-item">
-                <c:if test="${requestScope.UserInfor != null}"><a class="nav-link" href="#">注销</a></c:if>
+                <c:if test="${requestScope.UserInfor != null}"><a class="nav-link" href="/doLogOut">注销</a></c:if>
                 <c:if test="${requestScope.UserInfor == null}"><a class="nav-link" href="/login">登陆</a></c:if>
             </li>
         </ul>
