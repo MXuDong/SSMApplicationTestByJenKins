@@ -78,13 +78,13 @@ public class baseController {
     @RequestMapping("/doLogin")
     public String login(String userName, String password, HttpSession session){
         session.setAttribute("userInfoId", 1);
-        return "redirect:/login";
+        return "redirect:/";
     }
 
     @RequestMapping("/doLogOut")
     public String logOut(HttpSession session){
         session.setAttribute("userInfoId", null);
 
-        return "redirect:/login";
+        return "redirect:/";
     }
 }
