@@ -231,7 +231,7 @@
 
     ProductCountPic.setOption(option = {
         title: {
-            text: '产品库存变化图'
+            text: '产品价格变化图'
         },
         tooltip: {
             trigger: 'axis'

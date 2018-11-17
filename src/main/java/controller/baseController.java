@@ -53,7 +53,7 @@ public class baseController {
         productOptionValue.put("data", productData);
         modelAndView.addObject("ProductOptionValue", productOptionValue);
 
-//        产品类别总量饼图
+//        产品总量饼图
         Map<String, String> productBingPic = new HashMap<String, String>();
         String productNames = "'海绵宝宝', '皮皮虾', '蟹老板', '章鱼哥', '鲸鱼', '贝克'";
         String productBingData = "{value:1200, name:'海绵宝宝'},{value:1200, name:'皮皮虾'}," +

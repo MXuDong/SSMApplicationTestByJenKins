@@ -1,10 +1,11 @@
 package service.Interface;
 
-import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 public interface ObillManagerService {
-    //获取收入支出折线图信息
-    Map<String, String> getObillChangeInfo();
-    Map<String, String> getObillChangeInfo(Date date);
+    //获取结账金额，上一次结账信息
+    Map<String, String> getAccountAttribute();
+    //获取结账详细信息列表
+    List<Map<String, String>> getAccountInfos();
 }
