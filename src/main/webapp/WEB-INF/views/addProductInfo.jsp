@@ -70,19 +70,6 @@
                            name="productMinCount">
                 </div>
                 <br/>
-                <%--添加新类别--%>
-                <div class="input-group">
-                    <select class="custom-select" name="productType">
-                        <option selected>默认产品</option>
-                        <c:forEach items="${requestScope.typeList}" var="res">
-                            <option value="${res}">${res}</option>
-                        </c:forEach>
-                    </select>
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button">新建类别</button>
-                    </div>
-                </div>
-                <br/>
                 <%--产品描述--%>
                 <div class="input-group">
                     <div class="input-group-prepend">

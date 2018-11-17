@@ -27,7 +27,6 @@ public class ProductController {
         productHeader.add("产品价格");
         productHeader.add("产品库存");
         productHeader.add("产品库存状态");
-        productHeader.add("产品类别");
         productHeader.add("产品详细描述");
         modelAndView.addObject("ProductHeader", productHeader);
 
@@ -40,7 +39,6 @@ public class ProductController {
         productBody.add("9元（人民币）");
         productBody.add("1000");
         productBody.add("正常");
-        productBody.add("小菜");
         productBody.add("座头鲸，可以 做房子");
 
         productInfo.add(productBody);
@@ -63,7 +61,6 @@ public class ProductController {
         productHeader.add("产品价格");
         productHeader.add("产品库存");
         productHeader.add("产品库存状态");
-        productHeader.add("产品类别");
         productHeader.add("产品详细描述");
         modelAndView.addObject("ProductHeader", productHeader);
 
@@ -76,7 +73,6 @@ public class ProductController {
         productBody.add("9元（人民币）");
         productBody.add("1000");
         productBody.add("告急");
-        productBody.add("小菜");
         productBody.add("座头鲸，可以做房子");
 
         productInfo.add(productBody);
@@ -99,7 +95,6 @@ public class ProductController {
         productHeader.add("产品价格");
         productHeader.add("产品库存");
         productHeader.add("产品库存状态");
-        productHeader.add("产品类别");
         productHeader.add("产品详细描述");
         modelAndView.addObject("ProductHeader", productHeader);
 
@@ -112,7 +107,6 @@ public class ProductController {
         productBody.add("9元（人民币）");
         productBody.add("1000");
         productBody.add("冗余");
-        productBody.add("小菜");
         productBody.add("座头鲸，可以做房子");
 
         productInfo.add(productBody);
@@ -134,7 +128,6 @@ public class ProductController {
         productInfo.put("productPrice", "9.6元（人民币）");
         productInfo.put("productCount", "1000");
         productInfo.put("productPic", "../pic/1.jpg");
-        productInfo.put("productType", "测试版");
         productInfo.put("productDisc", "这里是产品的描述");
         productInfo.put("productMaxCount", "2000");
         productInfo.put("productMinCount", "1");
@@ -177,12 +170,6 @@ public class ProductController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("addProductInfo");
 
-        List<String> typeList = new ArrayList<String>();
-        typeList.add("默认类型");
-        typeList.add("标准类型");
-        typeList.add("抽象类型");
-        modelAndView.addObject("typeList", typeList);
-
         return modelAndView;
     }
 
@@ -193,7 +180,6 @@ public class ProductController {
             @RequestParam("productCount") Integer productCount,
             @RequestParam("productMaxCount") Integer productMaxCount,
             @RequestParam("productMinCount") Integer productMinCount,
-            @RequestParam("productType") String productType,
             @RequestParam("productDisc") String productDisc
     ) {
         if (productName != null) {
@@ -210,9 +196,6 @@ public class ProductController {
         }
         if (productMinCount != null) {
             System.out.println(productMinCount);
-        }
-        if (productType != null) {
-            System.out.println(productType);
         }
         if (productDisc != null) {
             System.out.println(productDisc);
