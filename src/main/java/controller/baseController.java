@@ -87,4 +87,31 @@ public class baseController {
 
         return "redirect:/";
     }
+
+    @RequestMapping("/account")
+    public ModelAndView turnToAccountPage(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("account");
+
+        Map<String, String> accountAttribute = new HashMap<String, String>();
+        accountAttribute.put("totalChangeMoney", "盈利 + 360");
+        accountAttribute.put("lastChangeTime", "2018-09-22 13:01:01");
+
+        List<Map<String, String>> accountInfo = new ArrayList<Map<String, String>>();
+
+        Map<String, String> infos = new HashMap<String, String>();
+        infos.put("numberOfThisInfo", "1");
+        infos.put("productName", "鲸鱼");
+        infos.put("changeType", "出库");
+        infos.put("changeCount", "-7");
+        infos.put("changeTimePrice", "56.5");
+        infos.put("changeTime", "2016-5-22 15:56:04");
+        infos.put("changeRes", "360");
+
+        accountInfo.add(infos);
+
+        modelAndView.addObject("changeInfors", accountInfo);
+        modelAndView.addObject("accountAttribute", accountAttribute);
+        return modelAndView;
+    }
 }
