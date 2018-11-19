@@ -22,9 +22,9 @@ public interface ProductMangerService {
     //添加产品信息
     int addProductInfo(String ... str);
     //修改产品图片信息
-    int updateProductInfo(int picId);
+    int updateProductInfo(String picId);
     //修改产品数量
-    int updateProductInfo(int productId, int changeCount);
+    int updateProductInfo(String productId, int changeCount);
     //修改产品价格
-    int updateProductInfo(int productId, double changePrice);
+    int updateProductInfo(String productId, double changePrice);
 }

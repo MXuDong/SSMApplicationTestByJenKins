@@ -139,17 +139,17 @@ public class ProductManagerImpl implements ProductMangerService {
     }
 
     @Override
-    public int updateProductInfo(int picId) {
+    public int updateProductInfo(String picId) {
         return 0;
     }
 
     @Override
-    public int updateProductInfo(int productId, int changeCount) {
+    public int updateProductInfo(String productId, int changeCount) {
         return 0;
     }
 
     @Override
-    public int updateProductInfo(int productId, double changePrice) {
+    public int updateProductInfo(String productId, double changePrice) {
         return 0;
     }
 }

@@ -170,6 +170,7 @@ public class ProductController {
                 //这里将上传得到的文件保存至 d:\\temp\\file 目录
                 FileUtils.copyInputStreamToFile(file.getInputStream(), new File(path,
                         productId + "." + suffix));
+                productMangerService.updateProductInfo("1");
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -200,12 +201,16 @@ public class ProductController {
     public String changeProductCount(@RequestParam(value = "productID") String productID, @RequestParam(value = "productCount", required = false)int productCount){
         System.out.println(productID + "ChangeCount" + productCount);
 
+        productMangerService.updateProductInfo(productID, productCount);
+
         return "redirect:/product/info?id=1";
     }
 
     @RequestMapping(value = "/changeProductPrice", method = RequestMethod.POST)
     public String changeProductPrice(String productID, double productPrice){
         System.out.println(productID + "ChangePrice" + productPrice);
+
+        productMangerService.updateProductInfo(productID, productPrice);
 
         return "redirect:/product/info?id=1";
     }
