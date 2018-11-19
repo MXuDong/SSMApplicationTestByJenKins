@@ -1,11 +1,14 @@
 package controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.SessionScope;
 import org.springframework.web.servlet.ModelAndView;
+import service.Interface.ProductMangerService;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,6 +17,9 @@ import java.util.Map;
 
 @Controller
 public class baseController {
+
+    @Autowired@Resource(name = "ProductManagerImpl")
+    ProductMangerService productMangerService;
 
     @RequestMapping(value = {"/", "/index", "Home"})
     public ModelAndView baseIndex() {
@@ -26,8 +32,7 @@ public class baseController {
         modelAndView.addObject("Opers", opers);
 
 //        库存告急
-        List<String> lessProduct = new ArrayList<String>();
-        lessProduct.add("产品:[\"龙虾\"] 库存不足 [剩余数量 :\"99\"]");
+        List<String> lessProduct = productMangerService.getLessProducts();
         modelAndView.addObject("LessProduct", lessProduct);
 
 //        库存冗余

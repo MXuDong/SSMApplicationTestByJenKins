@@ -2,6 +2,7 @@ package service.Impl;
 
 import org.springframework.stereotype.Service;
 import service.Interface.ProductMangerService;
+import util.StringFormatUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,7 +13,14 @@ import java.util.Map;
 public class ProductManagerImpl implements ProductMangerService {
     @Override
     public List<String> getLessProducts() {
-        return null;
+        List<String> lessProducts = new ArrayList<String>();
+
+        List<List<String>> lessProductInfos = getLessProducts(5);
+        for(List<String> L : lessProductInfos){
+            lessProducts.add(StringFormatUtil.formatProductInfoToString(StringFormatUtil.FORMAT_TYPE_LESS, L));
+        }
+
+        return lessProducts;
     }
 
 
