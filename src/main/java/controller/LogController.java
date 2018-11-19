@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import service.Interface.LogManagerService;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,8 +15,12 @@ import java.util.List;
 @RequestMapping("/log")
 public class LogController {
 
-    @Autowired
+    @Autowired@Resource(name = "LogManagerImpl")
     LogManagerService logManagerService;
+
+    public void setLogManagerService(LogManagerService logManagerService) {
+        this.logManagerService = logManagerService;
+    }
 
     @RequestMapping(value = {"", "/logManager"})
     public ModelAndView getIndexOfLog(){

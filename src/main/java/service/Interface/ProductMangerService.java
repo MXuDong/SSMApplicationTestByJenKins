@@ -7,13 +7,12 @@ import java.util.Map;
 public interface ProductMangerService {
     //库存告急数据
     List<String> getLessProducts();
-    List<String> getLessProducts(int count);
+    List<List<String>> getLessProducts(int count);
     //库存冗余数据
     List<String> getMoreProducts();
-    List<String> getMoreProducts(int count);
+    List<List<String>> getMoreProducts(int count);
     //产品总量饼图
     Map<String, String> getProductBingPic();
-    Map<String, String> getProductBingPic(int count);
     //获取所有产品列表
     List<List<String>> getProductInfos();
     //获取某个产品的详细信息

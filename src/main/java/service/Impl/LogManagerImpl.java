@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@Service("LogManagerService")
+@Service("LogManagerImpl")
 public class LogManagerImpl implements LogManagerService {
     @Override
     public List<String> getOperList() {
