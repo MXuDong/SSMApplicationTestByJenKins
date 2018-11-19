@@ -1,8 +1,11 @@
 package controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import service.Interface.LogManagerService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +13,9 @@ import java.util.List;
 @Controller
 @RequestMapping("/log")
 public class LogController {
+
+    @Autowired
+    LogManagerService logManagerService;
 
     @RequestMapping(value = {"", "/logManager"})
     public ModelAndView getIndexOfLog(){
@@ -26,16 +32,7 @@ public class LogController {
         logTableHeader.add("关联数值");
         modelAndView.addObject("LogTableHeader", logTableHeader);
 
-        List<List<String>> logTableInfo = new ArrayList<List<String>>();
-        List<String> logTableBody = new ArrayList<String>();
-        logTableBody.add("1");
-        logTableBody.add("Root");
-        logTableBody.add("产品价格上涨");
-        logTableBody.add("2018-11-4 22:02:23 [周日]");
-        logTableBody.add("产品价格变动");
-        logTableBody.add("鲸鱼价格");
-        logTableBody.add("6.0元（人民币）");
-        logTableInfo.add(logTableBody);
+        List<List<String>> logTableInfo = logManagerService.getAllLogInfo();
         modelAndView.addObject("LogTableInfo", logTableInfo);
 
         //设置页面信息标题
@@ -58,15 +55,7 @@ public class LogController {
         logTableHeader.add("变动价格");
         modelAndView.addObject("LogTableHeader", logTableHeader);
 
-        List<List<String>> logTableInfo = new ArrayList<List<String>>();
-        List<String> logTableBody = new ArrayList<String>();
-        logTableBody.add("1");
-        logTableBody.add("Root");
-        logTableBody.add("鲸鱼");
-        logTableBody.add("2018-11-4 22:02:23 [周日]");
-        logTableBody.add("上涨");
-        logTableBody.add("6.0元（人民币）");
-        logTableInfo.add(logTableBody);
+        List<List<String>> logTableInfo = logManagerService.getAllChangePriceInfo();
         modelAndView.addObject("LogTableInfo", logTableInfo);
 
         //设置页面信息标题
@@ -89,15 +78,7 @@ public class LogController {
         logTableHeader.add("变动数量");
         modelAndView.addObject("LogTableHeader", logTableHeader);
 
-        List<List<String>> logTableInfo = new ArrayList<List<String>>();
-        List<String> logTableBody = new ArrayList<String>();
-        logTableBody.add("1");
-        logTableBody.add("Root");
-        logTableBody.add("鲸鱼");
-        logTableBody.add("2018-11-4 22:02:23 [周日]");
-        logTableBody.add("上涨");
-        logTableBody.add("70");
-        logTableInfo.add(logTableBody);
+        List<List<String>> logTableInfo = logManagerService.getAllChangeCountInfo();
         modelAndView.addObject("LogTableInfo", logTableInfo);
 
         //设置页面信息标题
@@ -119,14 +100,7 @@ public class LogController {
         logTableHeader.add("结账类型");
         modelAndView.addObject("LogTableHeader", logTableHeader);
 
-        List<List<String>> logTableInfo = new ArrayList<List<String>>();
-        List<String> logTableBody = new ArrayList<String>();
-        logTableBody.add("1");
-        logTableBody.add("Root");
-        logTableBody.add("2018-11-4 22:02:23 [周日]");
-        logTableBody.add("5200.0元（人民币）");
-        logTableBody.add("收入");
-        logTableInfo.add(logTableBody);
+        List<List<String>> logTableInfo = logManagerService.getAllObillInfo();
         modelAndView.addObject("LogTableInfo", logTableInfo);
 
         //设置页面信息标题
