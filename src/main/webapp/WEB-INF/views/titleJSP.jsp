@@ -19,7 +19,7 @@
                 <a class="nav-link" href="/">首页<span class="sr-only">(Home)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">账单管理</a>
+                <a class="nav-link" href="/account">账单管理</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"

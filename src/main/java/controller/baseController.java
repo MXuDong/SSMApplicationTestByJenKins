@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.SessionScope;
 import org.springframework.web.servlet.ModelAndView;
+import service.Interface.ObillManagerService;
 import service.Interface.ProductMangerService;
 
 import javax.annotation.Resource;
@@ -20,6 +21,8 @@ public class baseController {
 
     @Autowired@Resource(name = "ProductManagerImpl")
     ProductMangerService productMangerService;
+    @Autowired@Resource(name = "ObillManagerService")
+    ObillManagerService obillManagerService;
 
     @RequestMapping(value = {"/", "/index", "Home"})
     public ModelAndView baseIndex() {
@@ -97,22 +100,9 @@ public class baseController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("account");
 
-        Map<String, String> accountAttribute = new HashMap<String, String>();
-        accountAttribute.put("totalChangeMoney", "盈利 + 360");
-        accountAttribute.put("lastChangeTime", "2018-09-22 13:01:01");
+        Map<String, String> accountAttribute = obillManagerService.getAccountAttribute();
 
-        List<Map<String, String>> accountInfo = new ArrayList<Map<String, String>>();
-
-        Map<String, String> infos = new HashMap<String, String>();
-        infos.put("numberOfThisInfo", "1");
-        infos.put("productName", "鲸鱼");
-        infos.put("changeType", "出库");
-        infos.put("changeCount", "-7");
-        infos.put("changeTimePrice", "56.5");
-        infos.put("changeTime", "2016-5-22 15:56:04");
-        infos.put("changeRes", "360");
-
-        accountInfo.add(infos);
+        List<Map<String, String>> accountInfo = obillManagerService.getAccountInfos();
 
         modelAndView.addObject("changeInfors", accountInfo);
         modelAndView.addObject("accountAttribute", accountAttribute);
