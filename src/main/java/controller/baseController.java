@@ -36,8 +36,7 @@ public class baseController {
         modelAndView.addObject("LessProduct", lessProduct);
 
 //        库存冗余
-        List<String> moreProduct = new ArrayList<String>();
-        moreProduct.add("产品:[\"龙虾\"] 库存冗余 [剩余数量 :\"99\"]");
+        List<String> moreProduct = productMangerService.getMoreProducts();
         modelAndView.addObject("MoreProduct", moreProduct);
 
 //        收入支出折线图

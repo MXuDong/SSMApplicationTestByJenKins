@@ -49,7 +49,14 @@ public class ProductManagerImpl implements ProductMangerService {
 
     @Override
     public List<String> getMoreProducts() {
-        return null;
+        List<String> moreProducts = new ArrayList<String>();
+
+        List<List<String>> moreProductInfos = getMoreProducts(5);
+        for(List<String> L : moreProductInfos){
+            moreProducts.add(StringFormatUtil.formatProductInfoToString(StringFormatUtil.FORMAT_TYPE_MORE, L));
+        }
+
+        return moreProducts;
     }
 
     @Override
