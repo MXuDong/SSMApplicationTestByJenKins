@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.SessionScope;
 import org.springframework.web.servlet.ModelAndView;
+import service.Interface.LogManagerService;
 import service.Interface.ObillManagerService;
 import service.Interface.ProductMangerService;
 
@@ -23,6 +24,8 @@ public class baseController {
     ProductMangerService productMangerService;
     @Autowired@Resource(name = "ObillManagerService")
     ObillManagerService obillManagerService;
+    @Autowired@Resource(name = "LogManagerImpl")
+    LogManagerService logManagerService;
 
     @RequestMapping(value = {"/", "/index", "Home"})
     public ModelAndView baseIndex() {
@@ -30,8 +33,7 @@ public class baseController {
         //假数据
 
 //        创建操作列表
-        List<String> opers = new ArrayList<String>();
-        opers.add("2018-5-25 13:24.18 [星期五]:产品[\"龙虾\"]价格发生变动[\"上涨\"] 6.0元");
+        List<String> opers = logManagerService.getOperList();
         modelAndView.addObject("Opers", opers);
 
 //        库存告急
@@ -43,31 +45,15 @@ public class baseController {
         modelAndView.addObject("MoreProduct", moreProduct);
 
 //        收入支出折线图
-        Map<String, String> obillPicOptionValue = new HashMap<String, String>();
-        String obillPicXAxisData = "'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'A', 'B'";
-        String obillPicSeriesData = "820, 932, 901, 934, 1290, 1330, 1320, 540, 7852";
-
-        obillPicOptionValue.put("xAxis", obillPicXAxisData);
-        obillPicOptionValue.put("data", obillPicSeriesData);
+        Map<String, String> obillPicOptionValue = logManagerService.getObilPicOptionValue();
         modelAndView.addObject("ObillPicOptionValue", obillPicOptionValue);
 
 //       产品总量变化折线图
-        Map<String, String> productOptionValue = new HashMap<String, String>();
-        String productXAxis = "'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'";
-        String productData = "820, 932, 1290, 1330, 1320, 540, 320";
-
-        productOptionValue.put("xAxis", productXAxis);
-        productOptionValue.put("data", productData);
+        Map<String, String> productOptionValue = logManagerService.getProductChangeValue();
         modelAndView.addObject("ProductOptionValue", productOptionValue);
 
 //        产品总量饼图
-        Map<String, String> productBingPic = new HashMap<String, String>();
-        String productNames = "'海绵宝宝', '皮皮虾', '蟹老板', '章鱼哥', '鲸鱼', '贝克'";
-        String productBingData = "{value:1200, name:'海绵宝宝'},{value:1200, name:'皮皮虾'}," +
-                "{value:300, name:'蟹老板'},{value:456, name:'章鱼哥'}," +
-                "{value:986, name:'鲸鱼'},{value:321, name:'贝克'}";
-        productBingPic.put("legendData", productNames);
-        productBingPic.put("seriesData", productBingData);
+        Map<String, String> productBingPic = logManagerService.getProductBingPic();
         modelAndView.addObject("ProductBingPic", productBingPic);
         return modelAndView;
     }

@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import service.Interface.LogManagerService;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,32 +12,49 @@ import java.util.Map;
 public class LogManagerImpl implements LogManagerService {
     @Override
     public List<String> getOperList() {
-        return null;
+        List<String> operList = new ArrayList<String>();
+
+        operList.add("2018-5-25 13:24.18 [星期五]:产品[\"龙虾\"]价格发生变动[\"上涨\"] 6.0元");
+
+        return operList;
     }
 
     @Override
-    public List<String> getOperList(int count) {
-        return null;
+    public Map<String, String> getObilPicOptionValue() {
+        Map<String, String> productChangeMap = new HashMap<String, String>();
+
+        String obillPicXAxisData = "'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'A', 'B'";
+        String obillPicSeriesData = "820, 932, 901, 934, 1290, 1330, 1320, 540, 7852";
+        productChangeMap.put("xAxis", obillPicXAxisData);
+        productChangeMap.put("data", obillPicSeriesData);
+
+        return productChangeMap;
     }
 
-    @Override
-    public List<String> getObilPicOptionValue() {
-        return null;
-    }
-
-    @Override
-    public List<String> getObilPicOptionValue(int count) {
-        return null;
-    }
 
     @Override
     public Map<String, String> getProductChangeValue() {
-        return null;
+        Map<String, String> productChangeMap = new HashMap<String, String>();
+
+        String obillPicXAxisData = "'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'";
+        String obillPicSeriesData = "820, 932, 1290, 1330, 1320, 540, 320";
+        productChangeMap.put("xAxis", obillPicXAxisData);
+        productChangeMap.put("data", obillPicSeriesData);
+
+        return productChangeMap;
     }
 
     @Override
-    public Map<String, String> getProductChangeValue(int count) {
-        return null;
+    public Map<String, String> getProductBingPic() {
+        Map<String, String> productBingPic = new HashMap<String, String>();
+        String productNames = "'海绵宝宝', '皮皮虾', '蟹老板', '章鱼哥', '鲸鱼', '贝克'";
+        String productBingData = "{value:1200, name:'海绵宝宝'},{value:1200, name:'皮皮虾'}," +
+                "{value:300, name:'蟹老板'},{value:456, name:'章鱼哥'}," +
+                "{value:986, name:'鲸鱼'},{value:321, name:'贝克'}";
+        productBingPic.put("legendData", productNames);
+        productBingPic.put("seriesData", productBingData);
+
+        return productBingPic;
     }
 
     @Override

@@ -11,13 +11,12 @@ import java.util.Map;
 public interface LogManagerService {
     //产品信息变动日志
     List<String> getOperList();
-    List<String> getOperList(int count);
     //收入支出操作数据
-    List<String> getObilPicOptionValue();
-    List<String> getObilPicOptionValue(int count);
+    Map<String, String> getObilPicOptionValue();
     //产品总量变化数据
     Map<String, String> getProductChangeValue();
-    Map<String, String> getProductChangeValue(int count);
+    //产品饼图数据
+    Map<String, String> getProductBingPic();
     //获取所有日志信息
     List<List<String>> getAllLogInfo();
     //获取价格变动日志信息
