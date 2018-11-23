@@ -156,7 +156,7 @@ public class ProductController {
     public String updateProductPic(@RequestParam("file") MultipartFile file, @RequestParam("productId") String productId) {
         if (!file.isEmpty()) {
 
-            String path = "D:\\Work Space\\Intellij WorkSpace\\SSMApplicationTestByJenKins\\src\\main\\webapp\\WEB-INF\\pic";
+            String path = "E:\\Work Space\\Intellij WorkSpace\\SSMApplicationTestByJenKins\\src\\main\\webapp\\WEB-INF\\pic";
 
             String suffix = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1);
 
