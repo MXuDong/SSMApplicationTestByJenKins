@@ -27,7 +27,7 @@
 <div class="row">
     <div class="col-md-1"></div>
     <div class="col-md-5">
-        <form method="post" action="/product/addOneProduct.up" id="productForm">
+        <form method="post" action="${pageContext.request.contextPath}/product/addOneProduct.up" id="productForm">
             <div>
                 <h1 style="text-align: center;">单产品添加</h1>
                 <h6>如果您希望为产品添加图片，请在商品详情页为其添加，谢谢</h6>
@@ -180,7 +180,7 @@
             <h1 style="text-align: center;">多产品批量添加</h1>
             <h6>如果您希望为产品添加图片，请在商品详情页为其添加，谢谢</h6>
             <hr/>
-            <form action="/product/uploadMoreProducts" method="post" enctype="multipart/form-data">
+            <form action="${pageContext.request.contextPath}/product/uploadMoreProducts" method="post" enctype="multipart/form-data">
                 <div class="modal-body">
                     <p>如果您没有模板文件，请点击下载，并保持模板文件的表头，避免发生异常。</p>
                     <div class="input-group mb-3">

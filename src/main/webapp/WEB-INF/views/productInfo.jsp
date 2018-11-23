@@ -31,7 +31,7 @@
                  aria-labelledby="changeProductPicHeader"
                  aria-hidden="true">
                 <div class="modal-dialog" role="document">
-                    <form action="/product/updateProductPic?productId=${requestScope.ProductInfo.productId}"
+                    <form action="${pageContext.request.contextPath}/product/updateProductPic?productId=${requestScope.ProductInfo.productId}"
                           method="post" enctype="multipart/form-data">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -84,7 +84,7 @@
                  aria-labelledby="changeProductCountHeader"
                  aria-hidden="true">
                 <div class="modal-dialog" role="document">
-                    <form action="/product/changeProductCount?productID=${requestScope.ProductInfo.productId}"
+                    <form action="${pageContext.request.contextPath}/product/changeProductCount?productID=${requestScope.ProductInfo.productId}"
                           method="post" id="changeCountForm">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -125,7 +125,7 @@
                  aria-labelledby="changeProductPriceHeader"
                  aria-hidden="true">
                 <div class="modal-dialog" role="document">
-                    <form action="/product/changeProductPrice?productID=${requestScope.ProductInfo.productId}"
+                    <form action="${pageContext.request.contextPath}/product/changeProductPrice?productID=${requestScope.ProductInfo.productId}"
                           method="post" id="changePriceForm">
                         <div class="modal-content">
                             <div class="modal-header">

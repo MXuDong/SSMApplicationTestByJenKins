@@ -19,7 +19,7 @@
                 <a class="nav-link" href="/">首页<span class="sr-only">(Home)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/account">账单管理</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/account">账单管理</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
@@ -27,16 +27,16 @@
                     产品管理
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="/product/ProductList">浏览产品信息</a>
-                    <a class="dropdown-item" href="/log/productPriceLog">显示产品变动信息</a>
+                    <a class="dropdown-item" href="${pageContext.request.contextPath}/product/ProductList">浏览产品信息</a>
+                    <a class="dropdown-item" href="${pageContext.request.contextPath}/log/productPriceLog">显示产品变动信息</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="/product/addProducts">增加数据</a>
+                    <a class="dropdown-item" href="${pageContext.request.contextPath}/product/addProducts">增加数据</a>
                     <a class="dropdown-item" href="#">导出数据</a>
                 </div>
             </li>
             <li class="nav-item">
-                <c:if test="${sessionScope.userInfoId != null}"><a class="nav-link" href="/doLogOut">注销</a></c:if>
-                <c:if test="${sessionScope.userInfoId == null}"><a class="nav-link" href="/login">登陆</a></c:if>
+                <c:if test="${sessionScope.userInfoId != null}"><a class="nav-link" href="${pageContext.request.contextPath}/doLogOut">注销</a></c:if>
+                <c:if test="${sessionScope.userInfoId == null}"><a class="nav-link" href="${pageContext.request.contextPath}/login">登陆</a></c:if>
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">

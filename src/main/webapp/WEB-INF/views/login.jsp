@@ -10,7 +10,7 @@
 <div class="row" >
     <div class="col-md-7"></div>
     <div class="col md-2">
-        <form action="/doLogin" style="background-color: antiquewhite;box-shadow: 10px 10px #383d41;margin: 10px; padding: 10px; border-radius: 10px;">
+        <form action="${pageContext.request.contextPath}/doLogin" style="background-color: antiquewhite;box-shadow: 10px 10px #383d41;margin: 10px; padding: 10px; border-radius: 10px;">
             <h1 style="margin-left: 10px; padding-left: 10px;">请登录</h1>
             <hr />
             <div class="form-group row">

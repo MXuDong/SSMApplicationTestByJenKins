@@ -19,9 +19,9 @@
         <h1 style="text-align: center;">产品明细表</h1>
 
         <hr/>
-        <a href="/product/lessProductList" class="btn btn-outline-primary">告急库存明细</a>
-        <a href="/product/moreProductList" class="btn btn-outline-primary">冗余库存明细</a>
-        <a href="/product/ProductList" class="btn btn-outline-primary">产品列表</a>
+        <a href="${pageContext.request.contextPath}/product/lessProductList" class="btn btn-outline-primary">告急库存明细</a>
+        <a href="${pageContext.request.contextPath}/product/moreProductList" class="btn btn-outline-primary">冗余库存明细</a>
+        <a href="${pageContext.request.contextPath}/product/ProductList" class="btn btn-outline-primary">产品列表</a>
         <hr/>
 
         <h2>${requestScope.PageHeader}</h2>
@@ -36,7 +36,7 @@
             </thead>
             <tbody>
             <c:forEach items="${requestScope.ProductInfo}" var="lti">
-                <tr onclick="window.location='/product/info?id=${lti[0]}'"  >
+                <tr onclick="window.location='${pageContext.request.contextPath}/product/info?id=${lti[0]}'"  >
                     <c:forEach items="${lti}" var="ltb" begin="1">
                         <td><c:out value="${ltb}"/></td>
                     </c:forEach>

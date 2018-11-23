@@ -142,7 +142,7 @@
     <div class="col-md-4">
         <h3>最新变化信息</h3>
         <div class="list-group">
-            <a href="/log/logManager" class="list-group-item list-group-item-action active">
+            <a href="${pageContext.request.contextPath}/log/logManager" class="list-group-item list-group-item-action active">
                 查看更多
             </a>
             <c:forEach items="${requestScope.Opers}" var="oper">
@@ -153,7 +153,7 @@
     <div class="col-md-3">
         <h3>库存告急列表</h3>
         <div class="list-group">
-            <a href="/product/lessProductList" class="list-group-item list-group-item-action active">
+            <a href="${pageContext.request.contextPath}/product/lessProductList" class="list-group-item list-group-item-action active">
                 查看更多
             </a>
             <c:forEach items="${requestScope.LessProduct}" var="lp">
@@ -164,7 +164,7 @@
     <div class="col-md-3">
         <h3>库存冗余列表</h3>
         <div class="list-group">
-            <a href="/product/lessProductList" class="list-group-item list-group-item-action active">
+            <a href="${pageContext.request.contextPath}/product/lessProductList" class="list-group-item list-group-item-action active">
                 查看更多
             </a>
             <c:forEach items="${requestScope.MoreProduct}" var="mp">
@@ -175,13 +175,13 @@
     <div class="col-md-2">
         <h3>快速链接</h3>
         <div class="list-group">
-            <a href="/product/ProductList" class="list-group-item list-group-item-action">产品列表</a>
-            <a href="/log/productCountLog" class="list-group-item list-group-item-action">产品库存变化列表</a>
-            <a href="/log/productPriceLog" class="list-group-item list-group-item-action">产品价格变化日志</a>
-            <a href="/log/logManager" class="list-group-item list-group-item-action">操作日志历史纪录</a>
-            <a href="/product/addProducts" class="list-group-item list-group-item-action">导入数据</a>
+            <a href="${pageContext.request.contextPath}/product/ProductList" class="list-group-item list-group-item-action">产品列表</a>
+            <a href="${pageContext.request.contextPath}/log/productCountLog" class="list-group-item list-group-item-action">产品库存变化列表</a>
+            <a href="${pageContext.request.contextPath}/log/productPriceLog" class="list-group-item list-group-item-action">产品价格变化日志</a>
+            <a href="${pageContext.request.contextPath}/log/logManager" class="list-group-item list-group-item-action">操作日志历史纪录</a>
+            <a href="${pageContext.request.contextPath}/product/addProducts" class="list-group-item list-group-item-action">导入数据</a>
             <a href="#" class="list-group-item list-group-item-action">下载库存产品数据</a>
-            <a href="/about" class="list-group-item list-group-item-action">关于我们</a>
+            <a href="${pageContext.request.contextPath}/about" class="list-group-item list-group-item-action">关于我们</a>
         </div>
     </div>
 </div>

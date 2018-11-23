@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <!-- Bootstrap CSS -->
-<link rel="stylesheet" href="/SSMApplicationTestByJenkins_war/CSS/bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/bootstrap/css/bootstrap.min.css" />
 
-<script src="/SSMApplicationTestByJenkins_war/JS/jquery-3.3.1.min.js"></script>
-<script src="/SSMApplicationTestByJenkins_war/JS/jquery.cookie.js"></script>
-<script src="/SSMApplicationTestByJenkins_war/JS/popper.min.js"></script>
-<script src="/SSMApplicationTestByJenkins_war/CSS/bootstrap/js/bootstrap.min.js"></script>
-<script src="/SSMApplicationTestByJenkins_war/JS/echarts.min.js"></script>
+<script src="${pageContext.request.contextPath}/JS/jquery-3.3.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/JS/jquery.cookie.js"></script>
+<script src="${pageContext.request.contextPath}/JS/popper.min.js"></script>
+<script src="${pageContext.request.contextPath}/CSS/bootstrap/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/JS/echarts.min.js"></script>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page isELIgnored="false" %>
