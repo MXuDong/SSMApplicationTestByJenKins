@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="dao.LogOperationObillResMapper" >
-  <resultMap id="BaseResultMap" type="main.java.model.LogOperationObillRes" >
+  <resultMap id="BaseResultMap" type="model.LogOperationObillRes" >
     <id column="lobr_id" property="lobrId" jdbcType="INTEGER" />
     <result column="t_obill_id" property="tObillId" jdbcType="INTEGER" />
     <result column="t_product_id" property="tProductId" jdbcType="INTEGER" />
@@ -20,13 +20,13 @@
     delete from t_log_operation_obill_res
     where lobr_id = #{lobrId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="main.java.model.LogOperationObillRes" >
+  <insert id="insert" parameterType="model.LogOperationObillRes" >
     insert into t_log_operation_obill_res (lobr_id, t_obill_id, t_product_id, 
       t_loo_id)
     values (#{lobrId,jdbcType=INTEGER}, #{tObillId,jdbcType=INTEGER}, #{tProductId,jdbcType=INTEGER}, 
       #{tLooId,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="main.java.model.LogOperationObillRes" >
+  <insert id="insertSelective" parameterType="model.LogOperationObillRes" >
     insert into t_log_operation_obill_res
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="lobrId != null" >
@@ -57,7 +57,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="main.java.model.LogOperationObillRes" >
+  <update id="updateByPrimaryKeySelective" parameterType="model.LogOperationObillRes" >
     update t_log_operation_obill_res
     <set >
       <if test="tObillId != null" >
@@ -72,7 +72,7 @@
     </set>
     where lobr_id = #{lobrId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="main.java.model.LogOperationObillRes" >
+  <update id="updateByPrimaryKey" parameterType="model.LogOperationObillRes" >
     update t_log_operation_obill_res
     set t_obill_id = #{tObillId,jdbcType=INTEGER},
       t_product_id = #{tProductId,jdbcType=INTEGER},

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="dao.ProductInfoMapper" >
-  <resultMap id="BaseResultMap" type="main.java.model.ProductInfo" >
+  <resultMap id="BaseResultMap" type="model.ProductInfo" >
     <id column="product_id" property="productId" jdbcType="INTEGER" />
     <result column="product_name" property="productName" jdbcType="CHAR" />
     <result column="product_pic" property="productPic" jdbcType="INTEGER" />
@@ -10,7 +10,7 @@
     <result column="product_max_count" property="productMaxCount" jdbcType="INTEGER" />
     <result column="product_min_count" property="productMinCount" jdbcType="INTEGER" />
   </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="main.java.model.ProductInfo" extends="BaseResultMap" >
+  <resultMap id="ResultMapWithBLOBs" type="model.ProductInfo" extends="BaseResultMap" >
     <result column="product_desc" property="productDesc" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
@@ -32,7 +32,7 @@
     delete from t_product
     where product_id = #{productId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="main.java.model.ProductInfo" >
+  <insert id="insert" parameterType="model.ProductInfo" >
     insert into t_product (product_id, product_name, product_pic, 
       product_price, product_count, product_max_count, 
       product_min_count, product_desc)
@@ -40,7 +40,7 @@
       #{productPrice,jdbcType=DOUBLE}, #{productCount,jdbcType=INTEGER}, #{productMaxCount,jdbcType=INTEGER}, 
       #{productMinCount,jdbcType=INTEGER}, #{productDesc,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="main.java.model.ProductInfo" >
+  <insert id="insertSelective" parameterType="model.ProductInfo" >
     insert into t_product
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="productId != null" >
@@ -95,7 +95,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="main.java.model.ProductInfo" >
+  <update id="updateByPrimaryKeySelective" parameterType="model.ProductInfo" >
     update t_product
     <set >
       <if test="productName != null" >
@@ -122,7 +122,7 @@
     </set>
     where product_id = #{productId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="main.java.model.ProductInfo" >
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="model.ProductInfo" >
     update t_product
     set product_name = #{productName,jdbcType=CHAR},
       product_pic = #{productPic,jdbcType=INTEGER},
@@ -133,7 +133,7 @@
       product_desc = #{productDesc,jdbcType=LONGVARCHAR}
     where product_id = #{productId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="main.java.model.ProductInfo" >
+  <update id="updateByPrimaryKey" parameterType="model.ProductInfo" >
     update t_product
     set product_name = #{productName,jdbcType=CHAR},
       product_pic = #{productPic,jdbcType=INTEGER},

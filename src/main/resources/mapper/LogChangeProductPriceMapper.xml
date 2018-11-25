@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="dao.LogChangeProductPriceMapper" >
-  <resultMap id="BaseResultMap" type="main.java.model.LogChangeProductPrice" >
+  <resultMap id="BaseResultMap" type="model.LogChangeProductPrice" >
     <id column="lcpp_id" property="lcppId" jdbcType="INTEGER" />
     <result column="log_id" property="logId" jdbcType="INTEGER" />
     <result column="product_id" property="productId" jdbcType="INTEGER" />
@@ -22,7 +22,7 @@
     delete from t_log_change_product_price
     where lcpp_id = #{lcppId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="main.java.model.LogChangeProductPrice" >
+  <insert id="insert" parameterType="model.LogChangeProductPrice" >
     insert into t_log_change_product_price (lcpp_id, log_id, product_id, 
       product_old_count, product_old_price, product_new_price
       )
@@ -30,7 +30,7 @@
       #{productOldCount,jdbcType=INTEGER}, #{productOldPrice,jdbcType=INTEGER}, #{productNewPrice,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="main.java.model.LogChangeProductPrice" >
+  <insert id="insertSelective" parameterType="model.LogChangeProductPrice" >
     insert into t_log_change_product_price
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="lcppId != null" >
@@ -73,7 +73,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="main.java.model.LogChangeProductPrice" >
+  <update id="updateByPrimaryKeySelective" parameterType="model.LogChangeProductPrice" >
     update t_log_change_product_price
     <set >
       <if test="logId != null" >
@@ -94,7 +94,7 @@
     </set>
     where lcpp_id = #{lcppId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="main.java.model.LogChangeProductPrice" >
+  <update id="updateByPrimaryKey" parameterType="model.LogChangeProductPrice" >
     update t_log_change_product_price
     set log_id = #{logId,jdbcType=INTEGER},
       product_id = #{productId,jdbcType=INTEGER},

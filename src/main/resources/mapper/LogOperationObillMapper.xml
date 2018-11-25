@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="dao.LogOperationObillMapper" >
-  <resultMap id="BaseResultMap" type="main.java.model.LogOperationObill" >
+  <resultMap id="BaseResultMap" type="model.LogOperationObill" >
     <id column="loo_id" property="looId" jdbcType="INTEGER" />
     <result column="log_id" property="logId" jdbcType="INTEGER" />
     <result column="t_lcpc_id" property="tLcpcId" jdbcType="INTEGER" />
@@ -19,13 +19,13 @@
     delete from t_log_operation_obill
     where loo_id = #{looId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="main.java.model.LogOperationObill" >
+  <insert id="insert" parameterType="model.LogOperationObill" >
     insert into t_log_operation_obill (loo_id, log_id, t_lcpc_id
       )
     values (#{looId,jdbcType=INTEGER}, #{logId,jdbcType=INTEGER}, #{tLcpcId,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="main.java.model.LogOperationObill" >
+  <insert id="insertSelective" parameterType="model.LogOperationObill" >
     insert into t_log_operation_obill
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="looId != null" >
@@ -50,7 +50,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="main.java.model.LogOperationObill" >
+  <update id="updateByPrimaryKeySelective" parameterType="model.LogOperationObill" >
     update t_log_operation_obill
     <set >
       <if test="logId != null" >
@@ -62,7 +62,7 @@
     </set>
     where loo_id = #{looId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="main.java.model.LogOperationObill" >
+  <update id="updateByPrimaryKey" parameterType="model.LogOperationObill" >
     update t_log_operation_obill
     set log_id = #{logId,jdbcType=INTEGER},
       t_lcpc_id = #{tLcpcId,jdbcType=INTEGER}

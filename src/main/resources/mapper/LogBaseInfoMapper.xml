@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="dao.LogBaseInfoMapper" >
-  <resultMap id="BaseResultMap" type="main.java.model.LogBaseInfo" >
+  <resultMap id="BaseResultMap" type="model.LogBaseInfo" >
     <id column="log_id" property="logId" jdbcType="INTEGER" />
     <result column="log_time" property="logTime" jdbcType="TIMESTAMP" />
     <result column="log_about_user" property="logAboutUser" jdbcType="INTEGER" />
@@ -21,13 +21,13 @@
     delete from t_log_base
     where log_id = #{logId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="main.java.model.LogBaseInfo" >
+  <insert id="insert" parameterType="model.LogBaseInfo" >
     insert into t_log_base (log_id, log_time, log_about_user, 
       log_type, log_what)
     values (#{logId,jdbcType=INTEGER}, #{logTime,jdbcType=TIMESTAMP}, #{logAboutUser,jdbcType=INTEGER}, 
       #{logType,jdbcType=INTEGER}, #{logWhat,jdbcType=CHAR})
   </insert>
-  <insert id="insertSelective" parameterType="main.java.model.LogBaseInfo" >
+  <insert id="insertSelective" parameterType="model.LogBaseInfo" >
     insert into t_log_base
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="logId != null" >
@@ -64,7 +64,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="main.java.model.LogBaseInfo" >
+  <update id="updateByPrimaryKeySelective" parameterType="model.LogBaseInfo" >
     update t_log_base
     <set >
       <if test="logTime != null" >
@@ -82,7 +82,7 @@
     </set>
     where log_id = #{logId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="main.java.model.LogBaseInfo" >
+  <update id="updateByPrimaryKey" parameterType="model.LogBaseInfo" >
     update t_log_base
     set log_time = #{logTime,jdbcType=TIMESTAMP},
       log_about_user = #{logAboutUser,jdbcType=INTEGER},

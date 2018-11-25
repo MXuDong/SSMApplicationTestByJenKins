@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="dao.UserInfosMapper" >
-  <resultMap id="BaseResultMap" type="main.java.model.UserInfos" >
+  <resultMap id="BaseResultMap" type="model.UserInfos" >
     <id column="user_id" property="userId" jdbcType="INTEGER" />
     <result column="user_name" property="userName" jdbcType="CHAR" />
     <result column="user_password" property="userPassword" jdbcType="CHAR" />
@@ -20,13 +20,13 @@
     delete from t_user_infos
     where user_id = #{userId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="main.java.model.UserInfos" >
+  <insert id="insert" parameterType="model.UserInfos" >
     insert into t_user_infos (user_id, user_name, user_password, 
       user_power)
     values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=CHAR}, #{userPassword,jdbcType=CHAR}, 
       #{userPower,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="main.java.model.UserInfos" >
+  <insert id="insertSelective" parameterType="model.UserInfos" >
     insert into t_user_infos
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="userId != null" >
@@ -57,7 +57,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="main.java.model.UserInfos" >
+  <update id="updateByPrimaryKeySelective" parameterType="model.UserInfos" >
     update t_user_infos
     <set >
       <if test="userName != null" >
@@ -72,7 +72,7 @@
     </set>
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="main.java.model.UserInfos" >
+  <update id="updateByPrimaryKey" parameterType="model.UserInfos" >
     update t_user_infos
     set user_name = #{userName,jdbcType=CHAR},
       user_password = #{userPassword,jdbcType=CHAR},

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="dao.ObillInfoMapper" >
-  <resultMap id="BaseResultMap" type="main.java.model.ObillInfo" >
+  <resultMap id="BaseResultMap" type="model.ObillInfo" >
     <id column="obill" property="obill" jdbcType="INTEGER" />
     <result column="obill_time" property="obillTime" jdbcType="TIMESTAMP" />
     <result column="obill_money" property="obillMoney" jdbcType="DOUBLE" />
@@ -19,13 +19,13 @@
     delete from t_obill_info
     where obill = #{obill,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="main.java.model.ObillInfo" >
+  <insert id="insert" parameterType="model.ObillInfo" >
     insert into t_obill_info (obill, obill_time, obill_money
       )
     values (#{obill,jdbcType=INTEGER}, #{obillTime,jdbcType=TIMESTAMP}, #{obillMoney,jdbcType=DOUBLE}
       )
   </insert>
-  <insert id="insertSelective" parameterType="main.java.model.ObillInfo" >
+  <insert id="insertSelective" parameterType="model.ObillInfo" >
     insert into t_obill_info
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="obill != null" >
@@ -50,7 +50,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="main.java.model.ObillInfo" >
+  <update id="updateByPrimaryKeySelective" parameterType="model.ObillInfo" >
     update t_obill_info
     <set >
       <if test="obillTime != null" >
@@ -62,7 +62,7 @@
     </set>
     where obill = #{obill,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="main.java.model.ObillInfo" >
+  <update id="updateByPrimaryKey" parameterType="model.ObillInfo" >
     update t_obill_info
     set obill_time = #{obillTime,jdbcType=TIMESTAMP},
       obill_money = #{obillMoney,jdbcType=DOUBLE}
