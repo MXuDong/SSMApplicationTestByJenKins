@@ -40,4 +40,14 @@ public class UserInfos {
     public void setUserPower(Integer userPower) {
         this.userPower = userPower;
     }
+
+    @Override
+    public String toString() {
+        return "UserInfos{" +
+                "userId=" + userId +
+                ", userName='" + userName + '\'' +
+                ", userPassword='" + userPassword + '\'' +
+                ", userPower=" + userPower +
+                '}';
+    }
 }

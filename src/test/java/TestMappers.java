@@ -15,7 +15,7 @@ public class TestMappers {
     UserInfosMapper userInfosMapper;
 
     @Test
-    public void TestMapper(){
-        System.out.println(userInfosMapper.selectByPrimaryKey(0));
+    public void testMapper(){
+        System.out.println(userInfosMapper.findUserByName("Admin"));
     }
 }
