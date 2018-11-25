@@ -5,7 +5,7 @@
 
 <generatorConfiguration>
     <!-- 配置mysql 驱动jar包路径.用了绝对路径 -->
-    <classPathEntry location="H:\mvnSpace\mysql\mysql-connector-java\8.0.11\mysql-connector-java-8.0.11.jar"/>
+    <classPathEntry location="E:\Java Environment\Maven\Mvn Space\mysql\mysql-connector-java\5.1.1\mysql-connector-java-5.1.1.jar"/>
 
     <context id="MengXuDong_mysql_tables" targetRuntime="MyBatis3">
         <!-- 防止生成的代码中有很多注释，加入下面的配置控制 -->
@@ -15,8 +15,8 @@
         </commentGenerator>
 
         <!-- 数据库连接 -->
-        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3306/tradingmanagerdata?useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=UTC&amp;allowPublicKeyRetrieval=true"
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/tradingmanagerdata?useUnicode=true&amp;characterEncoding=UTF-8"
                         userId="root"
                         password="a123456">
         </jdbcConnection>
@@ -42,43 +42,48 @@
         </javaClientGenerator>
 
         <!-- 数据表进行生成操作 schema:相当于库名; tableName:表名; domainObjectName:对应的DO -->
-        <table schema="tradingmanagerdata" tableName="log_info" domainObjectName="LogType"
+        <table schema="tradingmanagerdata" tableName="t_log_base" domainObjectName="LogBaseInfo"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
 
-        <table schema="tradingmanagerdata" tableName="obill_oupc" domainObjectName="ObillOUPCType"
+        <table schema="tradingmanagerdata" tableName="t_log_change_product_count" domainObjectName="LogChangeProductCount"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
 
-        <table schema="tradingmanagerdata" tableName="operation_bill" domainObjectName="OperBillType"
+        <table schema="tradingmanagerdata" tableName="t_log_change_product_price" domainObjectName="LogChangeProductPrice"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
 
-        <table schema="tradingmanagerdata" tableName="operation_user_product_count" domainObjectName="OUPCType"
+        <table schema="tradingmanagerdata" tableName="t_log_operation_obill" domainObjectName="LogOperationObill"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
 
-        <table schema="tradingmanagerdata" tableName="operation_user_product_price" domainObjectName="OUPPType"
+        <table schema="tradingmanagerdata" tableName="t_log_operation_obill_res" domainObjectName="LogOperationObillRes"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
 
-        <table schema="tradingmanagerdata" tableName="product_info" domainObjectName="ProductInfoType"
+        <table schema="tradingmanagerdata" tableName="t_obill_info" domainObjectName="ObillInfo"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
 
-        <table schema="tradingmanagerdata" tableName="user_info" domainObjectName="UserInfoType"
+        <table schema="tradingmanagerdata" tableName="t_product" domainObjectName="ProductInfo"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <table schema="tradingmanagerdata" tableName="t_user_infos" domainObjectName="UserInfos"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
