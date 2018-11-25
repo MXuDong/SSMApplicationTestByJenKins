@@ -57,11 +57,11 @@
     product_old_price
     product_new_price
 ### t_log_operation_obill
-    t_loo_id
+    loo_id
     parent_log_id
     t_lcpc_id
 ### t_log_operation_obill_res
-    t_lobr_id
+    lobr_id
     t_obill_id
     t_product_id
     t_loo_id

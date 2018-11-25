@@ -1,8 +1,8 @@
--- MySQL dump 10.14  Distrib 5.5.60-MariaDB, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 5.5.56, for Win64 (AMD64)
 --
 -- Host: localhost    Database: tradingmanagerdata
 -- ------------------------------------------------------
--- Server version	5.5.60-MariaDB
+-- Server version	5.5.56
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,205 +16,237 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `log_info`
+-- Table structure for table `t_log_base`
 --
 
-DROP TABLE IF EXISTS `log_info`;
+DROP TABLE IF EXISTS `t_log_base`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `log_info` (
+CREATE TABLE `t_log_base` (
   `log_id` int(11) NOT NULL AUTO_INCREMENT,
-  `log_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `log_type` int(11) NOT NULL,
-  `log_what` text NOT NULL,
+  `log_time` datetime DEFAULT NULL,
+  `log_about_user` int(11) DEFAULT NULL,
+  `log_type` int(11) DEFAULT '0',
+  `log_what` char(30) DEFAULT NULL,
   PRIMARY KEY (`log_id`),
-  UNIQUE KEY `log_info_log_id_uindex` (`log_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  UNIQUE KEY `t_log_base_log_id_uindex` (`log_id`),
+  KEY `t_log_base_t_user_infos_user_id_fk` (`log_about_user`),
+  CONSTRAINT `t_log_base_t_user_infos_user_id_fk` FOREIGN KEY (`log_about_user`) REFERENCES `t_user_infos` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `log_info`
+-- Dumping data for table `t_log_base`
 --
 
-LOCK TABLES `log_info` WRITE;
-/*!40000 ALTER TABLE `log_info` DISABLE KEYS */;
-/*!40000 ALTER TABLE `log_info` ENABLE KEYS */;
+LOCK TABLES `t_log_base` WRITE;
+/*!40000 ALTER TABLE `t_log_base` DISABLE KEYS */;
+/*!40000 ALTER TABLE `t_log_base` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `obill_oupc`
+-- Table structure for table `t_log_change_product_count`
 --
 
-DROP TABLE IF EXISTS `obill_oupc`;
+DROP TABLE IF EXISTS `t_log_change_product_count`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `obill_oupc` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `bill_id` int(11) NOT NULL,
-  `operation_user_product_count` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `obill_oupc_id_uindex` (`id`),
-  KEY `obill_oupc_operation_bill_bill_id_fk` (`bill_id`),
-  KEY `obill_oupc_operation_user_product_count_operation_id_fk` (`operation_user_product_count`),
-  CONSTRAINT `obill_oupc_operation_bill_bill_id_fk` FOREIGN KEY (`bill_id`) REFERENCES `operation_bill` (`bill_id`),
-  CONSTRAINT `obill_oupc_operation_user_product_count_operation_id_fk` FOREIGN KEY (`operation_user_product_count`) REFERENCES `operation_user_product_count` (`operation_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `t_log_change_product_count` (
+  `lcpc_id` int(11) NOT NULL AUTO_INCREMENT,
+  `log_id` int(11) DEFAULT NULL,
+  `product_id` int(11) DEFAULT NULL,
+  `product_old_count` int(11) NOT NULL,
+  `product_old_price` double NOT NULL,
+  `product_new_count` int(11) NOT NULL,
+  PRIMARY KEY (`lcpc_id`),
+  UNIQUE KEY `t_log_change_product_count_lcpc_id_uindex` (`lcpc_id`),
+  KEY `t_log_change_product_count_t_log_base_log_id_fk` (`log_id`),
+  KEY `t_log_change_product_count_t_product_product_id_fk` (`product_id`),
+  CONSTRAINT `t_log_change_product_count_t_product_product_id_fk` FOREIGN KEY (`product_id`) REFERENCES `t_product` (`product_id`),
+  CONSTRAINT `t_log_change_product_count_t_log_base_log_id_fk` FOREIGN KEY (`log_id`) REFERENCES `t_log_base` (`log_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `obill_oupc`
+-- Dumping data for table `t_log_change_product_count`
 --
 
-LOCK TABLES `obill_oupc` WRITE;
-/*!40000 ALTER TABLE `obill_oupc` DISABLE KEYS */;
-/*!40000 ALTER TABLE `obill_oupc` ENABLE KEYS */;
+LOCK TABLES `t_log_change_product_count` WRITE;
+/*!40000 ALTER TABLE `t_log_change_product_count` DISABLE KEYS */;
+/*!40000 ALTER TABLE `t_log_change_product_count` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `operation_bill`
+-- Table structure for table `t_log_change_product_price`
 --
 
-DROP TABLE IF EXISTS `operation_bill`;
+DROP TABLE IF EXISTS `t_log_change_product_price`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `operation_bill` (
-  `bill_id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) DEFAULT NULL,
-  `bill_money` int(11) NOT NULL,
-  `bill_type` int(11) NOT NULL,
-  PRIMARY KEY (`bill_id`),
-  UNIQUE KEY `operation_bill_bill_id_uindex` (`bill_id`),
-  KEY `operation_bill_user_info_user_id_fk` (`user_id`),
-  CONSTRAINT `operation_bill_user_info_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `user_info` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `t_log_change_product_price` (
+  `lcpp_id` int(11) NOT NULL AUTO_INCREMENT,
+  `log_id` int(11) DEFAULT NULL,
+  `product_id` int(11) DEFAULT NULL,
+  `product_old_count` int(11) NOT NULL,
+  `product_old_price` int(11) NOT NULL,
+  `product_new_price` int(11) NOT NULL,
+  PRIMARY KEY (`lcpp_id`),
+  UNIQUE KEY `t_log_change_product_price_lcpp_id_uindex` (`lcpp_id`),
+  KEY `t_log_change_product_price_t_log_base_log_id_fk` (`log_id`),
+  KEY `t_log_change_product_price_t_product_product_id_fk` (`product_id`),
+  CONSTRAINT `t_log_change_product_price_t_log_base_log_id_fk` FOREIGN KEY (`log_id`) REFERENCES `t_log_base` (`log_id`),
+  CONSTRAINT `t_log_change_product_price_t_product_product_id_fk` FOREIGN KEY (`product_id`) REFERENCES `t_product` (`product_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `operation_bill`
+-- Dumping data for table `t_log_change_product_price`
 --
 
-LOCK TABLES `operation_bill` WRITE;
-/*!40000 ALTER TABLE `operation_bill` DISABLE KEYS */;
-/*!40000 ALTER TABLE `operation_bill` ENABLE KEYS */;
+LOCK TABLES `t_log_change_product_price` WRITE;
+/*!40000 ALTER TABLE `t_log_change_product_price` DISABLE KEYS */;
+/*!40000 ALTER TABLE `t_log_change_product_price` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `operation_user_product_count`
+-- Table structure for table `t_log_operation_obill`
 --
 
-DROP TABLE IF EXISTS `operation_user_product_count`;
+DROP TABLE IF EXISTS `t_log_operation_obill`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `operation_user_product_count` (
-  `operation_id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
-  `operation_type` int(11) NOT NULL,
-  `change_count` int(11) NOT NULL,
-  PRIMARY KEY (`operation_id`),
-  UNIQUE KEY `operation_user_product_count_operation_id_uindex` (`operation_id`),
-  KEY `operation_user_product_count_user_info_user_id_fk` (`user_id`),
-  KEY `operation_user_product_count_product_info_product_id_fk` (`product_id`),
-  CONSTRAINT `operation_user_product_count_product_info_product_id_fk` FOREIGN KEY (`product_id`) REFERENCES `product_info` (`product_id`),
-  CONSTRAINT `operation_user_product_count_user_info_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `user_info` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `t_log_operation_obill` (
+  `loo_id` int(11) NOT NULL AUTO_INCREMENT,
+  `log_id` int(11) DEFAULT NULL,
+  `t_lcpc_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`loo_id`),
+  UNIQUE KEY `t_log_operation_obill_loo_id_uindex` (`loo_id`),
+  KEY `t_log_operation_obill_t_log_base_log_id_fk` (`log_id`),
+  KEY `t_log_operation_obill_t_log_change_product_count_lcpc_id_fk` (`t_lcpc_id`),
+  CONSTRAINT `t_log_operation_obill_t_log_base_log_id_fk` FOREIGN KEY (`log_id`) REFERENCES `t_log_base` (`log_id`),
+  CONSTRAINT `t_log_operation_obill_t_log_change_product_count_lcpc_id_fk` FOREIGN KEY (`t_lcpc_id`) REFERENCES `t_log_change_product_count` (`lcpc_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `operation_user_product_count`
+-- Dumping data for table `t_log_operation_obill`
 --
 
-LOCK TABLES `operation_user_product_count` WRITE;
-/*!40000 ALTER TABLE `operation_user_product_count` DISABLE KEYS */;
-/*!40000 ALTER TABLE `operation_user_product_count` ENABLE KEYS */;
+LOCK TABLES `t_log_operation_obill` WRITE;
+/*!40000 ALTER TABLE `t_log_operation_obill` DISABLE KEYS */;
+/*!40000 ALTER TABLE `t_log_operation_obill` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `operation_user_product_price`
+-- Table structure for table `t_log_operation_obill_res`
 --
 
-DROP TABLE IF EXISTS `operation_user_product_price`;
+DROP TABLE IF EXISTS `t_log_operation_obill_res`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `operation_user_product_price` (
-  `operation_id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
-  `operation_type` int(11) DEFAULT '0',
-  `change_price` double NOT NULL,
-  PRIMARY KEY (`operation_id`),
-  UNIQUE KEY `operation_user_product_price_operation_id_uindex` (`operation_id`),
-  KEY `user_operation_product_user_info_user_id_fk` (`user_id`),
-  KEY `operation_user_product_price_product_info_product_id_fk` (`product_id`),
-  CONSTRAINT `operation_user_product_price_product_info_product_id_fk` FOREIGN KEY (`product_id`) REFERENCES `product_info` (`product_id`),
-  CONSTRAINT `user_operation_product_user_info_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `user_info` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `t_log_operation_obill_res` (
+  `lobr_id` int(11) NOT NULL AUTO_INCREMENT,
+  `t_obill_id` int(11) DEFAULT NULL,
+  `t_product_id` int(11) DEFAULT NULL,
+  `t_loo_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`lobr_id`),
+  UNIQUE KEY `t_log_operation_obill_res_lobr_id_uindex` (`lobr_id`),
+  KEY `t_log_operation_obill_res_t_log_operation_obill_loo_id_fk` (`t_loo_id`),
+  KEY `t_log_operation_obill_res_t_obill_info_obill_fk` (`t_obill_id`),
+  KEY `t_log_operation_obill_res_t_product_product_id_fk` (`t_product_id`),
+  CONSTRAINT `t_log_operation_obill_res_t_log_operation_obill_loo_id_fk` FOREIGN KEY (`t_loo_id`) REFERENCES `t_log_operation_obill` (`loo_id`),
+  CONSTRAINT `t_log_operation_obill_res_t_obill_info_obill_fk` FOREIGN KEY (`t_obill_id`) REFERENCES `t_obill_info` (`obill`),
+  CONSTRAINT `t_log_operation_obill_res_t_product_product_id_fk` FOREIGN KEY (`t_product_id`) REFERENCES `t_product` (`product_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `operation_user_product_price`
+-- Dumping data for table `t_log_operation_obill_res`
 --
 
-LOCK TABLES `operation_user_product_price` WRITE;
-/*!40000 ALTER TABLE `operation_user_product_price` DISABLE KEYS */;
-/*!40000 ALTER TABLE `operation_user_product_price` ENABLE KEYS */;
+LOCK TABLES `t_log_operation_obill_res` WRITE;
+/*!40000 ALTER TABLE `t_log_operation_obill_res` DISABLE KEYS */;
+/*!40000 ALTER TABLE `t_log_operation_obill_res` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `product_info`
+-- Table structure for table `t_obill_info`
 --
 
-DROP TABLE IF EXISTS `product_info`;
+DROP TABLE IF EXISTS `t_obill_info`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `product_info` (
+CREATE TABLE `t_obill_info` (
+  `obill` int(11) NOT NULL AUTO_INCREMENT,
+  `obill_time` datetime NOT NULL,
+  `obill_money` double NOT NULL,
+  PRIMARY KEY (`obill`),
+  UNIQUE KEY `t_obill_info_obill_uindex` (`obill`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `t_obill_info`
+--
+
+LOCK TABLES `t_obill_info` WRITE;
+/*!40000 ALTER TABLE `t_obill_info` DISABLE KEYS */;
+/*!40000 ALTER TABLE `t_obill_info` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `t_product`
+--
+
+DROP TABLE IF EXISTS `t_product`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_product` (
   `product_id` int(11) NOT NULL AUTO_INCREMENT,
-  `product_name` char(30) NOT NULL,
-  `product_desc` varchar(50) DEFAULT NULL,
-  `product_pic` char(30) DEFAULT NULL,
-  `product_count` int(11) DEFAULT '0',
-  `product_price` double DEFAULT '0',
-  `product_last_change_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`product_id`),
-  UNIQUE KEY `productInfo_productId_uindex` (`product_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `product_name` char(20) NOT NULL,
+  `product_desc` text,
+  `product_pic` int(11) DEFAULT '0',
+  `product_price` double NOT NULL,
+  `product_count` int(11) NOT NULL,
+  `product_max_count` int(11) DEFAULT '0',
+  `product_min_count` int(11) DEFAULT '0',
+  PRIMARY KEY (`product_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `product_info`
+-- Dumping data for table `t_product`
 --
 
-LOCK TABLES `product_info` WRITE;
-/*!40000 ALTER TABLE `product_info` DISABLE KEYS */;
-/*!40000 ALTER TABLE `product_info` ENABLE KEYS */;
+LOCK TABLES `t_product` WRITE;
+/*!40000 ALTER TABLE `t_product` DISABLE KEYS */;
+/*!40000 ALTER TABLE `t_product` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `user_info`
+-- Table structure for table `t_user_infos`
 --
 
-DROP TABLE IF EXISTS `user_info`;
+DROP TABLE IF EXISTS `t_user_infos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `user_info` (
+CREATE TABLE `t_user_infos` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_password` char(35) NOT NULL,
+  `user_name` char(20) NOT NULL,
+  `user_password` char(20) NOT NULL,
   `user_power` int(11) DEFAULT '0',
-  `contact_way` char(12) NOT NULL,
-  `user_name` char(15) NOT NULL,
   PRIMARY KEY (`user_id`),
-  UNIQUE KEY `user_info_user_id_uindex` (`user_id`),
-  UNIQUE KEY `user_info_user_name_uindex` (`user_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  UNIQUE KEY `t_user_infos_user_id_uindex` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `user_info`
+-- Dumping data for table `t_user_infos`
 --
 
-LOCK TABLES `user_info` WRITE;
-/*!40000 ALTER TABLE `user_info` DISABLE KEYS */;
-/*!40000 ALTER TABLE `user_info` ENABLE KEYS */;
+LOCK TABLES `t_user_infos` WRITE;
+/*!40000 ALTER TABLE `t_user_infos` DISABLE KEYS */;
+/*!40000 ALTER TABLE `t_user_infos` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -225,3 +257,5 @@ UNLOCK TABLES;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2018-11-25 17:10:21
