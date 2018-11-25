@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dao.ObillInfoMapper" >
+  <resultMap id="BaseResultMap" type="main.java.model.ObillInfo" >
+    <id column="obill" property="obill" jdbcType="INTEGER" />
+    <result column="obill_time" property="obillTime" jdbcType="TIMESTAMP" />
+    <result column="obill_money" property="obillMoney" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    obill, obill_time, obill_money
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_obill_info
+    where obill = #{obill,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_obill_info
+    where obill = #{obill,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="main.java.model.ObillInfo" >
+    insert into t_obill_info (obill, obill_time, obill_money
+      )
+    values (#{obill,jdbcType=INTEGER}, #{obillTime,jdbcType=TIMESTAMP}, #{obillMoney,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="main.java.model.ObillInfo" >
+    insert into t_obill_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="obill != null" >
+        obill,
+      </if>
+      <if test="obillTime != null" >
+        obill_time,
+      </if>
+      <if test="obillMoney != null" >
+        obill_money,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="obill != null" >
+        #{obill,jdbcType=INTEGER},
+      </if>
+      <if test="obillTime != null" >
+        #{obillTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="obillMoney != null" >
+        #{obillMoney,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="main.java.model.ObillInfo" >
+    update t_obill_info
+    <set >
+      <if test="obillTime != null" >
+        obill_time = #{obillTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="obillMoney != null" >
+        obill_money = #{obillMoney,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where obill = #{obill,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="main.java.model.ObillInfo" >
+    update t_obill_info
+    set obill_time = #{obillTime,jdbcType=TIMESTAMP},
+      obill_money = #{obillMoney,jdbcType=DOUBLE}
+    where obill = #{obill,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dao.ProductInfoMapper" >
+  <resultMap id="BaseResultMap" type="main.java.model.ProductInfo" >
+    <id column="product_id" property="productId" jdbcType="INTEGER" />
+    <result column="product_name" property="productName" jdbcType="CHAR" />
+    <result column="product_pic" property="productPic" jdbcType="INTEGER" />
+    <result column="product_price" property="productPrice" jdbcType="DOUBLE" />
+    <result column="product_count" property="productCount" jdbcType="INTEGER" />
+    <result column="product_max_count" property="productMaxCount" jdbcType="INTEGER" />
+    <result column="product_min_count" property="productMinCount" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="main.java.model.ProductInfo" extends="BaseResultMap" >
+    <result column="product_desc" property="productDesc" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    product_id, product_name, product_pic, product_price, product_count, product_max_count, 
+    product_min_count
+  </sql>
+  <sql id="Blob_Column_List" >
+    product_desc
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_product
+    where product_id = #{productId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_product
+    where product_id = #{productId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="main.java.model.ProductInfo" >
+    insert into t_product (product_id, product_name, product_pic, 
+      product_price, product_count, product_max_count, 
+      product_min_count, product_desc)
+    values (#{productId,jdbcType=INTEGER}, #{productName,jdbcType=CHAR}, #{productPic,jdbcType=INTEGER}, 
+      #{productPrice,jdbcType=DOUBLE}, #{productCount,jdbcType=INTEGER}, #{productMaxCount,jdbcType=INTEGER}, 
+      #{productMinCount,jdbcType=INTEGER}, #{productDesc,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="main.java.model.ProductInfo" >
+    insert into t_product
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="productId != null" >
+        product_id,
+      </if>
+      <if test="productName != null" >
+        product_name,
+      </if>
+      <if test="productPic != null" >
+        product_pic,
+      </if>
+      <if test="productPrice != null" >
+        product_price,
+      </if>
+      <if test="productCount != null" >
+        product_count,
+      </if>
+      <if test="productMaxCount != null" >
+        product_max_count,
+      </if>
+      <if test="productMinCount != null" >
+        product_min_count,
+      </if>
+      <if test="productDesc != null" >
+        product_desc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="productId != null" >
+        #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="productName != null" >
+        #{productName,jdbcType=CHAR},
+      </if>
+      <if test="productPic != null" >
+        #{productPic,jdbcType=INTEGER},
+      </if>
+      <if test="productPrice != null" >
+        #{productPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="productCount != null" >
+        #{productCount,jdbcType=INTEGER},
+      </if>
+      <if test="productMaxCount != null" >
+        #{productMaxCount,jdbcType=INTEGER},
+      </if>
+      <if test="productMinCount != null" >
+        #{productMinCount,jdbcType=INTEGER},
+      </if>
+      <if test="productDesc != null" >
+        #{productDesc,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="main.java.model.ProductInfo" >
+    update t_product
+    <set >
+      <if test="productName != null" >
+        product_name = #{productName,jdbcType=CHAR},
+      </if>
+      <if test="productPic != null" >
+        product_pic = #{productPic,jdbcType=INTEGER},
+      </if>
+      <if test="productPrice != null" >
+        product_price = #{productPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="productCount != null" >
+        product_count = #{productCount,jdbcType=INTEGER},
+      </if>
+      <if test="productMaxCount != null" >
+        product_max_count = #{productMaxCount,jdbcType=INTEGER},
+      </if>
+      <if test="productMinCount != null" >
+        product_min_count = #{productMinCount,jdbcType=INTEGER},
+      </if>
+      <if test="productDesc != null" >
+        product_desc = #{productDesc,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where product_id = #{productId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="main.java.model.ProductInfo" >
+    update t_product
+    set product_name = #{productName,jdbcType=CHAR},
+      product_pic = #{productPic,jdbcType=INTEGER},
+      product_price = #{productPrice,jdbcType=DOUBLE},
+      product_count = #{productCount,jdbcType=INTEGER},
+      product_max_count = #{productMaxCount,jdbcType=INTEGER},
+      product_min_count = #{productMinCount,jdbcType=INTEGER},
+      product_desc = #{productDesc,jdbcType=LONGVARCHAR}
+    where product_id = #{productId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="main.java.model.ProductInfo" >
+    update t_product
+    set product_name = #{productName,jdbcType=CHAR},
+      product_pic = #{productPic,jdbcType=INTEGER},
+      product_price = #{productPrice,jdbcType=DOUBLE},
+      product_count = #{productCount,jdbcType=INTEGER},
+      product_max_count = #{productMaxCount,jdbcType=INTEGER},
+      product_min_count = #{productMinCount,jdbcType=INTEGER}
+    where product_id = #{productId,jdbcType=INTEGER}
+  </update>
+</mapper>
