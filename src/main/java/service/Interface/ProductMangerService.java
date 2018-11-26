@@ -22,7 +22,7 @@ public interface ProductMangerService {
     //获取某产品的绘图需要的信息
     Map<String, String> getProductPicInfo();
     //添加产品信息
-    int addProductInfo(ProductInfo productInfo);
+    int addProductInfo(ProductInfo productInfo, int userId);
     //修改产品图片信息
     int updateProductInfo(String picId);
     //修改产品数量

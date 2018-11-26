@@ -1,10 +1,15 @@
 package service.Impl;
 
+import dao.LogBaseInfoMapper;
+import dao.LogChangeProductCountMapper;
 import dao.ProductInfoMapper;
+import model.LogBaseInfo;
+import model.LogChangeProductCount;
 import model.ProductInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import service.Interface.ProductMangerService;
+import util.LogFactory;
 import util.StringFormatUtil;
 
 import java.util.ArrayList;
@@ -17,6 +22,10 @@ public class ProductManagerImpl implements ProductMangerService {
 
     @Autowired
     ProductInfoMapper productInfoMapper;
+    @Autowired
+    LogBaseInfoMapper logBaseInfoMapper;
+    @Autowired
+    LogChangeProductCountMapper logChangeProductCountMapper;
 
     @Override
     public List<String> getLessProducts() {
@@ -156,11 +165,13 @@ public class ProductManagerImpl implements ProductMangerService {
     }
 
     @Override
-    public int addProductInfo(ProductInfo productInfo) {
+    public int addProductInfo(ProductInfo productInfo, int userId) {
         int res = productInfoMapper.insert(productInfo);
-
         if(res == 1) {
-
+            logBaseInfoMapper.insert(LogFactory.makeLogBaseInfo(0, userId, "添加产品：" + productInfo.getProductName()));
+            LogBaseInfo logBaseInfo = LogFactory.makeLogBaseInfo(1, userId, "产品初次添加入库");
+            logBaseInfoMapper.insert(logBaseInfo);
+            logChangeProductCountMapper.insert(LogFactory.makeLogChangeProductCount(logBaseInfo.getLogId(),productInfo.getProductId(), 0, productInfo.getProductPrice(), productInfo.getProductCount()));
         }
 
         return res;

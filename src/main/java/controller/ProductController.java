@@ -149,8 +149,8 @@ public class ProductController {
         if (productDisc != null) {
             productInfo.setProductDesc(productDisc);
         }
-
-        productMangerService.addProductInfo(productInfo);
+        productInfo.setProductPic(0);
+        productMangerService.addProductInfo(productInfo, 0);
 
         return "redirect:/product/info?id=1";
     }
