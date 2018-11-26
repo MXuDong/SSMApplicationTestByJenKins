@@ -32,68 +32,13 @@
     delete from t_product
     where product_id = #{productId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="model.ProductInfo" >
-    insert into t_product (product_id, product_name, product_pic, 
+  <insert id="insert" parameterType="model.ProductInfo" keyProperty="productId" useGeneratedKeys="true">
+    insert into t_product (product_name, product_pic,
       product_price, product_count, product_max_count, 
       product_min_count, product_desc)
-    values (#{productId,jdbcType=INTEGER}, #{productName,jdbcType=CHAR}, #{productPic,jdbcType=INTEGER}, 
+    values (#{productName,jdbcType=CHAR}, #{productPic,jdbcType=INTEGER},
       #{productPrice,jdbcType=DOUBLE}, #{productCount,jdbcType=INTEGER}, #{productMaxCount,jdbcType=INTEGER}, 
       #{productMinCount,jdbcType=INTEGER}, #{productDesc,jdbcType=LONGVARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="model.ProductInfo" >
-    insert into t_product
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="productId != null" >
-        product_id,
-      </if>
-      <if test="productName != null" >
-        product_name,
-      </if>
-      <if test="productPic != null" >
-        product_pic,
-      </if>
-      <if test="productPrice != null" >
-        product_price,
-      </if>
-      <if test="productCount != null" >
-        product_count,
-      </if>
-      <if test="productMaxCount != null" >
-        product_max_count,
-      </if>
-      <if test="productMinCount != null" >
-        product_min_count,
-      </if>
-      <if test="productDesc != null" >
-        product_desc,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="productId != null" >
-        #{productId,jdbcType=INTEGER},
-      </if>
-      <if test="productName != null" >
-        #{productName,jdbcType=CHAR},
-      </if>
-      <if test="productPic != null" >
-        #{productPic,jdbcType=INTEGER},
-      </if>
-      <if test="productPrice != null" >
-        #{productPrice,jdbcType=DOUBLE},
-      </if>
-      <if test="productCount != null" >
-        #{productCount,jdbcType=INTEGER},
-      </if>
-      <if test="productMaxCount != null" >
-        #{productMaxCount,jdbcType=INTEGER},
-      </if>
-      <if test="productMinCount != null" >
-        #{productMinCount,jdbcType=INTEGER},
-      </if>
-      <if test="productDesc != null" >
-        #{productDesc,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="model.ProductInfo" >
     update t_product

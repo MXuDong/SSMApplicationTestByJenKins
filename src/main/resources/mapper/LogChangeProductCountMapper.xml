@@ -18,10 +18,6 @@
     from t_log_change_product_count
     where lcpc_id = #{lcpcId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from t_log_change_product_count
-    where lcpc_id = #{lcpcId,jdbcType=INTEGER}
-  </delete>
   <insert id="insert" parameterType="model.LogChangeProductCount" >
     insert into t_log_change_product_count (lcpc_id, log_id, product_id, 
       product_old_count, product_old_price, product_new_count
@@ -30,77 +26,4 @@
       #{productOldCount,jdbcType=INTEGER}, #{productOldPrice,jdbcType=DOUBLE}, #{productNewCount,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="model.LogChangeProductCount" >
-    insert into t_log_change_product_count
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="lcpcId != null" >
-        lcpc_id,
-      </if>
-      <if test="logId != null" >
-        log_id,
-      </if>
-      <if test="productId != null" >
-        product_id,
-      </if>
-      <if test="productOldCount != null" >
-        product_old_count,
-      </if>
-      <if test="productOldPrice != null" >
-        product_old_price,
-      </if>
-      <if test="productNewCount != null" >
-        product_new_count,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="lcpcId != null" >
-        #{lcpcId,jdbcType=INTEGER},
-      </if>
-      <if test="logId != null" >
-        #{logId,jdbcType=INTEGER},
-      </if>
-      <if test="productId != null" >
-        #{productId,jdbcType=INTEGER},
-      </if>
-      <if test="productOldCount != null" >
-        #{productOldCount,jdbcType=INTEGER},
-      </if>
-      <if test="productOldPrice != null" >
-        #{productOldPrice,jdbcType=DOUBLE},
-      </if>
-      <if test="productNewCount != null" >
-        #{productNewCount,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="model.LogChangeProductCount" >
-    update t_log_change_product_count
-    <set >
-      <if test="logId != null" >
-        log_id = #{logId,jdbcType=INTEGER},
-      </if>
-      <if test="productId != null" >
-        product_id = #{productId,jdbcType=INTEGER},
-      </if>
-      <if test="productOldCount != null" >
-        product_old_count = #{productOldCount,jdbcType=INTEGER},
-      </if>
-      <if test="productOldPrice != null" >
-        product_old_price = #{productOldPrice,jdbcType=DOUBLE},
-      </if>
-      <if test="productNewCount != null" >
-        product_new_count = #{productNewCount,jdbcType=INTEGER},
-      </if>
-    </set>
-    where lcpc_id = #{lcpcId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="model.LogChangeProductCount" >
-    update t_log_change_product_count
-    set log_id = #{logId,jdbcType=INTEGER},
-      product_id = #{productId,jdbcType=INTEGER},
-      product_old_count = #{productOldCount,jdbcType=INTEGER},
-      product_old_price = #{productOldPrice,jdbcType=DOUBLE},
-      product_new_count = #{productNewCount,jdbcType=INTEGER}
-    where lcpc_id = #{lcpcId,jdbcType=INTEGER}
-  </update>
 </mapper>

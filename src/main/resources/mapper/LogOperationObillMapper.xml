@@ -15,53 +15,12 @@
     from t_log_operation_obill
     where loo_id = #{looId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from t_log_operation_obill
-    where loo_id = #{looId,jdbcType=INTEGER}
-  </delete>
   <insert id="insert" parameterType="model.LogOperationObill" >
     insert into t_log_operation_obill (loo_id, log_id, t_lcpc_id
       )
     values (#{looId,jdbcType=INTEGER}, #{logId,jdbcType=INTEGER}, #{tLcpcId,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="model.LogOperationObill" >
-    insert into t_log_operation_obill
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="looId != null" >
-        loo_id,
-      </if>
-      <if test="logId != null" >
-        log_id,
-      </if>
-      <if test="tLcpcId != null" >
-        t_lcpc_id,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="looId != null" >
-        #{looId,jdbcType=INTEGER},
-      </if>
-      <if test="logId != null" >
-        #{logId,jdbcType=INTEGER},
-      </if>
-      <if test="tLcpcId != null" >
-        #{tLcpcId,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="model.LogOperationObill" >
-    update t_log_operation_obill
-    <set >
-      <if test="logId != null" >
-        log_id = #{logId,jdbcType=INTEGER},
-      </if>
-      <if test="tLcpcId != null" >
-        t_lcpc_id = #{tLcpcId,jdbcType=INTEGER},
-      </if>
-    </set>
-    where loo_id = #{looId,jdbcType=INTEGER}
-  </update>
   <update id="updateByPrimaryKey" parameterType="model.LogOperationObill" >
     update t_log_operation_obill
     set log_id = #{logId,jdbcType=INTEGER},

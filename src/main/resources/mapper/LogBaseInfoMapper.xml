@@ -17,77 +17,10 @@
     from t_log_base
     where log_id = #{logId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from t_log_base
-    where log_id = #{logId,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="model.LogBaseInfo" >
-    insert into t_log_base (log_id, log_time, log_about_user, 
+  <insert id="insert" parameterType="model.LogBaseInfo" keyProperty="logId" useGeneratedKeys="true">
+    insert into t_log_base (log_time, log_about_user,
       log_type, log_what)
-    values (#{logId,jdbcType=INTEGER}, #{logTime,jdbcType=TIMESTAMP}, #{logAboutUser,jdbcType=INTEGER}, 
+    values (#{logTime,jdbcType=TIMESTAMP}, #{logAboutUser,jdbcType=INTEGER},
       #{logType,jdbcType=INTEGER}, #{logWhat,jdbcType=CHAR})
   </insert>
-  <insert id="insertSelective" parameterType="model.LogBaseInfo" >
-    insert into t_log_base
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="logId != null" >
-        log_id,
-      </if>
-      <if test="logTime != null" >
-        log_time,
-      </if>
-      <if test="logAboutUser != null" >
-        log_about_user,
-      </if>
-      <if test="logType != null" >
-        log_type,
-      </if>
-      <if test="logWhat != null" >
-        log_what,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="logId != null" >
-        #{logId,jdbcType=INTEGER},
-      </if>
-      <if test="logTime != null" >
-        #{logTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="logAboutUser != null" >
-        #{logAboutUser,jdbcType=INTEGER},
-      </if>
-      <if test="logType != null" >
-        #{logType,jdbcType=INTEGER},
-      </if>
-      <if test="logWhat != null" >
-        #{logWhat,jdbcType=CHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="model.LogBaseInfo" >
-    update t_log_base
-    <set >
-      <if test="logTime != null" >
-        log_time = #{logTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="logAboutUser != null" >
-        log_about_user = #{logAboutUser,jdbcType=INTEGER},
-      </if>
-      <if test="logType != null" >
-        log_type = #{logType,jdbcType=INTEGER},
-      </if>
-      <if test="logWhat != null" >
-        log_what = #{logWhat,jdbcType=CHAR},
-      </if>
-    </set>
-    where log_id = #{logId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="model.LogBaseInfo" >
-    update t_log_base
-    set log_time = #{logTime,jdbcType=TIMESTAMP},
-      log_about_user = #{logAboutUser,jdbcType=INTEGER},
-      log_type = #{logType,jdbcType=INTEGER},
-      log_what = #{logWhat,jdbcType=CHAR}
-    where log_id = #{logId,jdbcType=INTEGER}
-  </update>
 </mapper>
