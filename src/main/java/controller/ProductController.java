@@ -1,6 +1,8 @@
 package controller;
 
+import model.ProductInfo;
 import org.apache.commons.io.FileUtils;
+import org.eclipse.core.internal.runtime.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -128,26 +130,27 @@ public class ProductController {
             @RequestParam("productMinCount") Integer productMinCount,
             @RequestParam("productDisc") String productDisc
     ) {
+        ProductInfo productInfo = new ProductInfo();
         if (productName != null) {
-            System.out.println(productName);
+            productInfo.setProductName(productName);
         }
         if (productPrice != null) {
-            System.out.println(productPrice);
+            productInfo.setProductPrice(productPrice);
         }
         if (productCount != null) {
-            System.out.println(productCount);
+            productInfo.setProductCount(productCount);
         }
         if (productMaxCount != null) {
-            System.out.println(productMaxCount);
+            productInfo.setProductMaxCount(productMaxCount);
         }
         if (productMinCount != null) {
-            System.out.println(productMinCount);
+            productInfo.setProductMinCount(productMinCount);
         }
         if (productDisc != null) {
-            System.out.println(productDisc);
+            productInfo.setProductDesc(productDisc);
         }
 
-        productMangerService.addProductInfo("Test");
+        productMangerService.addProductInfo(productInfo);
 
         return "redirect:/product/info?id=1";
     }

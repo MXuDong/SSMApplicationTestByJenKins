@@ -8,7 +8,15 @@
     <result column="user_power" property="userPower" jdbcType="INTEGER" />
   </resultMap>
   <select id="findUserByName" resultMap="BaseResultMap" parameterType="String">
-    select * from t_user_infos where user_name = #{user_name}
+    select *
+    from t_user_infos
+    where user_name = #{user_name}
+  </select>
+
+  <select id="findUserById" resultMap="BaseResultMap" parameterType="Integer">
+    select *
+    from t_user_infos
+    where user_id = #{user_id};
   </select>
 
 </mapper>

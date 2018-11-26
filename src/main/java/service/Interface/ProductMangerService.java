@@ -1,5 +1,7 @@
 package service.Interface;
 
+import model.ProductInfo;
+
 import java.awt.*;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +22,7 @@ public interface ProductMangerService {
     //获取某产品的绘图需要的信息
     Map<String, String> getProductPicInfo();
     //添加产品信息
-    int addProductInfo(String ... str);
+    int addProductInfo(ProductInfo productInfo);
     //修改产品图片信息
     int updateProductInfo(String picId);
     //修改产品数量

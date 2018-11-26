@@ -1,5 +1,8 @@
 package service.Impl;
 
+import dao.ProductInfoMapper;
+import model.ProductInfo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import service.Interface.ProductMangerService;
 import util.StringFormatUtil;
@@ -11,6 +14,10 @@ import java.util.Map;
 
 @Service("ProductManagerImpl")
 public class ProductManagerImpl implements ProductMangerService {
+
+    @Autowired
+    ProductInfoMapper productInfoMapper;
+
     @Override
     public List<String> getLessProducts() {
         List<String> lessProducts = new ArrayList<String>();
@@ -149,8 +156,14 @@ public class ProductManagerImpl implements ProductMangerService {
     }
 
     @Override
-    public int addProductInfo(String... str) {
-        return 0;
+    public int addProductInfo(ProductInfo productInfo) {
+        int res = productInfoMapper.insert(productInfo);
+
+        if(res == 1) {
+
+        }
+
+        return res;
     }
 
     @Override

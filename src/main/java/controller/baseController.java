@@ -1,5 +1,7 @@
 package controller;
 
+import dao.UserInfosMapper;
+import model.UserInfos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +24,8 @@ public class baseController {
     ObillManagerService obillManagerService;
     @Autowired@Resource(name = "LogManagerImpl")
     LogManagerService logManagerService;
+    @Autowired
+    UserInfosMapper userInfosMapper;
 
     @RequestMapping(value = {"/", "/index", "Home"})
     public ModelAndView baseIndex() {
@@ -66,7 +70,13 @@ public class baseController {
 
     @RequestMapping("/doLogin")
     public String login(String userName, String password, HttpSession session){
-        session.setAttribute("userInfoId", 1);
+        UserInfos userInfos = userInfosMapper.findUserByName(userName);
+
+        if(userInfos != null){
+            if(userInfos.getUserPassword().equals(password)){
+                session.setAttribute("userInfoId", userInfos.getUserId());
+            }
+        }
         return "redirect:/";
     }
 
