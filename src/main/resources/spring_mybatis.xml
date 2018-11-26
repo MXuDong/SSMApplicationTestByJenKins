@@ -28,7 +28,7 @@
         <!-- 别名 -->
         <property name="typeAliasesPackage" value="com.dong"></property>
         <!-- sql映射文件路径 -->
-        <property name="mapperLocations" value="mapper/*.xml"></property>
+        <property name="mapperLocations" value="classpath:mapper/*.xml"></property>
     </bean>
 
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
