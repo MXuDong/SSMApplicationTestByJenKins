@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import service.Interface.ProductMangerService;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
@@ -128,7 +129,8 @@ public class ProductController {
             @RequestParam("productCount") Integer productCount,
             @RequestParam("productMaxCount") Integer productMaxCount,
             @RequestParam("productMinCount") Integer productMinCount,
-            @RequestParam("productDisc") String productDisc
+            @RequestParam("productDisc") String productDisc,
+            HttpSession session
     ) {
         ProductInfo productInfo = new ProductInfo();
         if (productName != null) {
@@ -150,9 +152,12 @@ public class ProductController {
             productInfo.setProductDesc(productDisc);
         }
         productInfo.setProductPic(0);
-        productMangerService.addProductInfo(productInfo, 0);
 
-        return "redirect:/product/info?id=1";
+        int userId = (int) session.getAttribute("userInfoId");
+
+        int productId = productMangerService.addProductInfo(productInfo, userId);
+
+        return "redirect:/product/info?id=" + productId;
     }
 
     @RequestMapping(value = "/updateProductPic", method = RequestMethod.POST)
@@ -212,9 +217,8 @@ public class ProductController {
     @RequestMapping(value = "/changeProductPrice", method = RequestMethod.POST)
     public String changeProductPrice(String productID, double productPrice){
         System.out.println(productID + "ChangePrice" + productPrice);
-
         productMangerService.updateProductInfo(productID, productPrice);
 
-        return "redirect:/product/info?id=1";
+        return "redirect:/product/info?id=" + productID;
     }
 }

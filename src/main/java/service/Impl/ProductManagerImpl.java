@@ -174,7 +174,7 @@ public class ProductManagerImpl implements ProductMangerService {
             logChangeProductCountMapper.insert(LogFactory.makeLogChangeProductCount(logBaseInfo.getLogId(),productInfo.getProductId(), 0, productInfo.getProductPrice(), productInfo.getProductCount()));
         }
 
-        return res;
+        return productInfo.getProductId();
     }
 
     @Override
