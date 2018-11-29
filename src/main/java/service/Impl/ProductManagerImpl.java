@@ -2,10 +2,13 @@ package service.Impl;
 
 import dao.LogBaseInfoMapper;
 import dao.LogChangeProductCountMapper;
+import dao.LogChangeProductPriceMapper;
 import dao.ProductInfoMapper;
 import model.LogBaseInfo;
 import model.LogChangeProductCount;
+import model.LogChangeProductPrice;
 import model.ProductInfo;
+import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import service.Interface.ProductMangerService;
@@ -26,6 +29,8 @@ public class ProductManagerImpl implements ProductMangerService {
     LogBaseInfoMapper logBaseInfoMapper;
     @Autowired
     LogChangeProductCountMapper logChangeProductCountMapper;
+    @Autowired
+    LogChangeProductPriceMapper logChangeProductPriceMapper;
 
     @Override
     public List<String> getLessProducts() {
@@ -171,8 +176,8 @@ public class ProductManagerImpl implements ProductMangerService {
     public int addProductInfo(ProductInfo productInfo, int userId) {
         int res = productInfoMapper.insert(productInfo);
         if(res == 1) {
-            logBaseInfoMapper.insert(LogFactory.makeLogBaseInfo(0, userId, "添加产品：" + productInfo.getProductName()));
-            LogBaseInfo logBaseInfo = LogFactory.makeLogBaseInfo(1, userId, "产品初次添加入库");
+            logBaseInfoMapper.insert(LogFactory.makeLogBaseInfo(LogFactory.BaseInformaiton, userId, "添加产品：" + productInfo.getProductName()));
+            LogBaseInfo logBaseInfo = LogFactory.makeLogBaseInfo(LogFactory.ChangeProductCount, userId, "产品初次添加入库");
             logBaseInfoMapper.insert(logBaseInfo);
             logChangeProductCountMapper.insert(LogFactory.makeLogChangeProductCount(logBaseInfo.getLogId(),productInfo.getProductId(), 0, productInfo.getProductPrice(), productInfo.getProductCount()));
         }
@@ -182,21 +187,47 @@ public class ProductManagerImpl implements ProductMangerService {
 
     @Override
     public int updateProductInfo(String picId) {
-        return 0;
+        int productId = Integer.parseInt(picId);
+        ProductInfo productInfo = new ProductInfo();
+        productInfo.setProductPic(1);
+        productInfo.setProductId(productId);
+        int res = productInfoMapper.updateByPrimaryKeySelective(productInfo);
+        return res;
     }
 
     @Override
-    public int updateProductInfo(String productId, int changeCount) {
+    public int updateProductInfoC(String productId, int changeCount, int userId) {
 
         int p_id = Integer.parseInt(productId);
-//        ProductInfo newProductCount = new ProductInfo();
-//        newProductCount.setProductCount(changeCount);
+        ProductInfo oldProduct = productInfoMapper.selectByPrimaryKey(p_id);
+        int oldCount = oldProduct.getProductCount();
+        oldProduct.setProductCount(changeCount);
+
+        if(oldCount == oldProduct.getProductCount()) return 0;
+        productInfoMapper.updateByPrimaryKey(oldProduct);
+
+        LogBaseInfo logBaseInfo = LogFactory.makeLogBaseInfo(LogFactory.ChangeProductCount, userId, "产品：" + oldProduct.getProductName() + (oldCount > oldProduct.getProductCount() ? "出库" : "入库"));
+        logBaseInfoMapper.insert(logBaseInfo);
+        logChangeProductCountMapper.insert(LogFactory.makeLogChangeProductCount(logBaseInfo.getLogId(),oldProduct.getProductId(),oldCount, oldProduct.getProductPrice(), changeCount));
 
         return 0;
     }
 
     @Override
-    public int updateProductInfo(String productId, double changePrice) {
+    public int updateProductInfoP(String productId, double changePrice, int userId) {
+
+        int p_id = Integer.parseInt(productId);
+        ProductInfo product = productInfoMapper.selectByPrimaryKey(p_id);
+        double oldPrice = product.getProductPrice();
+        product.setProductPrice(changePrice);
+
+        if(oldPrice == product.getProductPrice()) return 0;
+        productInfoMapper.updateByPrimaryKey(product);
+
+        LogBaseInfo logBaseInfo = LogFactory.makeLogBaseInfo(LogFactory.ChangeProductPrice, userId, "产品：" + product.getProductName() + (oldPrice > product.getProductPrice() ? "价格提高":"价格减少"));
+        logBaseInfoMapper.insert(logBaseInfo);
+        logChangeProductPriceMapper.insert(LogFactory.makeLogChangeProductPrice(logBaseInfo.getLogId(), product.getProductId(), product.getProductCount(), oldPrice, product.getProductPrice()));
+
         return 0;
     }
 }

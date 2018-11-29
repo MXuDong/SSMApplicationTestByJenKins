@@ -11,7 +11,12 @@ import service.Interface.ObillManagerService;
 import service.Interface.ProductMangerService;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -100,4 +105,27 @@ public class baseController {
         modelAndView.addObject("accountAttribute", accountAttribute);
         return modelAndView;
     }
+
+//    @RequestMapping("/pic")
+//    public void getPic(String id, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse){
+//        int productId = Integer.parseInt(id);
+//
+//        if(productId == -1){
+//
+//            File file = new File("")
+//
+//            byte[] img = xxx;
+//            httpServletResponse.setContentType("image/png");
+//            OutputStream os = null;
+//            try {
+//                os = httpServletResponse.getOutputStream();
+//                os.write(img);
+//                os.flush();
+//                os.close();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//
+//        }
+//    }
 }

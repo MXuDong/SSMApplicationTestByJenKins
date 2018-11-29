@@ -9,9 +9,9 @@ public class LogChangeProductPrice {
 
     private Integer productOldCount;
 
-    private Integer productOldPrice;
+    private Double productOldPrice;
 
-    private Integer productNewPrice;
+    private Double productNewPrice;
 
     public Integer getLcppId() {
         return lcppId;
@@ -45,19 +45,19 @@ public class LogChangeProductPrice {
         this.productOldCount = productOldCount;
     }
 
-    public Integer getProductOldPrice() {
+    public Double getProductOldPrice() {
         return productOldPrice;
     }
 
-    public void setProductOldPrice(Integer productOldPrice) {
+    public void setProductOldPrice(Double productOldPrice) {
         this.productOldPrice = productOldPrice;
     }
 
-    public Integer getProductNewPrice() {
+    public Double getProductNewPrice() {
         return productNewPrice;
     }
 
-    public void setProductNewPrice(Integer productNewPrice) {
+    public void setProductNewPrice(Double productNewPrice) {
         this.productNewPrice = productNewPrice;
     }
 }

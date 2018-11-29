@@ -16,17 +16,22 @@ public class BaseFilter implements Filter {
         HttpSession session;
 
         session = request.getSession();
-        if(session.getAttribute("userInfoId") == null){
+        if (session.getAttribute("userInfoId") == null) {
 
             String path = request.getRequestURL().toString();
-            String [] requests = path.split("/");
-            if(requests[requests.length - 1] .equals("doLogin")){
+            String[] requests = path.split("/");
+            if (requests[requests.length - 1].equals("doLogin")) {
                 chain.doFilter(req, resp);
-                return ;
+                return;
+            }
+
+            if (requests[requests.length - 1].equals("bootstrap.min.css")) {
+                chain.doFilter(req, resp);
+                return;
             }
 
             req.getRequestDispatcher("/login").forward(req, resp);
-        }else{
+        } else {
             chain.doFilter(req, resp);
         }
     }

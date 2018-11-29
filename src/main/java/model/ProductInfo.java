@@ -82,7 +82,6 @@ public class ProductInfo {
     }
 
     public String isCountIllge(){
-        System.out.println(productCount + "" + productMinCount + "" + productMaxCount);
         if(productCount >= productMinCount && productCount <= productMaxCount){
             return "正常";
         }else if(productCount > productMaxCount){
@@ -92,9 +91,9 @@ public class ProductInfo {
 
     public String getPicPaths(){
         if(productPic == 0){
-            return "../pic/default.jpg";
+            return "/pic/default.jpg";
         }else{
-            return "../pic/" + productId + ".jpg";
+            return "/pic/" + productId + ".jpg";
         }
     }
 }

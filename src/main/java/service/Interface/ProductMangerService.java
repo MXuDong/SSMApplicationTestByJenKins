@@ -26,7 +26,7 @@ public interface ProductMangerService {
     //修改产品图片信息
     int updateProductInfo(String picId);
     //修改产品数量
-    int updateProductInfo(String productId, int changeCount);
+    int updateProductInfoC(String productId, int changeCount, int userId);
     //修改产品价格
-    int updateProductInfo(String productId, double changePrice);
+    int updateProductInfoP(String productId, double changePrice, int userId);
 }

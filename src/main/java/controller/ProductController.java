@@ -178,7 +178,7 @@ public class ProductController {
                 //这里将上传得到的文件保存至 d:\\temp\\file 目录
                 FileUtils.copyInputStreamToFile(file.getInputStream(), new File(path,
                         productId + "." + suffix));
-                productMangerService.updateProductInfo("1");
+                productMangerService.updateProductInfo(productId);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -190,7 +190,8 @@ public class ProductController {
     @RequestMapping(value = "/uploadMoreProducts", method = RequestMethod.POST)
     public String uploadProducts(@RequestParam("file") MultipartFile file) {
         if (!file.isEmpty()) {
-            String path = "D:\\Work Space\\Intellij WorkSpace\\SSMApplicationTestByJenKins\\src\\main\\webapp\\WEB-INF\\pic";
+            String path = "E:\\Work Space\\Intellij WorkSpace\\SSMApplicationTestByJenKins\\pic";
+
 
             //获取后缀
             String suffix = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1);
@@ -206,18 +207,18 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/changeProductCount", method = RequestMethod.POST)
-    public String changeProductCount(@RequestParam(value = "productID") String productID, @RequestParam(value = "productCount", defaultValue = "-1")int productCount){
+    public String changeProductCount(@RequestParam(value = "productID") String productID, @RequestParam(value = "productCount", defaultValue = "-1")int productCount, HttpSession session){
         System.out.println(productID + "ChangeCount" + productCount);
         if(productCount != -1){
-            productMangerService.updateProductInfo(productID, productCount);
+            productMangerService.updateProductInfoC(productID, productCount, (int)session.getAttribute("userInfoId"));
         }
         return "redirect:/product/info?id="+ productID;
     }
 
     @RequestMapping(value = "/changeProductPrice", method = RequestMethod.POST)
-    public String changeProductPrice(String productID, double productPrice){
+    public String changeProductPrice(String productID, @RequestParam(value = "productPrice", defaultValue = "-1") double productPrice, HttpSession session){
         System.out.println(productID + "ChangePrice" + productPrice);
-        productMangerService.updateProductInfo(productID, productPrice);
+        productMangerService.updateProductInfoP(productID, productPrice, (int)session.getAttribute("userInfoId"));
 
         return "redirect:/product/info?id=" + productID;
     }

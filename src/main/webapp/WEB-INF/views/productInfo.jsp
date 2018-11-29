@@ -64,7 +64,7 @@
             </div>
 
             <br/>
-            <img src="${requestScope.ProductInfo.productPic}" class="img-thumbnail">
+            <img src="${pageContext.request.contextPath}${requestScope.ProductInfo.productPic}" class="img-thumbnail">
             <hr class="my-4">
             <p class="lead">单价:${requestScope.ProductInfo.productPrice}</p>
             <p class="lead">当前库存总量:${requestScope.ProductInfo.productCount}</p>
@@ -115,8 +115,8 @@
 
             <%--修改产品价格--%>
             <button type="button" class="btn btn-outline-primary btn-block" data-toggle="modal"
-                    data-target="#changeProductCount"
-                    id="changeProductCountButton">修改产品价格
+                    data-target="#changeProductPrice"
+                    id="changeProductPriceButton">修改产品价格
             </button>
 
             <!-- Modal -->
@@ -128,7 +128,7 @@
                           method="post" id="changePriceForm">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="changeProductPriceHeader">修改产品数量</h5>
+                                <h5 class="modal-title" id="changeProductPriceHeader">修改产品价格</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -139,7 +139,7 @@
 
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="changeProductPriceInput">产品数量</span>
+                                        <span class="input-group-text" id="changeProductPriceInput">产品价格</span>
                                     </div>
                                     <input id="input_changeProductPrice" type="text" name="productPrice" class="form-control" aria-label="Default" aria-describedby="changeProductPriceInput">
                                 </div>
