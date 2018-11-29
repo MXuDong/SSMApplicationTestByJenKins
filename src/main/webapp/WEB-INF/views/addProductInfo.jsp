@@ -167,6 +167,11 @@
                 }
             }
 
+            //判断最大值是否大于最小值
+            if(productMinCount.val() > productMaxCount){
+                message = message + "最大值不能小于最小值！\n";
+            }
+
             if (message != "") {
                 alert(message);
             } else {

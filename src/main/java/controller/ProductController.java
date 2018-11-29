@@ -99,7 +99,7 @@ public class ProductController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("productInfo");
 
-        Map<String, String> productInfo = productMangerService.getProductMoreInfo();
+        Map<String, String> productInfo = productMangerService.getProductMoreInfo(id);
         modelAndView.addObject("ProductInfo", productInfo);
 
         Map<String, String> productPicInfos = productMangerService.getProductPicInfo();
@@ -169,7 +169,7 @@ public class ProductController {
             String suffix = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1);
 
             //不符合要求
-            if (!(suffix.equalsIgnoreCase("jpg") || suffix.equalsIgnoreCase("png") || suffix.equalsIgnoreCase("jepg"))) {
+            if (!(suffix.equalsIgnoreCase("jpg"))) {
                 return "redirect:/product/info?id=" + productId;
             }
 
@@ -206,12 +206,12 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/changeProductCount", method = RequestMethod.POST)
-    public String changeProductCount(@RequestParam(value = "productID") String productID, @RequestParam(value = "productCount", required = false)int productCount){
+    public String changeProductCount(@RequestParam(value = "productID") String productID, @RequestParam(value = "productCount", defaultValue = "-1")int productCount){
         System.out.println(productID + "ChangeCount" + productCount);
-
-        productMangerService.updateProductInfo(productID, productCount);
-
-        return "redirect:/product/info?id=1";
+        if(productCount != -1){
+            productMangerService.updateProductInfo(productID, productCount);
+        }
+        return "redirect:/product/info?id="+ productID;
     }
 
     @RequestMapping(value = "/changeProductPrice", method = RequestMethod.POST)

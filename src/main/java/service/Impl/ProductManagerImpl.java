@@ -119,18 +119,21 @@ public class ProductManagerImpl implements ProductMangerService {
     }
 
     @Override
-    public Map<String, String> getProductMoreInfo() {
-        Map<String, String> productMoreInfo = new HashMap<String, String>();
+    public Map<String, String> getProductMoreInfo(int productId) {
 
-        productMoreInfo.put("productId", "1");
-        productMoreInfo.put("productName", "鲸鱼");
-        productMoreInfo.put("productPrice", "9.6元（人民币）");
-        productMoreInfo.put("productCount", "1000");
-        productMoreInfo.put("productPic", "../pic/1.jpg");
-        productMoreInfo.put("productDisc", "这里是产品的描述");
-        productMoreInfo.put("productMaxCount", "2000");
-        productMoreInfo.put("productMinCount", "1");
-        productMoreInfo.put("productStatus", "正常");
+        ProductInfo productInfo = productInfoMapper.selectByPrimaryKey(productId);
+        Map<String, String> productMoreInfo = new HashMap<String, String>();
+        if(productInfo != null){
+            productMoreInfo.put("productId", productInfo.getProductId().toString());
+            productMoreInfo.put("productName", productInfo.getProductName());
+            productMoreInfo.put("productPrice", productInfo.getProductPrice() + "元（人民币）");
+            productMoreInfo.put("productCount", productInfo.getProductCount().toString());
+            productMoreInfo.put("productPic", productInfo.getPicPaths());
+            productMoreInfo.put("productDisc", productInfo.getProductDesc());
+            productMoreInfo.put("productMaxCount", productInfo.getProductMaxCount().toString());
+            productMoreInfo.put("productMinCount", productInfo.getProductMinCount().toString());
+            productMoreInfo.put("productStatus", productInfo.isCountIllge());
+        }
 
         return productMoreInfo;
     }
@@ -184,6 +187,11 @@ public class ProductManagerImpl implements ProductMangerService {
 
     @Override
     public int updateProductInfo(String productId, int changeCount) {
+
+        int p_id = Integer.parseInt(productId);
+//        ProductInfo newProductCount = new ProductInfo();
+//        newProductCount.setProductCount(changeCount);
+
         return 0;
     }
 

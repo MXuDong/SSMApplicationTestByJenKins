@@ -80,4 +80,21 @@ public class ProductInfo {
     public void setProductDesc(String productDesc) {
         this.productDesc = productDesc == null ? null : productDesc.trim();
     }
+
+    public String isCountIllge(){
+        System.out.println(productCount + "" + productMinCount + "" + productMaxCount);
+        if(productCount >= productMinCount && productCount <= productMaxCount){
+            return "正常";
+        }else if(productCount > productMaxCount){
+            return "冗余";
+        }else return "不足";
+    }
+
+    public String getPicPaths(){
+        if(productPic == 0){
+            return "../pic/default.jpg";
+        }else{
+            return "../pic/" + productId + ".jpg";
+        }
+    }
 }

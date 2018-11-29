@@ -66,7 +66,6 @@
             <br/>
             <img src="${requestScope.ProductInfo.productPic}" class="img-thumbnail">
             <hr class="my-4">
-            <p>归属类别：${requestScope.ProductInfo.productType}</p>
             <p class="lead">单价:${requestScope.ProductInfo.productPrice}</p>
             <p class="lead">当前库存总量:${requestScope.ProductInfo.productCount}</p>
             <p class="lead">当前库存状态:${requestScope.ProductInfo.productStatus}</p>
