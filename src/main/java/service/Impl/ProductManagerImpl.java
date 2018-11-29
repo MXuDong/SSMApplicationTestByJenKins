@@ -177,7 +177,7 @@ public class ProductManagerImpl implements ProductMangerService {
         int res = productInfoMapper.insert(productInfo);
         if(res == 1) {
             logBaseInfoMapper.insert(LogFactory.makeLogBaseInfo(LogFactory.BaseInformaiton, userId, "添加产品：" + productInfo.getProductName()));
-            LogBaseInfo logBaseInfo = LogFactory.makeLogBaseInfo(LogFactory.ChangeProductCount, userId, "产品初次添加入库");
+            LogBaseInfo logBaseInfo = LogFactory.makeLogBaseInfo(LogFactory.ChangeProductCount, userId, productInfo.getProductName() + "产品初次添加入库");
             logBaseInfoMapper.insert(logBaseInfo);
             logChangeProductCountMapper.insert(LogFactory.makeLogChangeProductCount(logBaseInfo.getLogId(),productInfo.getProductId(), 0, productInfo.getProductPrice(), productInfo.getProductCount()));
         }

@@ -168,7 +168,7 @@
             }
 
             //判断最大值是否大于最小值
-            if(productMinCount.val() > productMaxCount){
+            if(parseInt(productMinCount.val()) > parseInt(productMaxCount.val())){
                 message = message + "最大值不能小于最小值！\n";
             }
 

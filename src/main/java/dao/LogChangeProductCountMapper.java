@@ -2,7 +2,10 @@ package dao;
 
 import model.LogChangeProductCount;
 
+import java.util.List;
+
 public interface LogChangeProductCountMapper {
     int insert(LogChangeProductCount record);
-    LogChangeProductCount selectByPrimaryKey(Integer lcpcId);
+    List<LogChangeProductCount> selectAll();
+    LogChangeProductCount selectByBaseLogId(Integer logId);
 }

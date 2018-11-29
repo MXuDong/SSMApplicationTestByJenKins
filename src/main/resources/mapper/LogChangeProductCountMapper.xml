@@ -12,11 +12,15 @@
   <sql id="Base_Column_List" >
     lcpc_id, log_id, product_id, product_old_count, product_old_price, product_new_count
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectAll" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from t_log_change_product_count
-    where lcpc_id = #{lcpcId,jdbcType=INTEGER}
+    order by lcpc_id desc
+  </select>
+  <select id="selectByBaseLogId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select * from t_log_change_product_count
+    where log_id = #{log_id}
   </select>
   <insert id="insert" parameterType="model.LogChangeProductCount" >
     insert into t_log_change_product_count (lcpc_id, log_id, product_id, 

@@ -2,7 +2,10 @@ package dao;
 
 import model.LogBaseInfo;
 
+import java.util.List;
+
 public interface LogBaseInfoMapper {
     int insert(LogBaseInfo record);
-    LogBaseInfo selectByPrimaryKey(Integer logId);
+    List<LogBaseInfo> selectAll();
+    LogBaseInfo selectByLogId(int logId);
 }
