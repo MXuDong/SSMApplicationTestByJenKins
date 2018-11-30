@@ -37,7 +37,7 @@ public class ProductManagerImpl implements ProductMangerService {
         List<String> lessProducts = new ArrayList<String>();
 
         List<List<String>> lessProductInfos = getLessProducts(5);
-        for(List<String> L : lessProductInfos){
+        for (List<String> L : lessProductInfos) {
             lessProducts.add(StringFormatUtil.formatProductInfoToString(StringFormatUtil.FORMAT_TYPE_LESS, L));
         }
 
@@ -46,25 +46,37 @@ public class ProductManagerImpl implements ProductMangerService {
 
 
     /**
-     *
      * @param count (-1：所有， >0 个数)
      * @return
      */
     @Override
     public List<List<String>> getLessProducts(int count) {
-        List<List<String>> products = new ArrayList<List<String>>();
-        List<String> productInfo = new ArrayList<String>();
-        //id
-        productInfo.add("1");
-        //序号
-        productInfo.add("1");
-        productInfo.add("鲸鱼");
-        productInfo.add("9元（人民币）");
-        productInfo.add("1000");
-        productInfo.add("告急");
-        productInfo.add("座头鲸，可以做房子");
+        List<ProductInfo> productInfos = productInfoMapper.selectLessProduct();
 
-        products.add(productInfo);
+        List<List<String>> products = new ArrayList<List<String>>();
+
+        int id = 0;
+
+        if (count == -1) {
+            count = productInfos.size() + 1;
+        }
+        for (ProductInfo info : productInfos) {
+            List<String> productInfo = new ArrayList<String>();
+            productInfo.add(Integer.toString(info.getProductId()));
+            productInfo.add(Integer.toString(id));
+            productInfo.add(info.getProductName());
+            productInfo.add(info.getProductPrice() + "元（人民币)");
+            productInfo.add(Integer.toString(info.getProductCount()));
+            productInfo.add("告急");
+            String desc = info.getProductDesc()  + " ";
+            if (desc.length() > 10) {
+                desc = desc.substring(0, 10) + "...";
+            }
+
+            productInfo.add(desc);
+            products.add(productInfo);
+            if (id > count) break;
+        }
         return products;
     }
 
@@ -73,7 +85,7 @@ public class ProductManagerImpl implements ProductMangerService {
         List<String> moreProducts = new ArrayList<String>();
 
         List<List<String>> moreProductInfos = getMoreProducts(5);
-        for(List<String> L : moreProductInfos){
+        for (List<String> L : moreProductInfos) {
             moreProducts.add(StringFormatUtil.formatProductInfoToString(StringFormatUtil.FORMAT_TYPE_MORE, L));
         }
 
@@ -82,19 +94,32 @@ public class ProductManagerImpl implements ProductMangerService {
 
     @Override
     public List<List<String>> getMoreProducts(int count) {
-        List<List<String>> products = new ArrayList<List<String>>();
-        List<String> productInfo = new ArrayList<String>();
-        //id
-        productInfo.add("1");
-        //序号
-        productInfo.add("1");
-        productInfo.add("鲸鱼");
-        productInfo.add("9元（人民币）");
-        productInfo.add("1000");
-        productInfo.add("告急");
-        productInfo.add("座头鲸，可以做房子");
+        List<ProductInfo> productInfos = productInfoMapper.selectMoreProduct();
 
-        products.add(productInfo);
+        List<List<String>> products = new ArrayList<List<String>>();
+
+        int id = 0;
+
+        if (count == -1) {
+            count = productInfos.size() + 1;
+        }
+        for (ProductInfo info : productInfos) {
+            List<String> productInfo = new ArrayList<String>();
+            productInfo.add(Integer.toString(info.getProductId()));
+            productInfo.add(Integer.toString(id));
+            productInfo.add(info.getProductName());
+            productInfo.add(info.getProductPrice() + "元（人民币)");
+            productInfo.add(Integer.toString(info.getProductCount())) ;
+            productInfo.add("冗余");
+            String desc = info.getProductDesc() + " ";
+            if (desc.length() > 10) {
+                desc = desc.substring(0, 10) + "...";
+            }
+
+            productInfo.add(desc);
+            products.add(productInfo);
+            if (id > count) break;
+        }
         return products;
     }
 
@@ -105,22 +130,28 @@ public class ProductManagerImpl implements ProductMangerService {
 
     @Override
     public List<List<String>> getProductInfos() {
-        List<List<String>> productInfos = new ArrayList<List<String>>();
+        List<ProductInfo> productInfos = productInfoMapper.selectAll();
 
-        List<String> productInfo = new ArrayList<String>();
-        //ID
-        productInfo.add("1");
-        //序号
-        productInfo.add("1");
-        productInfo.add("鲸鱼");
-        productInfo.add("9元（人民币）");
-        productInfo.add("1000");
-        productInfo.add("正常");
-        productInfo.add("座头鲸，可以 做房子");
+        List<List<String>> products = new ArrayList<List<String>>();
 
-        productInfos.add(productInfo);
+        int id = 0;
 
-        return productInfos;
+        for (ProductInfo info : productInfos) {
+            List<String> productInfo = new ArrayList<String>();
+            productInfo.add(Integer.toString(info.getProductId()));
+            productInfo.add(Integer.toString(id));
+            productInfo.add(info.getProductName());
+            productInfo.add(info.getProductPrice() + "元（人民币)");
+            productInfo.add(Integer.toString(info.getProductCount()));
+            productInfo.add(info.isCountIllge());
+            String desc = info.getProductDesc() + " ";
+            if (desc.length() > 10) {
+                desc = "....";
+            }
+            productInfo.add(desc);
+            products.add(productInfo);
+        }
+        return products;
     }
 
     @Override
@@ -128,7 +159,7 @@ public class ProductManagerImpl implements ProductMangerService {
 
         ProductInfo productInfo = productInfoMapper.selectByPrimaryKey(productId);
         Map<String, String> productMoreInfo = new HashMap<String, String>();
-        if(productInfo != null){
+        if (productInfo != null) {
             productMoreInfo.put("productId", productInfo.getProductId().toString());
             productMoreInfo.put("productName", productInfo.getProductName());
             productMoreInfo.put("productPrice", productInfo.getProductPrice() + "元（人民币）");
@@ -175,11 +206,11 @@ public class ProductManagerImpl implements ProductMangerService {
     @Override
     public int addProductInfo(ProductInfo productInfo, int userId) {
         int res = productInfoMapper.insert(productInfo);
-        if(res == 1) {
+        if (res == 1) {
             logBaseInfoMapper.insert(LogFactory.makeLogBaseInfo(LogFactory.BaseInformaiton, userId, "添加产品：" + productInfo.getProductName()));
             LogBaseInfo logBaseInfo = LogFactory.makeLogBaseInfo(LogFactory.ChangeProductCount, userId, productInfo.getProductName() + "产品初次添加入库");
             logBaseInfoMapper.insert(logBaseInfo);
-            logChangeProductCountMapper.insert(LogFactory.makeLogChangeProductCount(logBaseInfo.getLogId(),productInfo.getProductId(), 0, productInfo.getProductPrice(), productInfo.getProductCount()));
+            logChangeProductCountMapper.insert(LogFactory.makeLogChangeProductCount(logBaseInfo.getLogId(), productInfo.getProductId(), 0, productInfo.getProductPrice(), productInfo.getProductCount()));
         }
 
         return productInfo.getProductId();
@@ -203,12 +234,12 @@ public class ProductManagerImpl implements ProductMangerService {
         int oldCount = oldProduct.getProductCount();
         oldProduct.setProductCount(changeCount);
 
-        if(oldCount == oldProduct.getProductCount()) return 0;
+        if (oldCount == oldProduct.getProductCount()) return 0;
         productInfoMapper.updateByPrimaryKey(oldProduct);
 
         LogBaseInfo logBaseInfo = LogFactory.makeLogBaseInfo(LogFactory.ChangeProductCount, userId, "产品：" + oldProduct.getProductName() + (oldCount > oldProduct.getProductCount() ? "出库" : "入库"));
         logBaseInfoMapper.insert(logBaseInfo);
-        logChangeProductCountMapper.insert(LogFactory.makeLogChangeProductCount(logBaseInfo.getLogId(),oldProduct.getProductId(),oldCount, oldProduct.getProductPrice(), changeCount));
+        logChangeProductCountMapper.insert(LogFactory.makeLogChangeProductCount(logBaseInfo.getLogId(), oldProduct.getProductId(), oldCount, oldProduct.getProductPrice(), changeCount));
 
         return 0;
     }
@@ -221,10 +252,10 @@ public class ProductManagerImpl implements ProductMangerService {
         double oldPrice = product.getProductPrice();
         product.setProductPrice(changePrice);
 
-        if(oldPrice == product.getProductPrice()) return 0;
+        if (oldPrice == product.getProductPrice()) return 0;
         productInfoMapper.updateByPrimaryKey(product);
 
-        LogBaseInfo logBaseInfo = LogFactory.makeLogBaseInfo(LogFactory.ChangeProductPrice, userId, "产品：" + product.getProductName() + (oldPrice > product.getProductPrice() ? "价格提高":"价格减少"));
+        LogBaseInfo logBaseInfo = LogFactory.makeLogBaseInfo(LogFactory.ChangeProductPrice, userId, "产品：" + product.getProductName() + (oldPrice > product.getProductPrice() ? "价格提高" : "价格减少"));
         logBaseInfoMapper.insert(logBaseInfo);
         logChangeProductPriceMapper.insert(LogFactory.makeLogChangeProductPrice(logBaseInfo.getLogId(), product.getProductId(), product.getProductCount(), oldPrice, product.getProductPrice()));
 

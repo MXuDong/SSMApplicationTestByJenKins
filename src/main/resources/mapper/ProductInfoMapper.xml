@@ -28,10 +28,6 @@
     from t_product
     where product_id = #{productId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from t_product
-    where product_id = #{productId,jdbcType=INTEGER}
-  </delete>
   <insert id="insert" parameterType="model.ProductInfo" keyProperty="productId" useGeneratedKeys="true">
     insert into t_product (product_name, product_pic,
       product_price, product_count, product_max_count, 
@@ -88,4 +84,24 @@
       product_min_count = #{productMinCount,jdbcType=INTEGER}
     where product_id = #{productId,jdbcType=INTEGER}
   </update>
+  <select id="selectLessProduct" resultMap="ResultMapWithBLOBs">
+    select <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_product
+    where product_min_count > product_count;
+  </select>
+  <select id="selectMoreProduct" resultMap="ResultMapWithBLOBs">
+    select <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_product
+    where product_count > product_max_count;
+  </select>
+  <select id="selectAll" resultMap="ResultMapWithBLOBs">
+    select <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_product;
+  </select>
 </mapper>

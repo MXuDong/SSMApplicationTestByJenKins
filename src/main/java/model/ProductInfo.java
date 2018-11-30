@@ -86,7 +86,7 @@ public class ProductInfo {
             return "正常";
         }else if(productCount > productMaxCount){
             return "冗余";
-        }else return "不足";
+        }else return "告急";
     }
 
     public String getPicPaths(){
