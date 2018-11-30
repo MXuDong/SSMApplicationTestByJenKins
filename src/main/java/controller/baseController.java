@@ -14,20 +14,22 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.File;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.awt.image.BufferedImage;
+import java.io.*;
 import java.util.List;
 import java.util.Map;
 
 @Controller
 public class baseController {
 
-    @Autowired@Resource(name = "ProductManagerImpl")
+    @Autowired
+    @Resource(name = "ProductManagerImpl")
     ProductMangerService productMangerService;
-    @Autowired@Resource(name = "ObillManagerService")
+    @Autowired
+    @Resource(name = "ObillManagerService")
     ObillManagerService obillManagerService;
-    @Autowired@Resource(name = "LogManagerImpl")
+    @Autowired
+    @Resource(name = "LogManagerImpl")
     LogManagerService logManagerService;
     @Autowired
     UserInfosMapper userInfosMapper;
@@ -64,21 +66,21 @@ public class baseController {
     }
 
     @RequestMapping("/about")
-    public ModelAndView turnAboutPage(){
+    public ModelAndView turnAboutPage() {
         return new ModelAndView("about");
     }
 
     @RequestMapping("/login")
-    public ModelAndView turnLoginPage(){
+    public ModelAndView turnLoginPage() {
         return new ModelAndView("login");
     }
 
     @RequestMapping("/doLogin")
-    public String login(String userName, String password, HttpSession session){
+    public String login(String userName, String password, HttpSession session) {
         UserInfos userInfos = userInfosMapper.findUserByName(userName);
 
-        if(userInfos != null){
-            if(userInfos.getUserPassword().equals(password)){
+        if (userInfos != null) {
+            if (userInfos.getUserPassword().equals(password)) {
                 session.setAttribute("userInfoId", userInfos.getUserId());
             }
         }
@@ -86,14 +88,14 @@ public class baseController {
     }
 
     @RequestMapping("/doLogOut")
-    public String logOut(HttpSession session){
+    public String logOut(HttpSession session) {
         session.setAttribute("userInfoId", null);
 
         return "redirect:/";
     }
 
     @RequestMapping("/account")
-    public ModelAndView turnToAccountPage(){
+    public ModelAndView turnToAccountPage() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("account");
 
@@ -106,26 +108,33 @@ public class baseController {
         return modelAndView;
     }
 
-//    @RequestMapping("/pic")
-//    public void getPic(String id, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse){
-//        int productId = Integer.parseInt(id);
-//
-//        if(productId == -1){
-//
-//            File file = new File("")
-//
-//            byte[] img = xxx;
-//            httpServletResponse.setContentType("image/png");
-//            OutputStream os = null;
-//            try {
-//                os = httpServletResponse.getOutputStream();
-//                os.write(img);
-//                os.flush();
-//                os.close();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//
-//        }
-//    }
+    @RequestMapping("/pic")
+    public void getPic(String id, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+        String path = "E:\\Work Space\\Intellij WorkSpace\\SSMApplicationTestByJenKins\\src\\main\\webapp\\WEB-INF\\pic\\";
+        File file = new File(path + id + ".jpg");
+        if (!file.exists()) {
+            file = new File(path + "default.jpg");
+        }
+
+        FileInputStream inputStream = null;
+        try {
+            inputStream = new FileInputStream(file);
+            byte[] data = new byte[(int) file.length()];
+            int length = inputStream.read(data);
+            inputStream.close();
+
+            httpServletResponse.setContentType("image/png");
+
+            OutputStream stream = httpServletResponse.getOutputStream();
+            stream.write(data);
+            stream.flush();
+            stream.close();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 }

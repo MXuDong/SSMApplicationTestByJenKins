@@ -64,7 +64,7 @@
             </div>
 
             <br/>
-            <img src="${pageContext.request.contextPath}${requestScope.ProductInfo.productPic}" class="img-thumbnail">
+            <img src="${pageContext.request.contextPath}/pic?id=${requestScope.ProductInfo.productId}" class="img-thumbnail">
             <hr class="my-4">
             <p class="lead">单价:${requestScope.ProductInfo.productPrice}</p>
             <p class="lead">当前库存总量:${requestScope.ProductInfo.productCount}</p>
