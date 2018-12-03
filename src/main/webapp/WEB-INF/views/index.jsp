@@ -164,7 +164,7 @@
     <div class="col-md-3">
         <h3>库存冗余列表</h3>
         <div class="list-group">
-            <a href="${pageContext.request.contextPath}/product/lessProductList" class="list-group-item list-group-item-action active">
+            <a href="${pageContext.request.contextPath}/product/moreProductList" class="list-group-item list-group-item-action active">
                 查看更多
             </a>
             <c:forEach items="${requestScope.MoreProduct}" var="mp">

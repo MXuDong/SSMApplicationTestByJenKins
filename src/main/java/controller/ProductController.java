@@ -102,7 +102,7 @@ public class ProductController {
         Map<String, String> productInfo = productMangerService.getProductMoreInfo(id);
         modelAndView.addObject("ProductInfo", productInfo);
 
-        Map<String, String> productPicInfos = productMangerService.getProductPicInfo();
+        Map<String, String> productPicInfos = productMangerService.getProductPicInfo(id);
         modelAndView.addObject("xAxisData", productPicInfos.get("xAxisData"));
         modelAndView.addObject("seriesData", productPicInfos.get("seriesData"));
         modelAndView.addObject("startValue", productPicInfos.get("startValue"));

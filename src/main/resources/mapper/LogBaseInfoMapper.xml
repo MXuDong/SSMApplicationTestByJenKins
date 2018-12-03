@@ -16,12 +16,40 @@
         from t_log_base
         where log_id = #{log_id};
     </select>
+
     <select id="selectAll" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from t_log_base
         order by log_id desc
     </select>
+
+    <select id="selectAllProductCountLog" resultMap="BaseResultMap">
+        select *
+        from t_log_base
+        where log_type = 1;
+    </select>
+
+    <select id="selectAllProductCountLogById" resultMap="BaseResultMap">
+        select *
+        from t_log_base
+        where t_log_base.log_id in
+              (select t_log_change_product_count.log_id
+               from t_log_change_product_count
+               where t_log_change_product_count.product_id = #{productId})
+        order by log_time;
+    </select>
+
+    <select id="selectAllProductPriceLogById" resultMap="BaseResultMap">
+        select *
+        from t_log_base
+        where t_log_base.log_id in
+              (select t_log_change_product_price.log_id
+               from t_log_change_product_price
+               where t_log_change_product_price.product_id = #{productId})
+        order by log_time;
+    </select>
+
     <insert id="insert" parameterType="model.LogBaseInfo" keyProperty="logId" useGeneratedKeys="true">
         insert into t_log_base (log_time, log_about_user,
                                 log_type, log_what)

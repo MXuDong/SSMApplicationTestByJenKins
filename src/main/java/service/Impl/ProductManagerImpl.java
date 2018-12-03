@@ -8,17 +8,14 @@ import model.LogBaseInfo;
 import model.LogChangeProductCount;
 import model.LogChangeProductPrice;
 import model.ProductInfo;
-import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import service.Interface.ProductMangerService;
+import sun.rmi.runtime.Log;
 import util.LogFactory;
 import util.StringFormatUtil;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service("ProductManagerImpl")
 public class ProductManagerImpl implements ProductMangerService {
@@ -38,7 +35,7 @@ public class ProductManagerImpl implements ProductMangerService {
 
         List<List<String>> lessProductInfos = getLessProducts(5);
         for (List<String> L : lessProductInfos) {
-            lessProducts.add(StringFormatUtil.formatProductInfoToString(StringFormatUtil.FORMAT_TYPE_LESS, L));
+            lessProducts.add(StringFormatUtil.formatProductInfoToString(StringFormatUtil.StringFormatType.FORMAT_TYPE_LESS, L));
         }
 
         return lessProducts;
@@ -68,7 +65,7 @@ public class ProductManagerImpl implements ProductMangerService {
             productInfo.add(info.getProductPrice() + "元（人民币)");
             productInfo.add(Integer.toString(info.getProductCount()));
             productInfo.add("告急");
-            String desc = info.getProductDesc()  + " ";
+            String desc = info.getProductDesc() + " ";
             if (desc.length() > 10) {
                 desc = desc.substring(0, 10) + "...";
             }
@@ -86,7 +83,7 @@ public class ProductManagerImpl implements ProductMangerService {
 
         List<List<String>> moreProductInfos = getMoreProducts(5);
         for (List<String> L : moreProductInfos) {
-            moreProducts.add(StringFormatUtil.formatProductInfoToString(StringFormatUtil.FORMAT_TYPE_MORE, L));
+            moreProducts.add(StringFormatUtil.formatProductInfoToString(StringFormatUtil.StringFormatType.FORMAT_TYPE_MORE, L));
         }
 
         return moreProducts;
@@ -109,7 +106,7 @@ public class ProductManagerImpl implements ProductMangerService {
             productInfo.add(Integer.toString(id));
             productInfo.add(info.getProductName());
             productInfo.add(info.getProductPrice() + "元（人民币)");
-            productInfo.add(Integer.toString(info.getProductCount())) ;
+            productInfo.add(Integer.toString(info.getProductCount()));
             productInfo.add("冗余");
             String desc = info.getProductDesc() + " ";
             if (desc.length() > 10) {
@@ -175,27 +172,153 @@ public class ProductManagerImpl implements ProductMangerService {
     }
 
     @Override
-    public Map<String, String> getProductPicInfo() {
+    public Map<String, String> getProductPicInfo(int productId) {
 
+        //获取产品
+        ProductInfo productInfo = productInfoMapper.selectByPrimaryKey(productId);
+        //获取所有产品的数量变化
+        List<LogBaseInfo> logBaseInfos = logBaseInfoMapper.selectAllProductCountLogById(productId);
+        //创造结果集和
         Map<String, String> productPicInfo = new HashMap<String, String>();
+        //日历类
+        Calendar calendarBase = Calendar.getInstance();
+        Date date = new Date();
+
+
+        String xAxisData = "";
+        String seriesData = "";
+        String startValue = "";
+        Calendar lastCalendar = Calendar.getInstance();
+        Calendar nowCalendar = Calendar.getInstance();
+        int count = 0;
+        int lastCount = productInfo.getProductCount();
+        for (LogBaseInfo L : logBaseInfos) {
+            LogChangeProductCount logChangeProductCount = logChangeProductCountMapper.selectByBaseLogId(L.getLogId());
+
+            String DATE = StringFormatUtil.formatProductInfoToString(StringFormatUtil.StringFormatType.FORMAT_TYPE_FORMAT_DATA_ONLY_DAY, L.getLogTime());
+            int nowCount = logChangeProductCount.getProductNewCount();
+
+            nowCalendar.setTime(L.getLogTime());
+            if (count++ == 0) {
+                xAxisData = "'" + DATE + "'";
+                startValue = xAxisData;
+                seriesData = "" + nowCount;
+            } else {
+                while (lastCalendar.get(Calendar.DAY_OF_YEAR) < nowCalendar.get(Calendar.DAY_OF_YEAR)) {
+                    xAxisData = xAxisData + ",'" + StringFormatUtil.formatProductInfoToString(StringFormatUtil.StringFormatType.FORMAT_TYPE_FORMAT_DATA_ONLY_DAY, lastCalendar.getTime()) + "'";
+                    seriesData = seriesData + "," + lastCount;
+                    lastCalendar.add(Calendar.DAY_OF_YEAR, 1);
+                }
+
+                if(lastCalendar.get(Calendar.DAY_OF_YEAR) - 1 == nowCalendar.get(Calendar.DAY_OF_YEAR)){
+                    int tempLastDoc = xAxisData.lastIndexOf(',');
+                    if(tempLastDoc == -1){
+                        xAxisData = "'" + DATE + "'";
+                    }else{
+                        xAxisData = xAxisData.substring(0, tempLastDoc);
+                        xAxisData = xAxisData + ",'" + DATE + "'";
+                    }
+
+                    tempLastDoc = seriesData.lastIndexOf(',');
+                    if(tempLastDoc == -1){
+                        seriesData = "" + nowCount;
+                    }else{
+                        seriesData = seriesData.substring(0, tempLastDoc);
+                        seriesData = seriesData + "," + nowCount;
+                    }
+                }else{
+                    xAxisData = xAxisData + ",'" + DATE + "'";
+                    seriesData = seriesData + "," + nowCount;
+                }
+            }
+
+            lastCalendar.setTime(L.getLogTime());
+            lastCalendar.add(Calendar.DAY_OF_YEAR,1);
+            lastCount = nowCount;
+        }
+
+        nowCalendar.setTime(new Date());
+
+        if(count != 0){
+            while (lastCalendar.get(Calendar.DAY_OF_YEAR) < nowCalendar.get(Calendar.DAY_OF_YEAR)) {
+                xAxisData = xAxisData + ",'" + StringFormatUtil.formatProductInfoToString(StringFormatUtil.StringFormatType.FORMAT_TYPE_FORMAT_DATA_ONLY_DAY, lastCalendar.getTime()) + "'";
+                seriesData = seriesData + "," + lastCount;
+                lastCalendar.add(Calendar.DAY_OF_YEAR, 1);
+            }
+        }
+
+        String productXAxisData = "";
+        String productSeriesData = "";
+        count = 0;
+        double lastPrice = productInfo.getProductPrice();
+        logBaseInfos = logBaseInfoMapper.selectAllProductPriceLogById(productId);
+
+        for (LogBaseInfo L : logBaseInfos) {
+            LogChangeProductPrice logChangeProductPrice = logChangeProductPriceMapper.selectByBoasLogId(L.getLogId());
+
+            String DATE = StringFormatUtil.formatProductInfoToString(StringFormatUtil.StringFormatType.FORMAT_TYPE_FORMAT_DATA_ONLY_DAY, L.getLogTime());
+            double nowPrice = logChangeProductPrice.getProductNewPrice();
+
+            nowCalendar.setTime(L.getLogTime());
+            if (count++ == 0) {
+                productXAxisData = "'" + DATE + "'";
+                productSeriesData = "" + nowPrice;
+            } else {
+                while (lastCalendar.get(Calendar.DAY_OF_YEAR) < nowCalendar.get(Calendar.DAY_OF_YEAR)) {
+                    productXAxisData = productXAxisData + ",'" + StringFormatUtil.formatProductInfoToString(StringFormatUtil.StringFormatType.FORMAT_TYPE_FORMAT_DATA_ONLY_DAY, lastCalendar.getTime()) + "'";
+                    productSeriesData = productSeriesData + "," + lastPrice;
+                    lastCalendar.add(Calendar.DAY_OF_YEAR, 1);
+                }
+
+                if(lastCalendar.get(Calendar.DAY_OF_YEAR) - 1 == nowCalendar.get(Calendar.DAY_OF_YEAR)){
+                    int tempLastDoc = xAxisData.lastIndexOf(',');
+                    if(tempLastDoc == -1){
+                        productXAxisData = "'" + DATE + "'";
+                    }else{
+                        productXAxisData = productXAxisData.substring(0, tempLastDoc);
+                        productXAxisData = productXAxisData + ",'" + DATE + "'";
+                    }
+
+                    tempLastDoc = seriesData.lastIndexOf(',');
+                    if(tempLastDoc == -1){
+                        productSeriesData = "" + nowPrice;
+                    }else{
+                        productSeriesData = productSeriesData.substring(0, tempLastDoc);
+                        productSeriesData = productSeriesData + "," + nowPrice;
+                    }
+                }else{
+                    productXAxisData = productXAxisData + ",'" + DATE + "'";
+                    productSeriesData = productSeriesData + "," + nowPrice;
+                }
+            }
+
+            lastCalendar.setTime(L.getLogTime());
+            lastCalendar.add(Calendar.DAY_OF_YEAR,1);
+            lastPrice = nowPrice;
+        }
+
+        nowCalendar.setTime(new Date());
+
+        if(count != 0){
+            while (lastCalendar.get(Calendar.DAY_OF_YEAR) < nowCalendar.get(Calendar.DAY_OF_YEAR)) {
+                productXAxisData = productXAxisData + ",'" + StringFormatUtil.formatProductInfoToString(StringFormatUtil.StringFormatType.FORMAT_TYPE_FORMAT_DATA_ONLY_DAY, lastCalendar.getTime()) + "'";
+                productSeriesData = productSeriesData + "," + lastPrice;
+                lastCalendar.add(Calendar.DAY_OF_YEAR, 1);
+            }
+        }
+
 
         //横坐标
-        String xAxisData = "'2018-9-1', '2018-9-2', '2018-9-3', '2018-9-4'";
         productPicInfo.put("xAxisData", xAxisData);
         //数据
-        String seriesData = "1250,4356,724,8985";
         productPicInfo.put("seriesData", seriesData);
         //横坐标开始数据
-        String startValue = "'2018-9-2'";
         productPicInfo.put("startValue", startValue);
         //最小值
-        String minValue = "1000";
-        productPicInfo.put("minValue", minValue);
+        productPicInfo.put("minValue", Integer.toString(productInfo.getProductMinCount()));
         //最大值
-        String maxValue = "5000";
-        productPicInfo.put("maxValue", maxValue);
-        String productXAxisData = "'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'A', 'B'";
-        String productSeriesData = "820, 932, 901, 934, 1290, 1330, 1320, 540, 7852";
+        productPicInfo.put("maxValue", Integer.toString(productInfo.getProductMaxCount()));
+
         productPicInfo.put("productXAxisData", productXAxisData);
         productPicInfo.put("productSeriesData", productSeriesData);
 
@@ -210,7 +333,9 @@ public class ProductManagerImpl implements ProductMangerService {
             logBaseInfoMapper.insert(LogFactory.makeLogBaseInfo(LogFactory.BaseInformaiton, userId, "添加产品：" + productInfo.getProductName()));
             LogBaseInfo logBaseInfo = LogFactory.makeLogBaseInfo(LogFactory.ChangeProductCount, userId, productInfo.getProductName() + "产品初次添加入库");
             logBaseInfoMapper.insert(logBaseInfo);
-            logChangeProductCountMapper.insert(LogFactory.makeLogChangeProductCount(logBaseInfo.getLogId(), productInfo.getProductId(), 0, productInfo.getProductPrice(), productInfo.getProductCount()));
+            logChangeProductCountMapper.insert(LogFactory.makeLogChangeProductCount(logBaseInfo.getLogId(), productInfo.getProductId(), 0,0, productInfo.getProductCount()));
+            logBaseInfo = LogFactory.makeLogBaseInfo(LogFactory.ChangeProductPrice, userId, productInfo.getProductName() + "产品初次添加入库");
+            logChangeProductPriceMapper.insert(LogFactory.makeLogChangeProductPrice(logBaseInfo.getLogId(), productInfo.getProductId(), productInfo.getProductCount(),0, productInfo.getProductCount()));
         }
 
         return productInfo.getProductId();

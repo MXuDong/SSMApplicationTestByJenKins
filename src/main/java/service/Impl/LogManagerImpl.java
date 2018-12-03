@@ -109,7 +109,7 @@ public class LogManagerImpl implements LogManagerService {
             switch (logType) {
                 case 0: {
                     logInfo.add("基本日志信息");
-                    logInfo.add(StringFormatUtil.formatProductInfoToString(StringFormatUtil.FORMAT_TYPE_FORMAT_DATA, logBaseInfo.getLogTime()));
+                    logInfo.add(StringFormatUtil.formatProductInfoToString(StringFormatUtil.StringFormatType.FORMAT_TYPE_FORMAT_DATA, logBaseInfo.getLogTime()));
                     logInfo.add("添加产品信息");
                     logInfo.add(logBaseInfo.getLogWhat());
                     logInfo.add("无");
@@ -117,7 +117,7 @@ public class LogManagerImpl implements LogManagerService {
                 }
                 case 1: {
                     logInfo.add("产品库存变动");
-                    logInfo.add(StringFormatUtil.formatProductInfoToString(StringFormatUtil.FORMAT_TYPE_FORMAT_DATA, logBaseInfo.getLogTime()));
+                    logInfo.add(StringFormatUtil.formatProductInfoToString(StringFormatUtil.StringFormatType.FORMAT_TYPE_FORMAT_DATA, logBaseInfo.getLogTime()));
                     LogChangeProductCount logChangeProductCount = logChangeProductCountMapper.selectByBaseLogId(logBaseInfo.getLogId());
                     ProductInfo productInfo = productInfoMapper.selectByPrimaryKey(logChangeProductCount.getProductId());
                     logInfo.add(logBaseInfo.getLogWhat());
@@ -127,7 +127,7 @@ public class LogManagerImpl implements LogManagerService {
                 }
                 case 2: {
                     logInfo.add("产品价格变动");
-                    logInfo.add(StringFormatUtil.formatProductInfoToString(StringFormatUtil.FORMAT_TYPE_FORMAT_DATA, logBaseInfo.getLogTime()));
+                    logInfo.add(StringFormatUtil.formatProductInfoToString(StringFormatUtil.StringFormatType.FORMAT_TYPE_FORMAT_DATA, logBaseInfo.getLogTime()));
                     LogChangeProductPrice logChangeProductPrice = logChangeProductPriceMapper.selectByBoasLogId(logBaseInfo.getLogId());
                     ProductInfo productInfo = productInfoMapper.selectByPrimaryKey(logChangeProductPrice.getProductId());
                     logInfo.add(logBaseInfo.getLogWhat());
@@ -165,7 +165,7 @@ public class LogManagerImpl implements LogManagerService {
             LogBaseInfo logBaseInfo = logBaseInfoMapper.selectByLogId(logChangeProductPrice.getLogId());
             changeLogs.add(userInfosMapper.findUserById(logBaseInfo.getLogAboutUser()).getUserName());
             changeLogs.add(productInfoMapper.selectByPrimaryKey(logChangeProductPrice.getProductId()).getProductName());
-            changeLogs.add(StringFormatUtil.formatProductInfoToString(StringFormatUtil.FORMAT_TYPE_FORMAT_DATA, logBaseInfo.getLogTime()));
+            changeLogs.add(StringFormatUtil.formatProductInfoToString(StringFormatUtil.StringFormatType.FORMAT_TYPE_FORMAT_DATA, logBaseInfo.getLogTime()));
             changeLogs.add(logChangeProductPrice.getProductOldPrice() > logChangeProductPrice.getProductNewPrice()?"下降" : "上涨");
             changeLogs.add(logChangeProductPrice.getProductOldPrice() + "元-->" + logChangeProductPrice.getProductNewPrice() + "元");
             priceChangeLogs.add(changeLogs);
@@ -187,7 +187,7 @@ public class LogManagerImpl implements LogManagerService {
             LogBaseInfo logBaseInfo = logBaseInfoMapper.selectByLogId(logChangeProductCount.getLogId());
             changeLogs.add(userInfosMapper.findUserById(logBaseInfo.getLogAboutUser()).getUserName());
             changeLogs.add(productInfoMapper.selectByPrimaryKey(logChangeProductCount.getProductId()).getProductName());
-            changeLogs.add(StringFormatUtil.formatProductInfoToString(StringFormatUtil.FORMAT_TYPE_FORMAT_DATA, logBaseInfo.getLogTime()));
+            changeLogs.add(StringFormatUtil.formatProductInfoToString(StringFormatUtil.StringFormatType.FORMAT_TYPE_FORMAT_DATA, logBaseInfo.getLogTime()));
             changeLogs.add(logChangeProductCount.getProductOldCount() > logChangeProductCount.getProductNewCount()?"出库" : "入库");
             changeLogs.add(logChangeProductCount.getProductOldCount() + "-->" + logChangeProductCount.getProductNewCount());
             countChangeInfos.add(changeLogs);

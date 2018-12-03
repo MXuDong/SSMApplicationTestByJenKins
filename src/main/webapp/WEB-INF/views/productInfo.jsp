@@ -207,7 +207,7 @@
 
     ProductPricePic.setOption(option = {
         title: {
-            text: '产品总量变化折线图'
+            text: '产品价格变化折线图'
         },
         xAxis: {
             type: 'category',
@@ -230,7 +230,7 @@
 
     ProductCountPic.setOption(option = {
         title: {
-            text: '产品价格变化图'
+            text: '产品总量变化图'
         },
         tooltip: {
             trigger: 'axis'
