@@ -331,12 +331,13 @@ public class ProductManagerImpl implements ProductMangerService {
         int res = productInfoMapper.insert(productInfo);
         if (res == 1) {
             logBaseInfoMapper.insert(LogFactory.makeLogBaseInfo(LogFactory.BaseInformaiton, userId, "添加产品：" + productInfo.getProductName()));
-            LogBaseInfo logBaseInfo = LogFactory.makeLogBaseInfo(LogFactory.ChangeProductCount, userId, productInfo.getProductName() + "产品初次添加入库");
+            LogBaseInfo logBaseInfo = LogFactory.makeLogBaseInfo(LogFactory.ChangeProductPrice, userId, productInfo.getProductName() + "产品初次添加入库");
             logBaseInfoMapper.insert(logBaseInfo);
-            logChangeProductCountMapper.insert(LogFactory.makeLogChangeProductCount(logBaseInfo.getLogId(), productInfo.getProductId(), 0,0, productInfo.getProductCount()));
-            logBaseInfo = LogFactory.makeLogBaseInfo(LogFactory.ChangeProductPrice, userId, productInfo.getProductName() + "产品初次添加入库");
+            logChangeProductPriceMapper.insert(LogFactory.makeLogChangeProductPrice(logBaseInfo.getLogId(), productInfo.getProductId(), 0,0, productInfo.getProductPrice()));
+            logBaseInfo = LogFactory.makeLogBaseInfo(LogFactory.ChangeProductCount, userId, productInfo.getProductName() + "产品初次添加入库");
             logBaseInfoMapper.insert(logBaseInfo);
-            logChangeProductPriceMapper.insert(LogFactory.makeLogChangeProductPrice(logBaseInfo.getLogId(), productInfo.getProductId(), productInfo.getProductCount(),0, productInfo.getProductPrice()));
+            logChangeProductCountMapper.insert(LogFactory.makeLogChangeProductCount(logBaseInfo.getLogId(), productInfo.getProductId(), 0,productInfo.getProductPrice(), productInfo.getProductCount()));
+
         }
 
         return productInfo.getProductId();

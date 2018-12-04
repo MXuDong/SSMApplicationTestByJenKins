@@ -15,57 +15,14 @@
     from t_obill_info
     where obill = #{obill,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from t_obill_info
-    where obill = #{obill,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="model.ObillInfo" >
-    insert into t_obill_info (obill, obill_time, obill_money
-      )
+  <select id="selectAllOrderByTimeDesc" resultMap="BaseResultMap" >
+    select *
+    from t_obill_info
+    order by t_obill_info.obill_time
+  </select>
+  <insert id="insert" parameterType="model.ObillInfo" keyProperty="obill" useGeneratedKeys="true">
+    insert into t_obill_info (obill, obill_time, obill_money)
     values (#{obill,jdbcType=INTEGER}, #{obillTime,jdbcType=TIMESTAMP}, #{obillMoney,jdbcType=DOUBLE}
       )
   </insert>
-  <insert id="insertSelective" parameterType="model.ObillInfo" >
-    insert into t_obill_info
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="obill != null" >
-        obill,
-      </if>
-      <if test="obillTime != null" >
-        obill_time,
-      </if>
-      <if test="obillMoney != null" >
-        obill_money,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="obill != null" >
-        #{obill,jdbcType=INTEGER},
-      </if>
-      <if test="obillTime != null" >
-        #{obillTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="obillMoney != null" >
-        #{obillMoney,jdbcType=DOUBLE},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="model.ObillInfo" >
-    update t_obill_info
-    <set >
-      <if test="obillTime != null" >
-        obill_time = #{obillTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="obillMoney != null" >
-        obill_money = #{obillMoney,jdbcType=DOUBLE},
-      </if>
-    </set>
-    where obill = #{obill,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="model.ObillInfo" >
-    update t_obill_info
-    set obill_time = #{obillTime,jdbcType=TIMESTAMP},
-      obill_money = #{obillMoney,jdbcType=DOUBLE}
-    where obill = #{obill,jdbcType=INTEGER}
-  </update>
 </mapper>

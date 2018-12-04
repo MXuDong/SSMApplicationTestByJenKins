@@ -18,7 +18,7 @@
             <div class="col-md-6" style="text-align: center;"><h2>
                 本次结账金额：${requestScope.accountAttribute.totalChangeMoney}</h2></div>
             <div class="col-md-6" style="text-align: center;">
-                <button type="button" class="btn btn-danger btn-lg">结账</button>
+                <a href="/doAccount" class="btn btn-danger btn-lg">结账</a>
             </div>
         </div>
 
@@ -38,7 +38,7 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach items="${requestScope.changeInfors}" var="accountInfo">
+            <c:forEach items="${requestScope.accountAttribute.accountInfos}" var="accountInfo">
                 <tr>
                     <td scope="row">${accountInfo.numberOfThisInfo}</td>
                     <td>${accountInfo.productName}</td>

@@ -99,13 +99,19 @@ public class baseController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("account");
 
-        Map<String, String> accountAttribute = obillManagerService.getAccountAttribute();
+        Map<String, Object> accountAttribute = obillManagerService.getAccountAttribute();
 
-        List<Map<String, String>> accountInfo = obillManagerService.getAccountInfos();
-
-        modelAndView.addObject("changeInfors", accountInfo);
         modelAndView.addObject("accountAttribute", accountAttribute);
         return modelAndView;
+    }
+
+    @RequestMapping("/doAccount")
+    public String doAccount(HttpSession session){
+        int userId = (int) session.getAttribute("userInfoId");
+
+        obillManagerService.doSubmitObill(userId);
+
+        return "redirect:/";
     }
 
     @RequestMapping("/pic")

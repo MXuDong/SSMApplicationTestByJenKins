@@ -2,16 +2,13 @@ package dao;
 
 import model.ObillInfo;
 
+import java.util.List;
+
 public interface ObillInfoMapper {
-    int deleteByPrimaryKey(Integer obill);
 
     int insert(ObillInfo record);
 
-    int insertSelective(ObillInfo record);
-
     ObillInfo selectByPrimaryKey(Integer obill);
 
-    int updateByPrimaryKeySelective(ObillInfo record);
-
-    int updateByPrimaryKey(ObillInfo record);
+    List<ObillInfo> selectAllOrderByTimeDesc();
 }

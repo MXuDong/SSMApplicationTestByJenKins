@@ -3,6 +3,7 @@ package util;
 import model.LogBaseInfo;
 import model.LogChangeProductCount;
 import model.LogChangeProductPrice;
+import model.LogObillOperation;
 
 import java.util.Date;
 
@@ -24,6 +25,7 @@ public class LogFactory {
     public static final int BaseInformaiton = 0;
     public static final int ChangeProductCount = 1;
     public static final int ChangeProductPrice = 2;
+    public static final int OperationObill = 3;
 
     public static LogBaseInfo makeLogBaseInfo(int logType, int abouteUserId, String logWhat){
         LogBaseInfo logBaseInfo = new LogBaseInfo();
@@ -55,5 +57,14 @@ public class LogFactory {
         logChangeProductPrice.setProductOldCount(oldCount);
 
         return logChangeProductPrice;
+    }
+
+    public static LogObillOperation makeLogObillOperation(int logId, int obillId){
+        LogObillOperation logObillOperation = new LogObillOperation();
+
+        logObillOperation.setLogId(logId);
+        logObillOperation.setObillId(obillId);
+
+        return logObillOperation;
     }
 }
