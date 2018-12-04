@@ -32,7 +32,7 @@ CREATE TABLE `t_log_base` (
   UNIQUE KEY `t_log_base_log_id_uindex` (`log_id`),
   KEY `t_log_base_t_user_infos_user_id_fk` (`log_about_user`),
   CONSTRAINT `t_log_base_t_user_infos_user_id_fk` FOREIGN KEY (`log_about_user`) REFERENCES `t_user_infos` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,6 +41,7 @@ CREATE TABLE `t_log_base` (
 
 LOCK TABLES `t_log_base` WRITE;
 /*!40000 ALTER TABLE `t_log_base` DISABLE KEYS */;
+INSERT INTO `t_log_base` VALUES (1,'2018-11-28 09:30:10',1,0,'添加产品：鲸鱼'),(2,'2018-11-28 09:30:10',1,1,'产品初次添加入库'),(3,'2018-11-29 13:59:57',1,1,'产品出库'),(4,'2018-11-29 14:15:43',1,1,'产品：鲸鱼出库'),(5,'2018-11-29 14:22:04',1,2,'产品：鲸鱼价格减少'),(6,'2018-11-29 15:05:27',1,0,'添加产品：海豚'),(7,'2018-11-29 15:05:27',1,1,'海豚产品初次添加入库'),(8,'2018-11-29 15:06:39',1,0,'添加产品：海绵宝宝'),(9,'2018-11-29 15:06:39',1,1,'海绵宝宝产品初次添加入库'),(10,'2018-11-29 18:40:24',1,2,'产品：海豚价格减少'),(11,'2018-11-29 18:40:33',1,1,'产品：海豚出库'),(12,'2018-11-30 10:17:12',1,2,'产品：海豚价格提高'),(13,'2018-11-30 13:44:38',1,0,'添加产品：派大星'),(14,'2018-11-30 13:44:38',1,1,'派大星产品初次添加入库'),(15,'2018-11-30 13:48:09',1,1,'产品：派大星入库'),(16,'2018-12-03 19:04:28',1,1,'产品：鲸鱼入库'),(17,'2018-12-03 19:16:52',1,1,'产品：海豚出库'),(18,'2018-12-03 19:16:58',1,1,'产品：海豚出库'),(19,'2018-12-03 19:23:59',1,1,'产品：派大星出库'),(20,'2018-12-03 19:25:32',1,0,'添加产品：测试数据'),(21,'2018-12-03 19:25:32',1,1,'测试数据产品初次添加入库'),(22,'2018-12-03 20:30:48',1,1,'产品：海豚入库'),(23,'2018-12-03 20:31:05',1,2,'产品：海豚价格减少'),(24,'2018-12-03 22:25:33',1,0,'添加产品：冗余测试数据'),(25,'2018-12-03 22:25:33',1,1,'冗余测试数据产品初次添加入库'),(26,'2018-12-03 22:28:45',1,0,'添加产品：测试告急数据'),(27,'2018-12-03 22:28:45',1,1,'测试告急数据产品初次添加入库'),(28,'2018-12-03 22:28:45',1,2,'测试告急数据产品初次添加入库'),(29,'2018-12-03 22:29:43',1,0,'添加产品：测试变动数据'),(30,'2018-12-03 22:29:43',1,1,'测试变动数据产品初次添加入库'),(31,'2018-12-03 22:29:43',1,2,'测试变动数据产品初次添加入库'),(32,'2018-12-03 22:29:52',1,1,'产品：测试变动数据入库'),(33,'2018-12-03 22:30:42',1,2,'产品：冗余测试数据价格提高');
 /*!40000 ALTER TABLE `t_log_base` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -62,9 +63,9 @@ CREATE TABLE `t_log_change_product_count` (
   UNIQUE KEY `t_log_change_product_count_lcpc_id_uindex` (`lcpc_id`),
   KEY `t_log_change_product_count_t_log_base_log_id_fk` (`log_id`),
   KEY `t_log_change_product_count_t_product_product_id_fk` (`product_id`),
-  CONSTRAINT `t_log_change_product_count_t_product_product_id_fk` FOREIGN KEY (`product_id`) REFERENCES `t_product` (`product_id`),
-  CONSTRAINT `t_log_change_product_count_t_log_base_log_id_fk` FOREIGN KEY (`log_id`) REFERENCES `t_log_base` (`log_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  CONSTRAINT `t_log_change_product_count_t_log_base_log_id_fk` FOREIGN KEY (`log_id`) REFERENCES `t_log_base` (`log_id`),
+  CONSTRAINT `t_log_change_product_count_t_product_product_id_fk` FOREIGN KEY (`product_id`) REFERENCES `t_product` (`product_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -73,6 +74,7 @@ CREATE TABLE `t_log_change_product_count` (
 
 LOCK TABLES `t_log_change_product_count` WRITE;
 /*!40000 ALTER TABLE `t_log_change_product_count` DISABLE KEYS */;
+INSERT INTO `t_log_change_product_count` VALUES (1,2,1,0,5.6,100),(2,3,1,100,5.6,70),(3,4,1,70,5.6,56),(4,7,2,0,71.6,500),(5,9,3,0,75,10),(6,11,2,500,10000,100),(7,14,4,0,100.5,50),(8,15,4,50,100.5,1000),(9,16,1,56,56,1200),(10,17,2,100,100,50),(11,18,2,50,100,26),(12,19,4,1000,100.5,103),(13,21,5,0,100,10000),(14,22,2,26,100,73),(15,25,6,0,0,1000),(16,27,7,0,0,100),(17,30,8,0,0,100),(18,32,8,100,100,600);
 /*!40000 ALTER TABLE `t_log_change_product_count` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -88,15 +90,15 @@ CREATE TABLE `t_log_change_product_price` (
   `log_id` int(11) DEFAULT NULL,
   `product_id` int(11) DEFAULT NULL,
   `product_old_count` int(11) NOT NULL,
-  `product_old_price` int(11) NOT NULL,
-  `product_new_price` int(11) NOT NULL,
+  `product_old_price` double NOT NULL,
+  `product_new_price` double NOT NULL,
   PRIMARY KEY (`lcpp_id`),
   UNIQUE KEY `t_log_change_product_price_lcpp_id_uindex` (`lcpp_id`),
   KEY `t_log_change_product_price_t_log_base_log_id_fk` (`log_id`),
   KEY `t_log_change_product_price_t_product_product_id_fk` (`product_id`),
   CONSTRAINT `t_log_change_product_price_t_log_base_log_id_fk` FOREIGN KEY (`log_id`) REFERENCES `t_log_base` (`log_id`),
   CONSTRAINT `t_log_change_product_price_t_product_product_id_fk` FOREIGN KEY (`product_id`) REFERENCES `t_product` (`product_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -105,68 +107,37 @@ CREATE TABLE `t_log_change_product_price` (
 
 LOCK TABLES `t_log_change_product_price` WRITE;
 /*!40000 ALTER TABLE `t_log_change_product_price` DISABLE KEYS */;
+INSERT INTO `t_log_change_product_price` VALUES (1,5,1,56,5.6,56),(2,10,2,500,71.6,10000),(3,12,2,100,10000,100),(4,23,2,73,100,5000),(5,28,7,100,0,100),(6,31,8,100,0,100),(7,33,6,1000,100,50);
 /*!40000 ALTER TABLE `t_log_change_product_price` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `t_log_operation_obill`
+-- Table structure for table `t_log_obill_operation`
 --
 
-DROP TABLE IF EXISTS `t_log_operation_obill`;
+DROP TABLE IF EXISTS `t_log_obill_operation`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `t_log_operation_obill` (
+CREATE TABLE `t_log_obill_operation` (
   `loo_id` int(11) NOT NULL AUTO_INCREMENT,
+  `obill_id` int(11) DEFAULT NULL,
   `log_id` int(11) DEFAULT NULL,
-  `t_lcpc_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`loo_id`),
-  UNIQUE KEY `t_log_operation_obill_loo_id_uindex` (`loo_id`),
-  KEY `t_log_operation_obill_t_log_base_log_id_fk` (`log_id`),
-  KEY `t_log_operation_obill_t_log_change_product_count_lcpc_id_fk` (`t_lcpc_id`),
-  CONSTRAINT `t_log_operation_obill_t_log_base_log_id_fk` FOREIGN KEY (`log_id`) REFERENCES `t_log_base` (`log_id`),
-  CONSTRAINT `t_log_operation_obill_t_log_change_product_count_lcpc_id_fk` FOREIGN KEY (`t_lcpc_id`) REFERENCES `t_log_change_product_count` (`lcpc_id`)
+  UNIQUE KEY `t_log_obill_operation_loo_id_uindex` (`loo_id`),
+  KEY `t_log_obill_operation_t_log_base_log_id_fk` (`log_id`),
+  KEY `t_log_obill_operation_t_obill_info_obill_fk` (`obill_id`),
+  CONSTRAINT `t_log_obill_operation_t_log_base_log_id_fk` FOREIGN KEY (`log_id`) REFERENCES `t_log_base` (`log_id`),
+  CONSTRAINT `t_log_obill_operation_t_obill_info_obill_fk` FOREIGN KEY (`obill_id`) REFERENCES `t_obill_info` (`obill`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `t_log_operation_obill`
+-- Dumping data for table `t_log_obill_operation`
 --
 
-LOCK TABLES `t_log_operation_obill` WRITE;
-/*!40000 ALTER TABLE `t_log_operation_obill` DISABLE KEYS */;
-/*!40000 ALTER TABLE `t_log_operation_obill` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `t_log_operation_obill_res`
---
-
-DROP TABLE IF EXISTS `t_log_operation_obill_res`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `t_log_operation_obill_res` (
-  `lobr_id` int(11) NOT NULL AUTO_INCREMENT,
-  `t_obill_id` int(11) DEFAULT NULL,
-  `t_product_id` int(11) DEFAULT NULL,
-  `t_loo_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`lobr_id`),
-  UNIQUE KEY `t_log_operation_obill_res_lobr_id_uindex` (`lobr_id`),
-  KEY `t_log_operation_obill_res_t_log_operation_obill_loo_id_fk` (`t_loo_id`),
-  KEY `t_log_operation_obill_res_t_obill_info_obill_fk` (`t_obill_id`),
-  KEY `t_log_operation_obill_res_t_product_product_id_fk` (`t_product_id`),
-  CONSTRAINT `t_log_operation_obill_res_t_log_operation_obill_loo_id_fk` FOREIGN KEY (`t_loo_id`) REFERENCES `t_log_operation_obill` (`loo_id`),
-  CONSTRAINT `t_log_operation_obill_res_t_obill_info_obill_fk` FOREIGN KEY (`t_obill_id`) REFERENCES `t_obill_info` (`obill`),
-  CONSTRAINT `t_log_operation_obill_res_t_product_product_id_fk` FOREIGN KEY (`t_product_id`) REFERENCES `t_product` (`product_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `t_log_operation_obill_res`
---
-
-LOCK TABLES `t_log_operation_obill_res` WRITE;
-/*!40000 ALTER TABLE `t_log_operation_obill_res` DISABLE KEYS */;
-/*!40000 ALTER TABLE `t_log_operation_obill_res` ENABLE KEYS */;
+LOCK TABLES `t_log_obill_operation` WRITE;
+/*!40000 ALTER TABLE `t_log_obill_operation` DISABLE KEYS */;
+/*!40000 ALTER TABLE `t_log_obill_operation` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -211,7 +182,7 @@ CREATE TABLE `t_product` (
   `product_max_count` int(11) DEFAULT '0',
   `product_min_count` int(11) DEFAULT '0',
   PRIMARY KEY (`product_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -220,6 +191,7 @@ CREATE TABLE `t_product` (
 
 LOCK TABLES `t_product` WRITE;
 /*!40000 ALTER TABLE `t_product` DISABLE KEYS */;
+INSERT INTO `t_product` VALUES (1,'鲸鱼','暂无',1,56,1200,1000,10),(2,'海豚','海豚而已啦',0,5000,73,100,10),(3,'海绵宝宝','派大星呢',0,75,10,100,20),(4,'派大星','海绵宝宝我在这里',1,100.5,103,200,100),(5,'测试数据','测试系统成像是否成功',0,100,10000,20000,5000),(6,'冗余测试数据','测试冗余状态',0,50,1000,800,200),(7,'测试告急数据','测试告急数据',0,100,100,800,200),(8,'测试变动数据','测试数据经常变动',0,100,600,800,200);
 /*!40000 ALTER TABLE `t_product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -237,7 +209,7 @@ CREATE TABLE `t_user_infos` (
   `user_power` int(11) DEFAULT '0',
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `t_user_infos_user_id_uindex` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -246,6 +218,7 @@ CREATE TABLE `t_user_infos` (
 
 LOCK TABLES `t_user_infos` WRITE;
 /*!40000 ALTER TABLE `t_user_infos` DISABLE KEYS */;
+INSERT INTO `t_user_infos` VALUES (1,'Admin@qq.com','a123456',1);
 /*!40000 ALTER TABLE `t_user_infos` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -258,4 +231,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-25 17:10:21
+-- Dump completed on 2018-12-04 11:49:05
