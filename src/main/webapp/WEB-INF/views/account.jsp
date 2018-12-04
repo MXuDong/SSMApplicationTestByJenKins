@@ -13,6 +13,8 @@
         <h5 style="text-align: right">上次结账时间：
             ${requestScope.accountAttribute.lastChangeTime}
         </h5>
+        <p class="lead">~.当天发生的变动不会记录在内</p>
+        <p class="lead">~.结账不可选择，列表中不可取消，请认真核对后再结账</p>
         <hr/>
         <div class="row">
             <div class="col-md-6" style="text-align: center;"><h2>
