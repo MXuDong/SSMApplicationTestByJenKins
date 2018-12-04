@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dao.LogObillOperationMapper">
+    <resultMap id="BaseResultMap" type="model.LogBaseInfo">
+        <id column="loo_id" property="looId" jdbcType="INTEGER"/>
+        <result column="obill_id" property="obillId" jdbcType="TIMESTAMP"/>
+        <result column="log_id" property="logId" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        select * from t_log_obill_operation;
+    </select>
+
+    <insert id="insert" parameterType="model.LogObillOperation" keyProperty="looId" useGeneratedKeys="true">
+        insert into t_log_obill_operation (loo_id, obill_id, log_id)
+        values (#{looId}, #{obillId}, #{logId})
+    </insert>
+</mapper>

@@ -8,5 +8,4 @@ public interface LogChangeProductPriceMapper {
     int insert(LogChangeProductPrice record);
     List<LogChangeProductPrice> selectAll();
     LogChangeProductPrice selectByBoasLogId(int logId);
-
 }
