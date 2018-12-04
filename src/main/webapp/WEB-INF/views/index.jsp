@@ -14,80 +14,19 @@
 <%@include file="titleJSP.jsp" %>
 
 <div class="row">
-    <div class="col-md-4">
-        <%--产品数量变化折线图--%>
-        <div id="ProductCount" style="width: 600px;height:400px;">
 
-        </div>
-
-    </div>
-
-    <div class="col-md-4">
-        <%--收入支出折线图--%>
-        <div id="ObillPic" style="width: 600px;height:400px;">
-            测试
-        </div>
-    </div>
-
-    <div class="col-md-4">
+    <div class="col-md-6">
         <%--产品总量占比饼图--%>
-        <div id="countPic" style="width: 480px;height:400px;">
-            测试
+        <div id="countPic" style="width: 700px;height:600px;">
         </div>
+    </div>
+    <div class="col-md-6">
+
     </div>
 </div>
 
 <script language="JavaScript">
-    var obillPic = echarts.init(document.getElementById('ObillPic'));
-    var productCount = echarts.init(document.getElementById('ProductCount'));
     var countPic = echarts.init(document.getElementById('countPic'));
-
-    optionProductCountPic = {
-        title: {
-            text: '产品总量变化折线图'
-        },
-        xAxis: {
-            type: 'category',
-            data: [${requestScope.ProductOptionValue.xAxis}]
-        },
-        yAxis: {
-            type: 'value'
-        },
-        toolbox: {
-            left: 'center',
-            feature: {
-                saveAsImage: {}
-            }
-        },
-        series: [{
-            data: [${requestScope.ProductOptionValue.data}],
-            type: 'line'
-        }]
-    };
-
-    // 指定图表的配置项和数据
-    optionObillPic = {
-        title: {
-            text: '收入支出折线图'
-        },
-        xAxis: {
-            type: 'category',
-            data: [${requestScope.ObillPicOptionValue.xAxis}]
-        },
-        yAxis: {
-            type: 'value'
-        },
-        toolbox: {
-            left: 'center',
-            feature: {
-                saveAsImage: {}
-            }
-        },
-        series: [{
-            data: [${requestScope.ObillPicOptionValue.data}],
-            type: 'line'
-        }]
-    };
 
     optionCountPic = {
         title : {
@@ -130,8 +69,6 @@
 
 
     // 使用刚指定的配置项和数据显示图表。
-    obillPic.setOption(optionObillPic);
-    productCount.setOption(optionProductCountPic);
     countPic.setOption(optionCountPic)
 
 </script>

@@ -74,10 +74,23 @@ public class LogManagerImpl implements LogManagerService {
     @Override
     public Map<String, String> getProductBingPic() {
         Map<String, String> productBingPic = new HashMap<String, String>();
-        String productNames = "'海绵宝宝', '皮皮虾', '蟹老板', '章鱼哥', '鲸鱼', '贝克'";
-        String productBingData = "{value:1200, name:'海绵宝宝'},{value:1200, name:'皮皮虾'}," +
-                "{value:300, name:'蟹老板'},{value:456, name:'章鱼哥'}," +
-                "{value:986, name:'鲸鱼'},{value:321, name:'贝克'}";
+        String productNames = "";
+        String productBingData = "";
+
+        List<ProductInfo> productInfos = productInfoMapper.selectAll();
+        int count = 0;
+        for(ProductInfo P : productInfos){
+            if(P.getProductCount() != 0){
+                if(count++ != 0){
+                    productNames = productNames + ",";
+                    productBingData = productBingData + ",";
+                }
+
+                productNames = productNames + "'" + P.getProductName() + "'";
+                productBingData = productBingData + "{value:" + P.getProductCount() + ", name:'" + P.getProductName() + "'}";
+            }
+        }
+
         productBingPic.put("legendData", productNames);
         productBingPic.put("seriesData", productBingData);
 
