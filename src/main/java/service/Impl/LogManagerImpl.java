@@ -47,31 +47,6 @@ public class LogManagerImpl implements LogManagerService {
     }
 
     @Override
-    public Map<String, String> getObilPicOptionValue() {
-        Map<String, String> productChangeMap = new HashMap<String, String>();
-
-        String obillPicXAxisData = "'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'A', 'B'";
-        String obillPicSeriesData = "820, 932, 901, 934, 1290, 1330, 1320, 540, 7852";
-        productChangeMap.put("xAxis", obillPicXAxisData);
-        productChangeMap.put("data", obillPicSeriesData);
-
-        return productChangeMap;
-    }
-
-
-    @Override
-    public Map<String, String> getProductChangeValue() {
-        Map<String, String> productChangeMap = new HashMap<String, String>();
-
-        String obillPicXAxisData = "'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'";
-        String obillPicSeriesData = "820, 932, 1290, 1330, 1320, 540, 320";
-        productChangeMap.put("xAxis", obillPicXAxisData);
-        productChangeMap.put("data", obillPicSeriesData);
-
-        return productChangeMap;
-    }
-
-    @Override
     public Map<String, String> getProductBingPic() {
         Map<String, String> productBingPic = new HashMap<String, String>();
         String productNames = "";

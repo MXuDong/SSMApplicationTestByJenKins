@@ -43,6 +43,9 @@ public class baseController {
         List<String> opers = logManagerService.getOperList();
         modelAndView.addObject("Opers", opers);
 
+        Map<String, Object> accountRes = obillManagerService.getAccountAttribute();
+        modelAndView.addObject("accountAttribute", accountRes);
+
 //        库存告急
         List<String> lessProduct = productMangerService.getLessProducts();
         modelAndView.addObject("LessProduct", lessProduct);
@@ -50,14 +53,6 @@ public class baseController {
 //        库存冗余
         List<String> moreProduct = productMangerService.getMoreProducts();
         modelAndView.addObject("MoreProduct", moreProduct);
-
-//        收入支出折线图
-        Map<String, String> obillPicOptionValue = logManagerService.getObilPicOptionValue();
-        modelAndView.addObject("ObillPicOptionValue", obillPicOptionValue);
-
-//       产品总量变化折线图
-        Map<String, String> productOptionValue = logManagerService.getProductChangeValue();
-        modelAndView.addObject("ProductOptionValue", productOptionValue);
 
 //        产品总量饼图
         Map<String, String> productBingPic = logManagerService.getProductBingPic();

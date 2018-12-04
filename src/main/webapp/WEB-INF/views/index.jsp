@@ -15,14 +15,39 @@
 
 <div class="row">
 
-    <div class="col-md-6">
+    <div class="col-md-5">
         <%--产品总量占比饼图--%>
         <div id="countPic" style="width: 700px;height:600px;">
         </div>
     </div>
-    <div class="col-md-6">
-
+    <div class="col-md-3">
+        <div class="jumbotron">
+            <h1 class="display-4">快速结账!</h1>
+            <p class="lead">本次结账金额：${requestScope.accountAttribute.totalChangeMoney}</p>
+            <hr class="my-4">
+            <p>浏览详细信息请转至：账单管理</p>
+            <p>注意，当结账金额为0的时候，则忽略记录</p>
+            <br><br>
+            <p class="lead">
+                <a class="btn btn-primary btn-lg btn-block" href="/doAccount" role="button">结账</a>
+            </p>
+        </div>
     </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-3">
+        <div class="jumbotron">
+            <h1 class="display-4">最新消息</h1>
+            <p class="lead">日期：2018年12月4日 20点41分</p>
+            <hr class="my-4">
+            <p>隶属类型：通知</p>
+            <p class="lead">
+                欢迎使用本产品，感谢您对本产品的大力支持。您在使用过程中有任何问题请尽快联系我方，避免造成不必要的后果。
+                <br>
+                一切后果由使用者承担！本项目产品概不负责！
+            </p>
+        </div>
+    </div>
+
 </div>
 
 <script language="JavaScript">
