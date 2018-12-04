@@ -14,12 +14,6 @@
 <%@include file="titleJSP.jsp" %>
 
 <div class="row">
-
-    <div class="col-md-5">
-        <%--产品总量占比饼图--%>
-        <div id="countPic" style="width: 700px;height:600px;">
-        </div>
-    </div>
     <div class="col-md-3">
         <div class="jumbotron">
             <h1 class="display-4">快速结账!</h1>
@@ -33,6 +27,13 @@
             </p>
         </div>
     </div>
+
+    <div class="col-md-5">
+        <%--产品总量占比饼图--%>
+        <div id="countPic" style="width: 700px;height:600px;">
+        </div>
+    </div>
+
     <div class="col-md-1"></div>
     <div class="col-md-3">
         <div class="jumbotron">
