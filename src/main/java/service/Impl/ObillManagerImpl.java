@@ -137,7 +137,7 @@ public class ObillManagerImpl implements ObillManagerService {
         }
 
         obillInfoMapper.insert(obillInfo);
-        LogBaseInfo logBaseInfo = LogFactory.makeLogBaseInfo(LogFactory.OperationObill, userId,"账单操作");
+        LogBaseInfo logBaseInfo = LogFactory.makeLogBaseInfo(LogFactory.OperationObill, userId,Integer.toString(obillInfo.getObill()));
         logBaseInfoMapper.insert(logBaseInfo);
     }
 }

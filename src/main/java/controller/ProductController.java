@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import service.Interface.ProductMangerService;
+import util.ExcelUtil.ExcelRead;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -22,7 +23,8 @@ import java.util.*;
 @RequestMapping("/product")
 public class ProductController {
 
-    @Autowired@Resource(name = "ProductManagerImpl")
+    @Autowired
+    @Resource(name = "ProductManagerImpl")
     ProductMangerService productMangerService;
 
     @RequestMapping(value = {"/ProductList"})
@@ -39,7 +41,7 @@ public class ProductController {
         productHeader.add("产品详细描述");
         modelAndView.addObject("ProductHeader", productHeader);
 
-        List<List<String>> productInfo =productMangerService.getProductInfos();
+        List<List<String>> productInfo = productMangerService.getProductInfos();
         modelAndView.addObject("ProductInfo", productInfo);
 
         //设置页面信息标题
@@ -188,37 +190,35 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/uploadMoreProducts", method = RequestMethod.POST)
-    public String uploadProducts(@RequestParam("file") MultipartFile file) {
+    public String uploadProducts(@RequestParam("file") MultipartFile file, HttpSession session) {
         if (!file.isEmpty()) {
-            String path = "E:\\Work Space\\Intellij WorkSpace\\SSMApplicationTestByJenKins\\pic";
-
-
+            String path = "E:\\Work Space\\Intellij WorkSpace\\SSMApplicationTestByJenKins\\src\\main\\webapp\\WEB-INF\\pic\\";
             //获取后缀
             String suffix = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1);
-            try{
+            try {
                 FileUtils.copyInputStreamToFile(file.getInputStream(), new File(path,
-                        suffix+"." + suffix));
-            }catch (IOException e) {
+                        suffix + "." + suffix));
+                ExcelRead excelRead = new ExcelRead(productMangerService, path + suffix + "." + suffix, (int) session.getAttribute("userInfoId"));
+                Map<String, Object> res = excelRead.doRead();
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
 
-        return "redirect:/product/info?id=1";
+        return "redirect:/";
     }
 
     @RequestMapping(value = "/changeProductCount", method = RequestMethod.POST)
-    public String changeProductCount(@RequestParam(value = "productID") String productID, @RequestParam(value = "productCount", defaultValue = "-1")int productCount, HttpSession session){
-        System.out.println(productID + "ChangeCount" + productCount);
-        if(productCount != -1){
-            productMangerService.updateProductInfoC(productID, productCount, (int)session.getAttribute("userInfoId"));
+    public String changeProductCount(@RequestParam(value = "productID") String productID, @RequestParam(value = "productCount", defaultValue = "-1") int productCount, HttpSession session) {
+        if (productCount != -1) {
+            productMangerService.updateProductInfoC(productID, productCount, (int) session.getAttribute("userInfoId"));
         }
-        return "redirect:/product/info?id="+ productID;
+        return "redirect:/product/info?id=" + productID;
     }
 
     @RequestMapping(value = "/changeProductPrice", method = RequestMethod.POST)
-    public String changeProductPrice(String productID, @RequestParam(value = "productPrice", defaultValue = "-1") double productPrice, HttpSession session){
-        System.out.println(productID + "ChangePrice" + productPrice);
-        productMangerService.updateProductInfoP(productID, productPrice, (int)session.getAttribute("userInfoId"));
+    public String changeProductPrice(String productID, @RequestParam(value = "productPrice", defaultValue = "-1") double productPrice, HttpSession session) {
+        productMangerService.updateProductInfoP(productID, productPrice, (int) session.getAttribute("userInfoId"));
 
         return "redirect:/product/info?id=" + productID;
     }

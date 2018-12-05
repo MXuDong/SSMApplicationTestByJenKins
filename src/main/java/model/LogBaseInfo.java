@@ -58,7 +58,11 @@ public class LogBaseInfo {
 
     public String toLessInfo(UserInfosMapper userInfosMapper) {
         UserInfos userInfos = userInfosMapper.findUserById(logAboutUser);
-        String lessInfo = StringFormatUtil.formatProductInfoToString(StringFormatUtil.StringFormatType.FORMAT_TYPE_FORMAT_DATA,logTime) + ":[" + logWhat + "]操作人:[" + userInfos.getUserName() + "]";
+        String whar = logWhat;
+        if(logType == 3){
+            whar = "账单操作";
+        }
+        String lessInfo = StringFormatUtil.formatProductInfoToString(StringFormatUtil.StringFormatType.FORMAT_TYPE_FORMAT_DATA,logTime) + ":[" + whar + "]操作人:[" + userInfos.getUserName() + "]";
         return lessInfo;
     }
 }

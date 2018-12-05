@@ -25,6 +25,8 @@ public class LogManagerImpl implements LogManagerService {
     LogChangeProductPriceMapper logChangeProductPriceMapper;
     @Autowired
     ProductInfoMapper productInfoMapper;
+    @Autowired
+    ObillInfoMapper obillInfoMapper;
 
     @Override
     public List<String> getOperList() {
@@ -121,6 +123,16 @@ public class LogManagerImpl implements LogManagerService {
                     logInfo.add(logBaseInfo.getLogWhat());
                     logInfo.add("[" + productInfo.getProductName() + "]价格");
                     logInfo.add(logChangeProductPrice.getProductOldPrice() + "元-->" + logChangeProductPrice.getProductNewPrice() + "元");
+                    break;
+                }
+                case 3:{
+                    //账单
+                    logInfo.add("账单操作");
+                    logInfo.add(StringFormatUtil.formatProductInfoToString(StringFormatUtil.StringFormatType.FORMAT_TYPE_FORMAT_DATA, logBaseInfo.getLogTime()));
+                    logInfo.add("进行结账");
+                    logInfo.add("账单结账");
+                    ObillInfo obillInfo = obillInfoMapper.selectByPrimaryKey(Integer.parseInt(logBaseInfo.getLogWhat()));
+                    logInfo.add(Double.toString(obillInfo.getObillMoney()));
                     break;
                 }
                 default: {

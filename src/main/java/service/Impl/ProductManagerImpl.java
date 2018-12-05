@@ -328,6 +328,7 @@ public class ProductManagerImpl implements ProductMangerService {
 
     @Override
     public int addProductInfo(ProductInfo productInfo, int userId) {
+        productInfo.setProductPic(0);
         int res = productInfoMapper.insert(productInfo);
         if (res == 1) {
             logBaseInfoMapper.insert(LogFactory.makeLogBaseInfo(LogFactory.BaseInformaiton, userId, "添加产品：" + productInfo.getProductName()));
