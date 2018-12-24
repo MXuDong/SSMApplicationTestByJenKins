@@ -119,7 +119,7 @@ public class baseController {
 
     @RequestMapping("/pic")
     public void getPic(String id, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
-        String path = "E:\\Work Space\\Intellij WorkSpace\\SSMApplicationTestByJenKins\\src\\main\\webapp\\WEB-INF\\pic\\";
+        String path = "/usr/local/DevelopmentFiles/Tomcat/apache-tomcat-8.0.53/productFiles";
         File file = new File(path + id + ".jpg");
         if (!file.exists()) {
             file = new File(path + "default.jpg");
@@ -149,7 +149,7 @@ public class baseController {
     @RequestMapping("/download/tempXls")
     public ResponseEntity<byte[]> getTempXls() {
         ResponseEntity<byte[]> response = null;
-        String fileName = "E:\\Work Space\\Intellij WorkSpace\\SSMApplicationTestByJenKins\\src\\main\\webapp\\WEB-INF\\pic\\temp.xls";
+        String fileName = "/usr/local/DevelopmentFiles/Tomcat/apache-tomcat-8.0.53/productFiles/temp.xls";
         InputStream in = null;//将该文件加入到输入流之中
         try {
             in = new FileInputStream(new File(fileName));
@@ -162,6 +162,8 @@ public class baseController {
             headers.add("Content-Disposition", "attachment;filename=" + fileName);
             HttpStatus statusCode = HttpStatus.OK;//设置响应吗
             response = new ResponseEntity<byte[]>(body, headers, statusCode);
+
+            in.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -176,7 +178,7 @@ public class baseController {
         ExcelWrite ew = new ExcelWrite(productInfoMapper);
         File file = ew.doWrite();
         ResponseEntity<byte[]> response = null;
-        String fileName = "E:\\Work Space\\Intellij WorkSpace\\SSMApplicationTestByJenKins\\src\\main\\webapp\\WEB-INF\\pic\\temp.xls";
+        String fileName = "productInformation.xls";
         InputStream in = null;//将该文件加入到输入流之中
         try {
             in = new FileInputStream(file);
@@ -189,6 +191,8 @@ public class baseController {
             headers.add("Content-Disposition", "attachment;filename=" + fileName);
             HttpStatus statusCode = HttpStatus.OK;//设置响应吗
             response = new ResponseEntity<byte[]>(body, headers, statusCode);
+
+            in.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

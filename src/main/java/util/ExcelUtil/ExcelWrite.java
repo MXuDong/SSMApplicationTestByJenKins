@@ -23,9 +23,10 @@ public class ExcelWrite {
     }
 
     public File doWrite(){
-        File fille = new File("E:\\Work Space\\Intellij WorkSpace\\SSMApplicationTestByJenKins\\src\\main\\webapp\\WEB-INF\\pic\\downloadFile.xls");
+        File fille = new File("/usr/local/DevelopmentFiles/Tomcat/apache-tomcat-8.0.53/productFiles/downloadFile.xls");
+        WritableWorkbook workbook = null;
         try {
-            WritableWorkbook workbook = Workbook.createWorkbook(fille);
+            workbook = Workbook.createWorkbook(fille);
             WritableSheet sheet = workbook.createSheet("sheet1", 0);
 
             sheet.addCell(new Label(0,0,"产品名称"));
@@ -44,8 +45,10 @@ public class ExcelWrite {
                 sheet.addCell(new Label(3,row,Integer.toString(productInfo.getProductMaxCount())));
                 sheet.addCell(new Label(4,row,Integer.toString(productInfo.getProductMinCount())));
                 sheet.addCell(new Label(5,row,productInfo.getProductDesc()));
+                row++;
             }
-            workbook.close();
+            workbook.write();
+
         } catch (IOException e) {
             e.printStackTrace();
         } catch (RowsExceededException e) {
@@ -54,6 +57,16 @@ public class ExcelWrite {
             e.printStackTrace();
         }
 
+        if(workbook != null){
+            try {
+                workbook.close();
+                System.out.println("close Success");
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (WriteException e) {
+                e.printStackTrace();
+            }
+        }
         return fille;
     }
 }

@@ -31,7 +31,7 @@
                     <a class="dropdown-item" href="${pageContext.request.contextPath}/log/productPriceLog">显示产品变动信息</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="${pageContext.request.contextPath}/product/addProducts">增加数据</a>
-                    <a class="dropdown-item" href="#">导出数据</a>
+                    <a class="dropdown-item" href="${pageContext.request.contextPath}/download/allProductInfo">导出数据</a>
                 </div>
             </li>
             <li class="nav-item">
