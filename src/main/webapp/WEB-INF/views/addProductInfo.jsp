@@ -187,7 +187,7 @@
             <hr/>
             <form action="${pageContext.request.contextPath}/product/uploadMoreProducts" method="post" enctype="multipart/form-data">
                 <div class="modal-body">
-                    <p>如果您没有模板文件，请点击下载，并保持模板文件的表头，避免发生异常。</p>
+                    <p>如果您没有模板文件，请点击下载，并保持模板文件的表头，避免发生异常。<a href="${pageContext.request.contextPath}/download/tempXls">点击下载模板</a></p>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text">上传</span>

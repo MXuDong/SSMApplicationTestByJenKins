@@ -1,20 +1,26 @@
 package controller;
 
+
+import dao.ProductInfoMapper;
 import dao.UserInfosMapper;
 import model.UserInfos;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.RequestEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import service.Interface.LogManagerService;
 import service.Interface.ObillManagerService;
 import service.Interface.ProductMangerService;
+import util.ExcelUtil.ExcelWrite;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.List;
 import java.util.Map;
@@ -33,6 +39,8 @@ public class baseController {
     LogManagerService logManagerService;
     @Autowired
     UserInfosMapper userInfosMapper;
+    @Autowired
+    ProductInfoMapper productInfoMapper;
 
     @RequestMapping(value = {"/", "/index", "Home"})
     public ModelAndView baseIndex() {
@@ -101,7 +109,7 @@ public class baseController {
     }
 
     @RequestMapping("/doAccount")
-    public String doAccount(HttpSession session){
+    public String doAccount(HttpSession session) {
         int userId = (int) session.getAttribute("userInfoId");
 
         obillManagerService.doSubmitObill(userId);
@@ -136,6 +144,59 @@ public class baseController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
+    @RequestMapping("/download/tempXls")
+    public ResponseEntity<byte[]> getTempXls() {
+        ResponseEntity<byte[]> response = null;
+        String fileName = "E:\\Work Space\\Intellij WorkSpace\\SSMApplicationTestByJenKins\\src\\main\\webapp\\WEB-INF\\pic\\temp.xls";
+        InputStream in = null;//将该文件加入到输入流之中
+        try {
+            in = new FileInputStream(new File(fileName));
+            byte[] body = null;
+            body = new byte[in.available()];// 返回下一次对此输入流调用的方法可以不受阻塞地从此输入流读取（或跳过）的估计剩余字节数
+            in.read(body);//读入到 输入流里面
+            fileName = new String(fileName.getBytes("gbk"), "iso8859-1");//防止中文乱码
+
+            HttpHeaders headers = new HttpHeaders();//设置响应头
+            headers.add("Content-Disposition", "attachment;filename=" + fileName);
+            HttpStatus statusCode = HttpStatus.OK;//设置响应吗
+            response = new ResponseEntity<byte[]>(body, headers, statusCode);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return response;
+    }
+
+    @RequestMapping("/download/allProductInfo")
+    public ResponseEntity<byte[]> getAllProdectInformations(){
+        ExcelWrite ew = new ExcelWrite(productInfoMapper);
+        File file = ew.doWrite();
+        ResponseEntity<byte[]> response = null;
+        String fileName = "E:\\Work Space\\Intellij WorkSpace\\SSMApplicationTestByJenKins\\src\\main\\webapp\\WEB-INF\\pic\\temp.xls";
+        InputStream in = null;//将该文件加入到输入流之中
+        try {
+            in = new FileInputStream(file);
+            byte[] body = null;
+            body = new byte[in.available()];// 返回下一次对此输入流调用的方法可以不受阻塞地从此输入流读取（或跳过）的估计剩余字节数
+            in.read(body);//读入到 输入流里面
+            fileName = new String(fileName.getBytes("gbk"), "iso8859-1");//防止中文乱码
+
+            HttpHeaders headers = new HttpHeaders();//设置响应头
+            headers.add("Content-Disposition", "attachment;filename=" + fileName);
+            HttpStatus statusCode = HttpStatus.OK;//设置响应吗
+            response = new ResponseEntity<byte[]>(body, headers, statusCode);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        file.delete();
+
+        return response;
     }
 }

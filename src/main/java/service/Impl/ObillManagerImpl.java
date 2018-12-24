@@ -55,9 +55,10 @@ public class ObillManagerImpl implements ObillManagerService {
                     continue;
                 }
 
-                if(oldTime.get(Calendar.DAY_OF_YEAR) >= nowTime.get(Calendar.DAY_OF_YEAR)){
+                if(oldTime.get(Calendar.DAY_OF_YEAR) >= (nowTime.get(Calendar.DAY_OF_YEAR))){
                     continue;
                 }
+
                 LogChangeProductCount logChangeProductCount = logChangeProductCountMapper.selectByBaseLogId(L.getLogId());
                 ProductInfo productInfo = productInfoMapper.selectByPrimaryKey(logChangeProductCount.getProductId());
                 Map<String, String> accountInfo = new HashMap<String, String>();
